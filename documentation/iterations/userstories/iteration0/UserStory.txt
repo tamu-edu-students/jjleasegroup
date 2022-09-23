@@ -1,0 +1,21 @@
+UserStory Cards
+
+Feature: Show leasing information by cities
+	As JJ's leasing agent
+	So that I can manage leasing information by areas
+	I want to show leasing information by different areas  
+
+Feature: Present frequently asked questions
+	As JJ's leasing agent
+	So that I can avoid answering the same question multiple times
+	I want to list frequently asked questions at the bottom of our website
+
+Feature: List detailed information about apartment
+	As JJ's leasing agent
+	So that I can help customers make better decision 
+	I want to list information like description and price as a card on our website  
+
+Feature: Provide contact form
+	As JJ leasing group's customer  
+	So that I can reach a leasing agent easily 
+	I want to have a contact form on our website for the user to provide scheduling information 
