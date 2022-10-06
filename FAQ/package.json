@@ -1,0 +1,14 @@
+{
+    "name": "faqpackage",
+    "description": "",
+    "version": "1.0.0",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/tamu-edu-students/jjleasegroup.git"
+    },
+    "keywords": [],
+    "author": ""
+}
