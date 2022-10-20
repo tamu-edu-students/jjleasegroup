@@ -56,7 +56,7 @@ function App() {
       console.log(error);
     }else{//old password matched 
       console.log("Old password right"); 
-      setError("abc")
+      setError("")
     }
     if(checkError === "" && error ===""){
       setMode(modes[0]);
