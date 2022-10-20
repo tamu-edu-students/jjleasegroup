@@ -23,6 +23,7 @@ function App() {
         email: details.email,
       });
       setMode(modes[1]);
+      //setError("");
 
     }else{// password wrong
 
@@ -45,16 +46,23 @@ function App() {
   }
 
   //change password controller
-  const checkOldPassword = details =>{
-
+  const checkOldPassword = (details,checkError) =>{
+    console.log("=====step2 check old password=====");
     //testing email and password matching
-    if (details.password !== adminUser.password){//check old password 
-      setError("Password wrong");
-      console.Log("Old password wrong");
-
+    console.log(details)
+    if (details.password !== adminUser.password){
+      //check old password 
+      setError("Old password wrong")
+      console.log(error);
     }else{//old password matched 
-      console.Log("Password changed"); 
-      setMode(modes[0]); 
+      console.log("Old password right"); 
+      setError("abc")
+    }
+    if(checkError === "" && error ===""){
+      setMode(modes[0]);
+      console.log("Password changed"); 
+    }else{
+      console.log("errors are " + error + checkError);
     }
   }
   const changePassword = () => {
@@ -63,35 +71,29 @@ function App() {
 
   switch(mode){
     case modes[0]:
+      console.log("login form mode");
       return(<LoginForm checkLogin={checkLogin} error={error}/>);
       break;
     case modes[1]:
-        console.log("successfully logged in ")
-        return (
-
-          <div className="App">
-            {(user.email !== "") ? (//when succefully login 
-              
-              <div className="welcome">
-                <h2>Welcome, <span>{user.name}</span></h2>
-                <button onClick={Logout}>Logout</button>
-                <button onClick={changePassword}>Change Password</button>
-              </div>
-            
-            ):(//when havent log in, call loginform page
-              
-              <LoginForm checkLogin={checkLogin} error={error}/>
-            
-            )}
-          </div>
-        );
+      console.log("logged in mode");
+        
+      return (
+        <div className="App"> 
+            <div className="welcome">
+              <button onClick={Logout}>Logout</button>
+              <button onClick={changePassword}>Change Password</button>
+            </div>
+        </div>
+      );
       break;
     case modes[2]:
+      console.log("change password mode");
       return(
         <ChangePasswordForm checkOldPassword={checkOldPassword} error={error}/>
       );
       break;
       default:
+        console.log("default mode");
         return(<LoginForm checkLogin={checkLogin} error={error}/>);
     }
 

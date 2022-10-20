@@ -6,19 +6,26 @@ function ChangePasswordForm({ checkOldPassword , error}){
     //pass through detail 
 
 
-    const handleCompare = (event) => {
-        this.setDetails({...details, password_rep: event.target.value})
-        if(this.details.password_new !== event.target.value){
+    const handleCompare = event => {
+        setDetails({...details, password_rep: event.target.value})
+        if(details.password_new !== details.password_rep){
             setCheckError("Password are not the same");
+        }else{
+            setCheckError("");
+            console.log("two password match");
         }
-        
     }
     
     const submitHandler = e =>{
         e.preventDefault();
-        if(checkError !== ""){
-            checkOldPassword(details);
+        console.log("=====step1 check two password match=====");
+        if(details.password_new !== details.password_rep){
+            setCheckError("Password are not the same");
+        }else{
+            setCheckError("");
+            console.log("two password match");
         }
+        checkOldPassword(details, checkError);
     }
     return(
         <form onSubmit={submitHandler}>  
@@ -46,13 +53,13 @@ function ChangePasswordForm({ checkOldPassword , error}){
                     <label htmlFor="password">Repeat password: </label>
                     <input 
                         type="password" name="password_rep" id="password_rep" 
-                        onChange={(handleCompare)}
+                        onChange={e=>setDetails({...details, password_rep: e.target.value})}
                         value = {details.password_rep}
                     />
                     {/*ERROR*/checkError !=="" ? (<div className='error'>{checkError}</div>) : "" }
                 </div>
                 <input type="submit" value="Confirm" />
-                
+                {/*ERROR*/error !=="" ? (<div className='error'>{error}</div>) : "" }
             </div>
         </form>
     )

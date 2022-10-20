@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 function LoginForm({checkLogin , error}){
-    const [details, setDetails] = useState({name: "", email: "", password:""});
+    const [details, setDetails] = useState({ email: "", password:""});
     
     //pass through detail 
     const submitHandler = e =>{
@@ -13,16 +13,6 @@ function LoginForm({checkLogin , error}){
         <form onSubmit={submitHandler}>  
             <div className='form-inner'>
                 <h2>Login</h2>
-                
-                <div className='form-group'>
-                    <label htmlFor='name'>Name:</label>
-                    <input 
-                        type="text" name="name" id="name" 
-                        onChange={e=>setDetails({...details, name: e.target.value})} 
-                        value = {details.name} 
-                    />
-                </div>
-
                 <div className="form-group">
                     <label htmlFor="email">Email: </label>
                     <input 
