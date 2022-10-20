@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import ContactForm from "./components/ContactForm";
 import axios from "axios";
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
       {/*    Learn React*/}
       {/*  </a>*/}
       {/*</header>*/}
-        <ContactForm/>
-
+      {/*  <ContactForm/>*/}
+      {/*  {<SignUp/>}*/}
     </div>
   );
 }
