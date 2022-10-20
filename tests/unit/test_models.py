@@ -2,6 +2,7 @@ from django.test import TestCase
 from apartment_finder_app.models import QuestionConsultation
 from datetime import datetime
 
+
 class QuestionConsultationTestCase(TestCase):
     @classmethod
     def set_up_test_data(self):
