@@ -129,7 +129,6 @@ class ContactForm extends Component {
                 "apt_area": this.state.apt_area,
                 "question_text": this.state.question_text,
                 "question_status": "0",
-                // "submission_date_time": "2022-09-09T22:20:30-05:00",
                 "submission_date_time": new Date().toISOString().slice(0, 19),
                 "customer_id": "2"})
                 .then(resp => console.log(resp))
