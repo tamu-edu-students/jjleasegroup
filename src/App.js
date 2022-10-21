@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginForm from './components/LoginForm';
 import './App.css';
 import ChangePasswordForm from './components/ChangePWForm';
@@ -14,8 +14,8 @@ function App() {
   const [mode, setMode] = useState(modes[0]);
   //password checking controller
   const checkLogin = details =>{
-
     //testing email and password matching
+
     if (details.email === adminUser.email && details.password === adminUser.password){
       console.log("Admin login");
       setUser({
@@ -44,26 +44,30 @@ function App() {
     setMode("login");
   
   }
-
   //change password controller
   const checkOldPassword = (details,checkError) =>{
     console.log("=====step2 check old password=====");
     //testing email and password matching
-    console.log(details)
-    if (details.password !== adminUser.password){
+    console.log("detail password is " + details.password);
+    console.log("detail password is " + adminUser.password);
+    console.log("two password match " + checkError);
+    if (details.password === adminUser.password){
       //check old password 
-      setError("Old password wrong")
-      console.log(error);
-    }else{//old password matched 
-      console.log("Old password right"); 
       setError("")
+      if(checkError === ""){
+        setMode(modes[0]);
+        console.log("Password changed"); 
+      }
+    }else{//old password matched 
+      console.log("Old password wrong"); 
+      setError("Old password wrong");
     }
-    if(checkError === "" && error ===""){
-      setMode(modes[0]);
-      console.log("Password changed"); 
-    }else{
-      console.log("errors are " + error + checkError);
-    }
+    // if(checkError === "" && error ===""){
+    //   setMode(modes[0]);
+    //   console.log("Password changed"); 
+    // }else{
+    //   console.log("errors are " + error + checkError);
+    // }
   }
   const changePassword = () => {
     setMode(modes[2]);

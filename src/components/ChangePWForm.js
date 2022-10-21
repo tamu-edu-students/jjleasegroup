@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 
 function ChangePasswordForm({ checkOldPassword , error}){
     const [details, setDetails] = useState({name: "", email: "", password:"", password_new:"",password_rep:""});
@@ -7,25 +7,49 @@ function ChangePasswordForm({ checkOldPassword , error}){
 
 
     const handleCompare = event => {
+        
         setDetails({...details, password_rep: event.target.value})
-        if(details.password_new !== details.password_rep){
+        
+        if(event.target.value !== details.password_new){
             setCheckError("Password are not the same");
         }else{
             setCheckError("");
             console.log("two password match");
         }
     }
-    
+    // const submitHandler = e =>{
+    //     e.preventDefault();
+    //     console.log("=====step1 check two password match=====");
+    //     if(details.password_new !== details.password_rep){
+    //         console.log("two password not match");
+    //         if(checkError){
+                
+    //         }
+            
+    //     }else{
+    //         setCheckError("");
+    //         console.log("two password match");
+    //         checkOldPassword(details, "");
+    //     }
+        
+    // }
+    // useEffect(()=>{
+    //     checkOldPassword(details,checkError);
+    // }, [checkError]);
+
     const submitHandler = e =>{
         e.preventDefault();
         console.log("=====step1 check two password match=====");
         if(details.password_new !== details.password_rep){
+            console.log("two password not match");
             setCheckError("Password are not the same");
+            checkOldPassword(details, "password wrong");
         }else{
             setCheckError("");
             console.log("two password match");
+            checkOldPassword(details, "");
         }
-        checkOldPassword(details, checkError);
+        
     }
     return(
         <form onSubmit={submitHandler}>  
