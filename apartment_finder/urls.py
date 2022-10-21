@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', views.login),
     path('image/code/', views.image_code),
+    path('changepwd/', views.change_password),
     # url(r'^', include('apartment_finder_app.urls'))
 
 ]

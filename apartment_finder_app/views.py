@@ -50,6 +50,25 @@ class LoginForm(forms.Form):
     )
 
 
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(
+        label='old_password',
+        widget=forms.PasswordInput(render_value=True),
+        required=True   # 不能为空
+    )
+    new_password = forms.CharField(
+        label='new_password',
+        widget=forms.PasswordInput(render_value=True),
+        required=True  # 不能为空
+    )
+
+    confirmed_new_password = forms.CharField(
+        label='confirmed_new_password',
+        widget=forms.PasswordInput,
+        required=True  # 不能为空
+    )
+
+
 def login(request):
     if request.method == 'GET':
         form = LoginForm()
@@ -84,3 +103,27 @@ def image_code(request):
     stream = BytesIO()
     img.save(stream, 'png')
     return HttpResponse(stream.getvalue())
+
+
+def change_password(request):
+    if request.method == 'GET':
+        form = ChangePasswordForm()
+        return render(request, 'change_pwd.html', {'form': form})
+    form = ChangePasswordForm(data=request.POST)
+    if form.is_valid():
+        customer = models.Customer.objects.filter(
+            customer_id=request.session['info']['id']).first()
+        if form.cleaned_data.get('old_password') != customer.customer_password:
+            form.add_error('old_password', 'Wrong password! ')
+            return render(request, 'change_pwd.html', {'form': form})
+        if form.cleaned_data.get('new_password') == customer.customer_password:
+            form.add_error('new_password', 'The new password cannot be the same as the previous one! ')
+            return render(request, 'change_pwd.html', {'form': form})
+        if form.cleaned_data.get('new_password') != form.cleaned_data.get('confirmed_new_password'):
+            form.add_error('confirmed_new_password', 'Two new passwords are not the same! ')
+            return render(request, 'change_pwd.html', {'form': form})
+
+        models.Customer.objects.filter(customer_id=request.session['info']['id']).update(
+            customer_password=form.cleaned_data.get('new_password'))
+        return HttpResponse('You have changed your password!')
+    return render(request, 'change_pwd.html', {'form': form})

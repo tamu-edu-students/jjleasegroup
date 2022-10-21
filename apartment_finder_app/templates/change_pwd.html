@@ -5,6 +5,24 @@
   <title>$Title$</title>
 </head>
 <body>
-$END$
+<form method="post" novalidate>
+    {% csrf_token %}
+    <div>
+        <label>原密码</label>
+        {{ form.old_password }}
+        <span style="color: red">{{ form.old_password.errors.0 }}</span>
+    </div>
+    <div>
+        <label>新密码</label>
+        {{ form.new_password }}
+        <span style="color: red">{{ form.new_password.errors.0 }}</span>
+    </div>
+    <div>
+        <label>确认新密码</label>
+        {{ form.confirmed_new_password }}
+        <span style="color: red">{{ form.confirmed_new_password.errors.0 }}</span>
+    </div>
+    <input type="submit" value="change password">
+</form>
 </body>
 </html>
