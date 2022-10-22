@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import re_path as url
 from apartment_finder_app import views
 
 from django.conf.urls import include
@@ -24,6 +25,6 @@ urlpatterns = [
     path('login/', views.login),
     path('image/code/', views.image_code),
     path('changepwd/', views.change_password),
+    url(r'^question_consultation$', views.question_consultation_API, name='add-question-consultation'),
     # url(r'^', include('apartment_finder_app.urls'))
-
 ]
