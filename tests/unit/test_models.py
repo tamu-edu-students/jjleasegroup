@@ -22,6 +22,7 @@ class QuestionConsultationTestCase(TestCase):
         self.assertEqual(field_label, 'question_purpose')
 '''
 
+
 class CustomerTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
