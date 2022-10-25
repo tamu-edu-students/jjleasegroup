@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LoginForm from './components/LoginForm';
 import './App.css';
 import ChangePasswordForm from './components/ChangePWForm';
+//import APIService from "/APIService";
 
 function App() {
   const adminUser= {
@@ -15,33 +16,44 @@ function App() {
   //password checking controller
   const checkLogin = details =>{
     //testing email and password matching
+   
+    // APIService.add_log_in({ //push email and password to backend
+    //   "email": details.question_purpose,
+    //   "password": details.apt_area})
+    //   .then(resp => console.log(resp))
 
-    if (details.email === adminUser.email && details.password === adminUser.password){
+    //TOCHANGE check password right or wrong here
+    if (details.email === adminUser.email && 
+        details.password === adminUser.password){
       console.log("Admin login");
+      
       setUser({
         name: details.name,
         email: details.email,
       });
-      setMode(modes[1]);
+
+      setMode(modes[1]);//switch page
       //setError("");
 
-    }else{// password wrong
+    }else{//TOCHANGE return wrong here password wrong
 
       if(details.password !== adminUser.password){ 
         setError("Password wrong")
       }else{
         setError("Detail wrong")
       }
-      
-      console.log("Detail do not match");
+
     }
+
   }
 
   const Logout = () => {//log out controll
 
+    //clear current User
     setUser({name:"", email:""});
+
     console.log("Logout");
-    setMode("login");
+    setMode(modes[0]);
   
   }
   //change password controller
