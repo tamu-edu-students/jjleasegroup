@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import LoginForm from './components/LoginForm';
 import './App.css';
+import ContactForm from "./components/ContactForm";
 import ChangePasswordForm from './components/ChangePWForm';
 //import APIService from "/APIService";
 
@@ -98,6 +99,7 @@ function App() {
             <div className="welcome">
               <button onClick={Logout}>Logout</button>
               <button onClick={changePassword}>Change Password</button>
+              <ContactForm/>
             </div>
         </div>
       );
