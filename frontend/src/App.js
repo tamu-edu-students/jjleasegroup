@@ -3,7 +3,7 @@ import LoginForm from './components/LoginForm';
 import './App.css';
 import ContactForm from "./components/ContactForm";
 import ChangePasswordForm from './components/ChangePWForm';
-//import APIService from "/APIService";
+import APIService from "./APIService";
 
 function App() {
   const adminUser= {
@@ -17,35 +17,27 @@ function App() {
   //password checking controller
   const checkLogin = details =>{
     //testing email and password matching
-   
-    // APIService.add_log_in({ //push email and password to backend
-    //   "email": details.question_purpose,
-    //   "password": details.apt_area})
-    //   .then(resp => console.log(resp))
+   //console.log(details.email);
+    APIService.add_log_in({ //push email and password to backend
+      "customer_email": details.email,
+      "customer_password": details.password,
+      "verification_code": details.password})
+      .then(
+        resp => {
+            //TOCHANGE check password right or wrong here
+            if (resp.code === "200"){
+            console.log("Login");
+            
+            setUser({
+              name: details.name,
+              email: details.email,
+            });
 
-    //TOCHANGE check password right or wrong here
-    if (details.email === adminUser.email && 
-        details.password === adminUser.password){
-      console.log("Admin login");
-      
-      setUser({
-        name: details.name,
-        email: details.email,
-      });
-
-      setMode(modes[1]);//switch page
-      //setError("");
-
-    }else{//TOCHANGE return wrong here password wrong
-
-      if(details.password !== adminUser.password){ 
-        setError("Password wrong")
-      }else{
-        setError("Detail wrong")
-      }
-
-    }
-
+            setMode(modes[1]);//switch page
+          }else{//TOCHANGE return wrong here password wrong
+            setError(resp.error_message)
+          }
+        })
   }
 
   const Logout = () => {//log out controll
@@ -61,20 +53,38 @@ function App() {
   const checkOldPassword = (details,checkError) =>{
     console.log("=====step2 check old password=====");
     //testing email and password matching
-    console.log("detail password is " + details.password);
-    console.log("detail password is " + adminUser.password);
-    console.log("two password match " + checkError);
-    if (details.password === adminUser.password){
-      //check old password 
-      setError("")
-      if(checkError === ""){
-        setMode(modes[0]);
-        console.log("Password changed"); 
-      }
-    }else{//old password matched 
-      console.log("Old password wrong"); 
-      setError("Old password wrong");
-    }
+    console.log("User data:"+user.email);
+    console.log("Detail data:"+details.password);
+    console.log("Detail new data:"+details.password_new);
+    APIService.change_password({ //push email and password to backend
+      "customer_email": user.email,
+      "old_password": details.password,
+      "new_password": details.password_new})
+      .then(
+        resp => {
+          if (resp.code == "200"){
+            //check old password 
+            setError("")
+            if(checkError === ""){
+              setMode(modes[0]);
+              console.log("Password changed"); 
+            }
+          }else{//old password matched 
+            console.log(resp.error_message); 
+            setError(resp.error_message);
+          }
+        })
+    // if (details.password === adminUser.password){
+    //   //check old password 
+    //   setError("")
+    //   if(checkError === ""){
+    //     setMode(modes[0]);
+    //     console.log("Password changed"); 
+    //   }
+    // }else{//old password matched 
+    //   console.log("Old password wrong"); 
+    //   setError("Old password wrong");
+    // }
     // if(checkError === "" && error ===""){
     //   setMode(modes[0]);
     //   console.log("Password changed"); 

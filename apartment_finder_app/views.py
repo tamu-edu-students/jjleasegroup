@@ -32,27 +32,30 @@ def question_consultation_API(request, id=0):
         return JsonResponse({"code": "404"}, safe=False)
 
 
+@csrf_exempt
 def login(request):
     if request.method == 'GET':
-        customer = models.Customer.objects.filter(
-            customer_email='123').first()
         # form = LoginForm()
         # return render(request, 'login.html', {'form': form})
         return JsonResponse({}, safe=False)
 
-    form = LoginForm(data=request.POST)
+    form = LoginForm(data=JSONParser().parse(request))
+    # form = LoginForm(data=request.POST)
     if form.is_valid():
+        print(form.cleaned_data)
+
         user_input_code = form.cleaned_data.pop('verification_code')
         real_image_code = request.session.get('image_code', "")
+        '''
         if real_image_code.upper() != user_input_code.upper():
             form.add_error('verification_code', 'Wrong Verification Code! ')
             return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
             # return render(request, 'login.html', {'form': form})
-
+        '''
         customer_object = models.Customer.objects.filter(**form.cleaned_data).first()
         if not customer_object:
             form.add_error('customer_password', 'Wrong email or password！')
-            return JsonResponse({"code": "404", "error_message": ""}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！"}, safe=False)
             # return render(request, 'login.html', {'form': form})
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
@@ -73,12 +76,13 @@ def image_code(request):
     return HttpResponse(stream.getvalue())
 
 
+@csrf_exempt
 def change_password(request):
     if request.method == 'GET':
         # form = ChangePasswordForm()
         return JsonResponse({})
         # return render(request, 'change_pwd.html', {'form': form})
-    form = ChangePasswordForm(data=request.POST)
+    form = ChangePasswordForm(data=JSONParser().parse(request))
     if form.is_valid():
         # customer = models.Customer.objects.filter(
         #     customer_id=request.session['info']['id']).first()

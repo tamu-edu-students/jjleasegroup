@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
-//import APIService from "../APIService";
+import APIService from "../APIService";
 
 function ChangePasswordForm({ checkOldPassword , error}){
     const [details, setDetails] = useState({name: "", email: "", password:"", password_new:"",password_rep:""});
