@@ -21,6 +21,11 @@ class LoginForm(forms.Form):
 
 
 class ChangePasswordForm(forms.Form):
+    customer_email = forms.EmailField(
+        label='customer_email',
+        widget=forms.TextInput,
+        required=True   # cannot be empty
+    )
     old_password = forms.CharField(
         label='old_password',
         widget=forms.PasswordInput(render_value=True),
@@ -32,8 +37,8 @@ class ChangePasswordForm(forms.Form):
         required=True  # cannot be empty
     )
 
-    confirmed_new_password = forms.CharField(
-        label='confirmed_new_password',
-        widget=forms.PasswordInput,
-        required=True  # cannot be empty
-    )
+    # confirmed_new_password = forms.CharField(
+    #     label='confirmed_new_password',
+    #     widget=forms.PasswordInput,
+    #     required=True  # cannot be empty
+    # )
