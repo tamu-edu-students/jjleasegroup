@@ -15,22 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< HEAD
-=======
 from django.urls import re_path as url
 from apartment_finder_app import views
 
->>>>>>> 95ee304ddb32c48abfb6e78d2de9cd73d0eff43b
+
 from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
-=======
     path('login/', views.login),
     path('image/code/', views.image_code),
     path('changepwd/', views.change_password),
     url(r'^question_consultation$', views.question_consultation_API, name='add-question-consultation'),
->>>>>>> 95ee304ddb32c48abfb6e78d2de9cd73d0eff43b
-    # url(r'^', include('apartment_finder_app.urls'))
+    url(r'^', include('apartment_finder_app.urls'))
 ]

@@ -53,11 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-    'app01.middleware.auth.AuthMiddleware',
-=======
     'apartment_finder_app.middleware.auth.AuthMiddleware',
->>>>>>> 95ee304ddb32c48abfb6e78d2de9cd73d0eff43b
+
 ]
 
 ROOT_URLCONF = 'apartment_finder.urls'
@@ -83,10 +80,7 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-<<<<<<< HEAD
 
-=======
->>>>>>> 95ee304ddb32c48abfb6e78d2de9cd73d0eff43b
 '''
 DATABASES = {
     'default': {
@@ -109,10 +103,8 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 95ee304ddb32c48abfb6e78d2de9cd73d0eff43b
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
