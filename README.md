@@ -14,3 +14,11 @@ We are a professional team lead by Jennifer Juang, an agent and locator of Texas
 - Junru Liu
 - Winston Liu
 - Lucas Lyu
+
+## Project Setup
+### Database Migrations
+under the root directory of this project, execute the following commands:
+```
+python manage.py makemigrations
+python manage.py migrate
+```
