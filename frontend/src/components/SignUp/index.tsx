@@ -12,14 +12,14 @@ function SignUp() {
   const [date_of_birth, setDate_of_birth] = useState(
     new Date().toISOString().slice(0, 10)
   );
-  const [today, setToday] = useState(new Date().toISOString().slice(0, 10));
+  const today = new Date().toISOString().slice(0, 10);
 
   const handlePassword2 = (e: any) => {
     setPassword2(e.target.value);
     if (password1 === password2) {
       setPassword(password1);
     }
-  }
+  };
 
   const submitForm = () => {
     APIService.sign_up({

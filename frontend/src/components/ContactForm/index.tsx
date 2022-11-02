@@ -54,7 +54,7 @@ function ContactForm() {
         value={questionText}
         placeholder="enter your question"
         className="form-control"
-        onChange={(e)=> setQuestionText(e.target.value)}
+        onChange={(e) => setQuestionText(e.target.value)}
       />
 
       <button className="btn btn-primary" onClick={submitForm}>
