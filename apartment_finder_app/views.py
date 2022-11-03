@@ -87,7 +87,6 @@ def login(request):
         if not customer_object:
             form.add_error('customer_password', 'Wrong email or password！')
             return JsonResponse({"code": "404", "error_message": "Wrong email or password！"}, safe=False)
-            # return render(request, 'login.html', {'form': form})
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
         request.session.set_expiry(60*60*24*7)
@@ -110,9 +109,7 @@ def image_code(request):
 @csrf_exempt
 def change_password(request):
     if request.method == 'GET':
-        # form = ChangePasswordForm()
         return JsonResponse({})
-        # return render(request, 'change_pwd.html', {'form': form})
     form = ChangePasswordForm(data=JSONParser().parse(request))
     if form.is_valid():
         # customer = models.Customer.objects.filter(
@@ -121,18 +118,18 @@ def change_password(request):
             customer_email=form.cleaned_data.get('customer_email')).first()
         if customer is None:
             return JsonResponse({"code": "404", "error_message": "Account not found!"}, safe=False)
-        if form.cleaned_data.get('old_password') != customer.customer_password:
+        old_password = make_password(password=form.cleaned_data.get('old_password'), salt=SALT)
+        new_password = make_password(password=form.cleaned_data.get('new_password'), salt=SALT)
+        if old_password != customer.customer_password:
             form.add_error('old_password', 'Wrong password! ')
             return JsonResponse({"code": "404", "error_message": "Wrong password! "}, safe=False)
-            # return render(request, 'change_pwd.html', {'form': form})
-        if form.cleaned_data.get('new_password') == customer.customer_password:
+        if new_password == customer.customer_password:
             form.add_error('new_password', 'The new password cannot be the same as the previous one! ')
-            # return render(request, 'change_pwd.html', {'form': form})
             return JsonResponse({"code": "404", "error_message": "The new password cannot be the same as the previous "
                                                                  "one!"}, safe=False)
 
         models.Customer.objects.filter(customer_email=customer.customer_email).update(
-            customer_password=form.cleaned_data.get('new_password'))
+            customer_password=new_password)
         return JsonResponse({"code": "200", "error_message": ""}, safe=False)
     return JsonResponse({"code": "404", "error_message": "Not valid!"}, safe=False)
 
@@ -140,8 +137,11 @@ def change_password(request):
 @csrf_exempt
 def get_back_password(request):
     if request.method == 'GET':
-        # form = ChangePasswordForm()
-        return JsonResponse({})
+        customer_email = JSONParser().parse(request)['customer_email']
+        customer = models.Customer.objects.filter(customer_email=customer_email).first
+        question = customer.customer_security_question
+        if question
+        return JsonResponse({'customer_security_question': customer.customer_security_question})
     form = GetPasswordBackForm(data=JSONParser().parse(request))
     if form.is_valid():
         customer = models.Customer.objects.filter(
@@ -151,7 +151,8 @@ def get_back_password(request):
         if form.cleaned_data.get('security_question') != customer.security_question:
             return JsonResponse({"code": "404", "error_message": "Wrong security question answer! "}, safe=False)
 
+        new_password = make_password(password=form.cleaned_data.get('new_password'), salt=SALT)
         models.Customer.objects.filter(customer_email=customer.customer_email).update(
-            customer_password=form.cleaned_data.get('new_password'))
+            customer_password=new_password)
         return JsonResponse({"code": "200", "error_message": ""}, safe=False)
     return JsonResponse({"code": "404", "error_message": "Not valid!"}, safe=False)

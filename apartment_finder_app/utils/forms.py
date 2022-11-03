@@ -47,8 +47,8 @@ class GetPasswordBackForm(forms.Form):
         label='new_password',
         required=True  # cannot be empty
     )
-    security_question = forms.CharField(
-        label='security_question',
+    customer_security_answer = forms.CharField(
+        label='customer_security_answer',
         required=True  # cannot be empty
     )
 
