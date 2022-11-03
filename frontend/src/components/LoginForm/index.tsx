@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import APIService from "../../api/APIService";
+import { saveUser } from "../../utils/cookie";
 
-function LoginForm(setUser: any) {
+function LoginForm() {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
 
@@ -16,16 +17,20 @@ function LoginForm(setUser: any) {
       //push email and password to backend
       customer_email: details.email,
       customer_password: details.password,
-      verification_code: details.password,
+      verification_code: details.password
     }).then((resp) => {
       //TOCHANGE check password right or wrong here
       if (resp.code === "200") {
         console.log("Login");
 
-        setUser({
+        saveUser({
           name: details.name,
-          email: details.email,
+          email: details.email
         });
+        // setUser({
+        //   name: details.name,
+        //   email: details.email,
+        // });
         window.location.href = "/Success";
       } else {
         //TOCHANGE return wrong here password wrong

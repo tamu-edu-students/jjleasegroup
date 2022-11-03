@@ -5,11 +5,12 @@ import SignUp from "./components/SignUp";
 import LoginForm from "./components/LoginForm";
 import ChangePasswordForm from "./components/ChangePasswordForm";
 import Home from "./pages/home";
+import { deleteUser, getUser } from "./utils/cookie";
 
 function App() {
-  const [user, setUser] = React.useState({ name: "", email: "" });
   const Logout = () => {
-    setUser({ name: "", email: "" });
+    deleteUser();
+    window.location.href = "/Login";
   };
   return (
     <BrowserRouter>
@@ -17,7 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/ContactForm" element={<ContactForm />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/Login" element={<LoginForm setUser={setUser} />} />
+        <Route path="/Login" element={<LoginForm />} />
         <Route
           path="/Success"
           element={
@@ -35,7 +36,7 @@ function App() {
         />
         <Route
           path="/ChangePassword"
-          element={<ChangePasswordForm {...user} />}
+          element={<ChangePasswordForm {...getUser()} />}
         />
       </Routes>
     </BrowserRouter>
