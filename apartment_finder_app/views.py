@@ -136,3 +136,4 @@ def change_password(request):
         return JsonResponse({"code": "200", "error_message": ""}, safe=False)
     return JsonResponse({"code": "404", "error_message": "Not valid!"}, safe=False)
 
+
