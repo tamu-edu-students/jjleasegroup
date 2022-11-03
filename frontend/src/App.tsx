@@ -4,6 +4,7 @@ import ContactForm from "./components/ContactForm";
 import SignUp from "./components/SignUp";
 import LoginForm from "./components/LoginForm";
 import ChangePasswordForm from "./components/ChangePasswordForm";
+import Home from "./pages/home";
 
 function App() {
   const [user, setUser] = React.useState({ name: "", email: "" });
@@ -13,10 +14,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div />} />
+        <Route path="/" element={<Home />} />
         <Route path="/ContactForm" element={<ContactForm />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/LogIn" element={<LoginForm setUser={setUser} />} />
+        <Route path="/Login" element={<LoginForm setUser={setUser} />} />
         <Route
           path="/Success"
           element={

@@ -26,6 +26,7 @@ function LoginForm(setUser: any) {
           name: details.name,
           email: details.email,
         });
+        window.location.href = "/Success";
       } else {
         //TOCHANGE return wrong here password wrong
         setError(resp.error_message);
