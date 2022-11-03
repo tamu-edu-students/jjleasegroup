@@ -6,7 +6,7 @@ from rest_framework import status
 from django.contrib.auth.hashers import make_password
 
 from apartment_finder_app.models import QuestionConsultation, Customer
-from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer
+from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer_full, CustomerSerializer_update, CustomerSerializer_pwd
 
 SALT = "CSCE606"
 # Create your views here.
@@ -15,7 +15,7 @@ def question_consultation_API(request, question_id=0):
     if request.method == 'GET':
         questions = QuestionConsultation.objects.all()
         questions_serializer = QuestionConsultationSerializer(questions, many=True)
-        return JsonResponse(questions_serializer.data, safe=False, status=status.HTTP_200_OK)
+        return JsonResponse(questions_serializer.data, safe=False)
     elif request.method == 'POST':
         question = JSONParser().parse(request)
         # print(question)
@@ -33,21 +33,28 @@ def customer_API(request, customer_id=0):
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         # print(customer_info)
-        customer_info_serializer = CustomerSerializer(data=customer_info)
+        customer_info_serializer = CustomerSerializer_full(data=customer_info)
         if customer_info_serializer.is_valid():
             customer_info_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        # print(customer_info_serializer.errors)
+        print(customer_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'GET':
+        customer = Customer.objects.get(customer_id=customer_id)
+        customer_info_serializer = CustomerSerializer_update(customer)
+        return JsonResponse(customer_info_serializer.data, safe=False)
     elif request.method == 'PUT':
         customer_info = JSONParser().parse(request)
-        customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         customer = Customer.objects.get(customer_id=customer_info['customer_id'])
-        customers_serializer = CustomerSerializer(customer, data=customer_info)
+        if 'customer_password' in customer_info:
+            customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
+            customers_serializer = CustomerSerializer_pwd(customer, data=customer_info)
+        else:
+            customers_serializer = CustomerSerializer_update(customer, data=customer_info)
         if customers_serializer.is_valid():
             customers_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        # print(customers_serializer.errors)
+        print(customers_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'DELETE':
         customer = Customer.objects.get(customer_id=customer_id)

@@ -4,11 +4,21 @@ import './App.css';
 import ContactForm from "./components/ContactForm";
 import axios from "axios";
 import SignUp from "./components/SignUp";
+import { BrowserRouter, Routes, Route, Link, } from 'react-router-dom';
+import MyProfile from "./components/MyProfile";
 
 function App() {
   return (
     <div className="App">
-        <p>hello</p>
+        {/*<p>hello</p>*/}
+        <BrowserRouter>
+        <Routes>
+            {/*<Route exact path="/homePage" element={<SignUp/>} />*/}
+            <Route exact path="/signUp" element={<SignUp/>} />
+            <Route exact path="/contact" element={<ContactForm/>}/>
+            <Route exact path="/myProfile" element={<MyProfile/>}/>
+        </Routes>
+      </BrowserRouter>
       {/*<header className="App-header">*/}
       {/*  <img src={logo} className="App-logo" alt="logo" />*/}
       {/*  <p>*/}
@@ -24,7 +34,7 @@ function App() {
       {/*  </a>*/}
       {/*</header>*/}
       {/*  <ContactForm/>*/}
-        {<SignUp/>}
+      {/*  {<SignUp/>}*/}
     </div>
   );
 }
