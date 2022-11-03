@@ -37,8 +37,19 @@ class ChangePasswordForm(forms.Form):
         required=True  # cannot be empty
     )
 
-    # confirmed_new_password = forms.CharField(
-    #     label='confirmed_new_password',
-    #     widget=forms.PasswordInput,
-    #     required=True  # cannot be empty
-    # )
+
+class GetPasswordBackForm(forms.Form):
+    customer_email = forms.EmailField(
+        label='customer_email',
+        required=True   # cannot be empty
+    )
+    new_password = forms.CharField(
+        label='new_password',
+        required=True  # cannot be empty
+    )
+    security_question = forms.CharField(
+        label='security_question',
+        required=True  # cannot be empty
+    )
+
+

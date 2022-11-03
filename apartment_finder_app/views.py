@@ -10,7 +10,7 @@ from io import BytesIO
 
 from apartment_finder_app import models
 from apartment_finder_app.utils.code import check_code
-from apartment_finder_app.utils.forms import LoginForm, ChangePasswordForm
+from apartment_finder_app.utils.forms import LoginForm, ChangePasswordForm, GetPasswordBackForm
 
 from apartment_finder_app.models import QuestionConsultation, Customer
 from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer
@@ -137,3 +137,21 @@ def change_password(request):
     return JsonResponse({"code": "404", "error_message": "Not valid!"}, safe=False)
 
 
+@csrf_exempt
+def get_back_password(request):
+    if request.method == 'GET':
+        # form = ChangePasswordForm()
+        return JsonResponse({})
+    form = GetPasswordBackForm(data=JSONParser().parse(request))
+    if form.is_valid():
+        customer = models.Customer.objects.filter(
+            customer_email=form.cleaned_data.get('customer_email')).first()
+        if customer is None:
+            return JsonResponse({"code": "404", "error_message": "Account not found!"}, safe=False)
+        if form.cleaned_data.get('security_question') != customer.security_question:
+            return JsonResponse({"code": "404", "error_message": "Wrong security question answer! "}, safe=False)
+
+        models.Customer.objects.filter(customer_email=customer.customer_email).update(
+            customer_password=form.cleaned_data.get('new_password'))
+        return JsonResponse({"code": "200", "error_message": ""}, safe=False)
+    return JsonResponse({"code": "404", "error_message": "Not valid!"}, safe=False)
