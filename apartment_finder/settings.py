@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apartment_finder',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'xxxxxx',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
