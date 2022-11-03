@@ -4,7 +4,7 @@ from apartment_finder_app.models import QuestionConsultation, Customer
 from datetime import datetime
 import json
 
-
+'''
 class QuestionConsultationTestCase(TestCase):
     @classmethod
     def setUp(self):
@@ -48,6 +48,17 @@ class QuestionConsultationTestCase(TestCase):
         response = self.client.post(self.post_url, data, content_type="application/json", follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
         self.assertEquals(code, "404")
+'''
+
+
+class LoginTestCase(TestCase):
+    def test_view_url_exists_at_desired_location(self):
+        resp = self.client.get('/login/')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_redirect_if_not_logged_in(self):
+        resp = self.client.get('You have logged in! ')
+        self.assertRedirects(resp, '/login/')
 
 
 class CustomerTestCase(TestCase):
@@ -121,3 +132,4 @@ class CustomerTestCase(TestCase):
         response = self.client.delete(delete_url, follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
         self.assertEquals(code, "200")
+
