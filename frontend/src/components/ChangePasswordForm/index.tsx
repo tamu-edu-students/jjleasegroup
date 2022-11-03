@@ -33,6 +33,7 @@ function ChangePasswordForm(user: { name: string; email: string }) {
         setError("");
         if (checkError === "") {
           console.log("Password changed");
+          window.location.href = "/";
         }
       } else {
         //old password matched
