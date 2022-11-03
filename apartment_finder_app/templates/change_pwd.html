@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>$Title$</title>
+</head>
+<body>
+<form method="post" novalidate>
+    {% csrf_token %}
+    <div>
+        <label>Old Password</label>
+        {{ form.old_password }}
+        <span style="color: red">{{ form.old_password.errors.0 }}</span>
+    </div>
+    <div>
+        <label>New Password</label>
+        {{ form.new_password }}
+        <span style="color: red">{{ form.new_password.errors.0 }}</span>
+    </div>
+    <div>
+        <label>Confirm New Password</label>
+        {{ form.confirmed_new_password }}
+        <span style="color: red">{{ form.confirmed_new_password.errors.0 }}</span>
+    </div>
+    <input type="submit" value="change password">
+</form>
+</body>
+</html>

@@ -5,7 +5,7 @@ from django.db import models
 class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
     customer_username = models.CharField(max_length=50)
-    customer_password = models.CharField(max_length=50)
+    customer_password = models.CharField(max_length=88)
     customer_email = models.EmailField(max_length=50)
     customer_phone = models.BigIntegerField()
     customer_gender = models.CharField(max_length=1)
@@ -15,7 +15,7 @@ class Customer(models.Model):
 class Admin(models.Model):
     admin_id = models.AutoField(primary_key=True)
     admin_username = models.CharField(max_length=50)
-    admin_password = models.CharField(max_length=50)
+    admin_password = models.CharField(max_length=88)
     admin_email = models.EmailField(max_length=50)
     admin_phone = models.BigIntegerField()
 
