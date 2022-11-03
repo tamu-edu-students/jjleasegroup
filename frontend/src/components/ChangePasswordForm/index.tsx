@@ -22,6 +22,7 @@ function ChangePasswordForm(user: { name: string; email: string }) {
     console.log("User data:" + user.email);
     console.log("Detail data:" + details.password);
     console.log("Detail new data:" + details.password_new);
+    if (checkError === "") {
     APIService.change_password({
       //push email and password to backend
       customer_email: user.email,
@@ -40,7 +41,7 @@ function ChangePasswordForm(user: { name: string; email: string }) {
         console.log(resp.error_message);
         setError(resp.error_message);
       }
-    });
+    }); }
   };
 
   const submitHandler = (e: any) => {
