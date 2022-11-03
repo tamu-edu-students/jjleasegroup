@@ -23,9 +23,6 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^login', views.login, name='login'),
-    path('image/code/', views.image_code),
-    url(r'^change_password', views.change_password, name='change-password'),
     url(r'^question_consultation$', views.question_consultation_API, name='add-question-consultation'),
     url(r'^', include('apartment_finder_app.urls'))
 ]
