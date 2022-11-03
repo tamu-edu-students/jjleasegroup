@@ -10,6 +10,9 @@ class Customer(models.Model):
     customer_phone = models.BigIntegerField()
     customer_gender = models.CharField(max_length=1)
     customer_date_of_birth = models.DateField()
+    customer_security_question = models.IntegerField()
+    # 0 = what is your mother's last name, 1 = which city were you born in, 2 = what is your favorite movie
+    customer_security_answer = models.CharField(max_length=50)
 
 
 class Admin(models.Model):
@@ -23,7 +26,7 @@ class Admin(models.Model):
 class QuestionConsultation(models.Model):
     question_id = models.AutoField(primary_key=True)
     question_purpose = models.IntegerField() # 0 = xxx, 1 = xxx
-    apt_area = models.IntegerField() # 0 = College Station, 1 = Austin, 2 = Houston
+    apt_area = models.IntegerField() # 0 = College Station, 1 = Austin, 2 = Houstonquit
     question_text = models.TextField()
     question_status = models.IntegerField() # 1 = answered, 0 = not annswered
     submission_date_time = models.DateTimeField()
