@@ -81,13 +81,13 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apartment_finder',
         'USER': 'root',
-        'PASSWORD': 'xxxxx',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
@@ -103,7 +103,7 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-
+'''
 
 
 # Password validation

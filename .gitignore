@@ -17,7 +17,8 @@ build
 .env.development.local
 .env.test.local
 .env.production.local
-.idea
+.idea/
+__pycache__
 
 
 npm-debug.log*

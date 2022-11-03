@@ -1,5 +1,5 @@
 import APIService from "../../api/APIService";
-import { useState } from "react";
+import {useState} from "react";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -30,6 +30,7 @@ function SignUp() {
       customer_gender: gender,
       customer_date_of_birth: date_of_birth,
     }).then((resp) => console.log(resp));
+    window.location.href = "/LogIn";
   };
 
   return (
@@ -79,8 +80,8 @@ function SignUp() {
         <option value="m">Male</option>
         <option value="f">Female</option>
       </select>
-      <br />
-      <br />
+      <br/>
+      <br/>
       <label htmlFor="customer date of birth">Start date:</label>
       <input
         type="date"
@@ -92,8 +93,8 @@ function SignUp() {
         onChange={(e) => setDate_of_birth(e.target.value)}
       />
 
-      <br />
-      <br />
+      <br/>
+      <br/>
       <button className="btn btn-primary" onClick={submitForm}>
         Submit
       </button>
