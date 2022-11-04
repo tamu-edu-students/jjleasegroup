@@ -4,17 +4,22 @@ const FAQ = () => {
   return (
     <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="0">
-        <Accordion.Header>What's JJ GroupLease? JJ团租是什么组织？</Accordion.Header>
+        <Accordion.Header>
+          What's JJ GroupLease? JJ团租是什么组织？
+        </Accordion.Header>
         <Accordion.Body>
           <p>
-            JJ GroupLease is the name of the leasing team led by Jennifer. We provide free and
-            professional apartment leasing for international students.
+            JJ GroupLease is the name of the leasing team led by Jennifer. We
+            provide free and professional apartment leasing for international
+            students.
           </p>
           JJ团租是一个由Jennifer领导的为留美学生提供免费专业租房服务的组织，目前经营范围限于德州。
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
-        <Accordion.Header>Why choosing JJ GroupLease?为什么选择JJ团租？</Accordion.Header>
+        <Accordion.Header>
+          Why choosing JJ GroupLease?为什么选择JJ团租？
+        </Accordion.Header>
         <Accordion.Body>
           <p>JJ GroupLease provides you:</p>
           <ul>
@@ -35,13 +40,16 @@ const FAQ = () => {
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="2">
-        <Accordion.Header>What are our strengths?我们的优势是什么？</Accordion.Header>
+        <Accordion.Header>
+          What are our strengths?我们的优势是什么？
+        </Accordion.Header>
         <Accordion.Body>
           <p>
-            Unlike agencies that rent apartments online, JJ Group Lease based in Texas an have
-            adequate knowledge about the place. Not only we can provide you with detailed
-            information about the orientation of the house, but also help you solve problems at any
-            time during your stay. We hope you can have a reliable friend when living alone in an
+            Unlike agencies that rent apartments online, JJ Group Lease based in
+            Texas an have adequate knowledge about the place. Not only we can
+            provide you with detailed information about the orientation of the
+            house, but also help you solve problems at any time during your
+            stay. We hope you can have a reliable friend when living alone in an
             foreign country.
           </p>
           <p>
@@ -60,8 +68,9 @@ const FAQ = () => {
             <li>2. Looking for suitable roommates;</li>
             <li>3. Contact us via wechat, email or the online chat onsite;</li>
             <li>
-              4. Pack all names, emails, apartment and floor plan information, and all the required
-              supporting documents and send them to our email address.
+              4. Pack all names, emails, apartment and floor plan information,
+              and all the required supporting documents and send them to our
+              email address.
             </li>
           </ul>
           <ul>
@@ -80,25 +89,30 @@ const FAQ = () => {
       </Accordion.Item>
       <Accordion.Item eventKey="4">
         <Accordion.Header>
-          What supporting docuements are required to rent a room in Texas?德州租房子需要哪些文件呢？
+          What supporting docuements are required to rent a room in
+          Texas?德州租房子需要哪些文件呢？
         </Accordion.Header>
         <Accordion.Body>
-          In Texas, passport and I-20/DS-2019 forms are in need when applying. The VISA is required
-          before moving in. Some apartments also require bank statement or income proof to finish
-          application. In Texas, apartments require the monthly income at least three times as the
-          monthly rent or the total bank deposit reaches at least three times as the amount of the
-          total rent.
+          In Texas, passport and I-20/DS-2019 forms are in need when applying.
+          The VISA is required before moving in. Some apartments also require
+          bank statement or income proof to finish application. In Texas,
+          apartments require the monthly income at least three times as the
+          monthly rent or the total bank deposit reaches at least three times as
+          the amount of the total rent.
           在德州，留学生在提交租房申请时必须要有“护照”和I-20或DS-2019表，在办理入住时，必须要出示VISA签证页。
           此外，很多公寓要求额外提供“银行存款证明”或者“收入证明”。德州房地产协会规定：租客提供的收入证明或存款证明金额要求满足至少是租金的三倍
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="5">
-        <Accordion.Header>How can I join the JJ GroupLease? 如何参加JJ团租？</Accordion.Header>
+        <Accordion.Header>
+          How can I join the JJ GroupLease? 如何参加JJ团租？
+        </Accordion.Header>
         <Accordion.Body>
           <p>
-            If you rent an apartment through us, then you are one member of JJ GroupLeasers and you
-            can enjoy our services. When you are looking for an apartment, you can contact us via
-            wechat, email or online chat. We will response you once we get the notice.
+            If you rent an apartment through us, then you are one member of JJ
+            GroupLeasers and you can enjoy our services. When you are looking
+            for an apartment, you can contact us via wechat, email or online
+            chat. We will response you once we get the notice.
           </p>
           <p>
             如果您是通过JJ团租租的房子，那您就是JJ团租大家庭中的一员，您即可以享受到我们提供的服务。您可以通过微信、邮件、电话或在线给我们留言交流，我们将及时回复您。如果在线留言不在线，敬请留下您的邮箱，我们会第一时间通过邮件与您联系
@@ -106,14 +120,18 @@ const FAQ = () => {
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="6">
-        <Accordion.Header>How to choose an apartment?如何选择适合自己的房子？</Accordion.Header>
+        <Accordion.Header>
+          How to choose an apartment?如何选择适合自己的房子？
+        </Accordion.Header>
         <Accordion.Body>
           <p>
-            In each city, we provide a number of cooperating apartments for you. Those apartments
-            are chosen carefully with consideration of safety, convenience, price, service, etc.
-            Each apartment has its own features and prices. You should choose the apartment
-            according to your budget and requirements. Usually, it's hard to find an apartment with
-            good furnishes, good environment, convenient but also in cheap price.
+            In each city, we provide a number of cooperating apartments for you.
+            Those apartments are chosen carefully with consideration of safety,
+            convenience, price, service, etc. Each apartment has its own
+            features and prices. You should choose the apartment according to
+            your budget and requirements. Usually, it's hard to find an
+            apartment with good furnishes, good environment, convenient but also
+            in cheap price.
           </p>
           <p>
             JJ团租在德州四个城市提供租房咨询服务，我们精心挑选了安全、便捷、服务好和性价比高的公寓和我们达成长久的合作。每个公寓都有其自己的优点和缺点，关键是要根据自己的实际情况选择一个适合自己的公寓，比如预算、对房子的要求等。通常，位置好的公寓租金高但可能没家具，有家具的公寓性价比高但位置可能没那么好。但是，有一点是肯定的，那就是一定有校车站点。
@@ -127,13 +145,15 @@ const FAQ = () => {
         </Accordion.Header>
         <Accordion.Body>
           <p>
-            The differences lie in the floor plans with two bedrooms or more. The individual lease
-            means that you are only responsible for the rent of your private room and the shared
-            public space, utilities. It is better for you if you don't have any roommates, but you
-            want to share a whole unit with others. The non-individual lease requires that all the
-            tenants have the responsibility for the whole unit. Even though you don't have a
-            roommate, you are asked to pay the rent of the whole unit. So, looking for roommates
-            ahead is very important.
+            The differences lie in the floor plans with two bedrooms or more.
+            The individual lease means that you are only responsible for the
+            rent of your private room and the shared public space, utilities. It
+            is better for you if you don't have any roommates, but you want to
+            share a whole unit with others. The non-individual lease requires
+            that all the tenants have the responsibility for the whole unit.
+            Even though you don't have a roommate, you are asked to pay the rent
+            of the whole unit. So, looking for roommates ahead is very
+            important.
           </p>
           <p>
             对于1b1b的房子，也就是一居室来说，独立和非独立合约公寓没什么区别，区别就在于两居室及以上的房子。首先，独立合约的意思是每个人只需要对自己住的卧室负责租金，不管其他卧室是否空着，您都不用担心公寓会问你要钱。相反，非独立合约的公寓要求大家对整套房子一起负责，假如房子有空的卧室，您也要为那间空的卧室付租金。这就是最大的区别。所以，如果您没找到室友，那么独立合约公寓是您的选择；如果您找到室友并且大家居住时间一样，那可以考虑非独立合约公寓，当然也可以租独立合约的公寓。
@@ -141,40 +161,44 @@ const FAQ = () => {
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="8">
-        <Accordion.Header>What do those floor plans mean? 怎么看房型？</Accordion.Header>
+        <Accordion.Header>
+          What do those floor plans mean? 怎么看房型？
+        </Accordion.Header>
         <Accordion.Body>
           <p>
-            US apartments usually have 1b-1b, 2b-1b, 2b-2b, 3b-2b, 3b-3b, 4b-2b and 4b-4b floor
-            plans. The first "b" means "bedroom" and the second "b" means "bathroom". Therefore,
+            US apartments usually have 1b-1b, 2b-1b, 2b-2b, 3b-2b, 3b-3b, 4b-2b
+            and 4b-4b floor plans. The first "b" means "bedroom" and the second
+            "b" means "bathroom". Therefore,
           </p>
           <ul>
             <li>
-              (1) 1b-1b: 1 private bedroom and 1 private bathroom. The studio is also one kind of
-              1b-1b plans, with the bedroom and living room together.
+              (1) 1b-1b: 1 private bedroom and 1 private bathroom. The studio is
+              also one kind of 1b-1b plans, with the bedroom and living room
+              together.
             </li>
             <li>
-              (2) 2b-1b: 2 private bedrooms and 1 shared bathroom. Shared living room and kitchen
-              room.
+              (2) 2b-1b: 2 private bedrooms and 1 shared bathroom. Shared living
+              room and kitchen room.
             </li>
             <li>
-              (3) 2b-2b: 2 private bedrooms and 2 shared bathroom. Shared living room and kitchen
-              room.
+              (3) 2b-2b: 2 private bedrooms and 2 shared bathroom. Shared living
+              room and kitchen room.
             </li>
             <li>
-              (4) 3b-2b: 3 private bedrooms and 2 shared bathroom. Shared living room and kitchen
-              room.
+              (4) 3b-2b: 3 private bedrooms and 2 shared bathroom. Shared living
+              room and kitchen room.
             </li>
             <li>
-              (5) 3b-3b: 3 private bedrooms and 3 shared bathroom. Shared living room and kitchen
-              room.
+              (5) 3b-3b: 3 private bedrooms and 3 shared bathroom. Shared living
+              room and kitchen room.
             </li>
             <li>
-              (6) 4b-2b: 4 private bedrooms and 2 shared bathroom. Shared living room and kitchen
-              room.
+              (6) 4b-2b: 4 private bedrooms and 2 shared bathroom. Shared living
+              room and kitchen room.
             </li>
             <li>
-              (7) 4b-2b: 2 private bedrooms and 4 shared bathroom. Shared living room and kitchen
-              room.
+              (7) 4b-2b: 2 private bedrooms and 4 shared bathroom. Shared living
+              room and kitchen room.
             </li>
           </ul>
           <p>
@@ -189,10 +213,11 @@ const FAQ = () => {
         </Accordion.Header>
         <Accordion.Body>
           <p>
-            Of course, yes! Air conditioner is the necessity in Texas. You need air conditioner to
-            cool in summer and to heat in winter. Almost all apartments install center air
-            conditioners inside each unit. The tenants can control it by themselves. There is air
-            change window in every bedroom. You can also control the window size.
+            Of course, yes! Air conditioner is the necessity in Texas. You need
+            air conditioner to cool in summer and to heat in winter. Almost all
+            apartments install center air conditioners inside each unit. The
+            tenants can control it by themselves. There is air change window in
+            every bedroom. You can also control the window size.
           </p>
           <p>
             答案是肯定的，德州所有出租公寓都第一要求有空调，原因是因为德州夏天很热，温度可以高到100多华氏度。所以，德州有法律规定如果公寓房间里温度高于100华氏度超过24小时，公寓负责人必须要么立即把房间空调修好，要么给换一套空调正常工作的房间。另外，在冬天您也需要空调来制暖。德州大部分公寓房子内部装的空调都是中央空调，是租户可以自己在房间里控制开关、温度高低的中央空调，所以非常方便。
@@ -205,10 +230,11 @@ const FAQ = () => {
         </Accordion.Header>
         <Accordion.Body>
           <p>
-            In US, most apartments are built with wood. It usually has 2~3 floors high. So, there
-            are a number of buildings in an apartment.There are some student apartments near campus
-            which are modern built and often mucher higher. But the price is also much higher than
-            the wood ones.
+            In US, most apartments are built with wood. It usually has 2~3
+            floors high. So, there are a number of buildings in an
+            apartment.There are some student apartments near campus which are
+            modern built and often mucher higher. But the price is also much
+            higher than the wood ones.
           </p>
           <p>
             众所周知，美国大部分的房子都是木头造的，因此不可能像钢筋水泥建筑一样盖很高，通常都是2-3层。所以，一个公寓就像一个社区，往往有很多栋公寓楼，每栋楼都是两三层。还有一点，美国的钢筋水泥公寓的价格比木头造的公寓高很多。
@@ -218,7 +244,6 @@ const FAQ = () => {
     </Accordion>
   );
 };
-
 
 export default FAQ;
 

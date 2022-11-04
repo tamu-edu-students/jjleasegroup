@@ -1,7 +1,6 @@
 import "./styles.module.scss";
 import { IonIcon } from "react-ion-icon";
 
-
 const Box = () => {
   return (
     <section className="property" id="property">
@@ -14,7 +13,6 @@ const Box = () => {
           <li>
             <div className="property-card">
               <figure className="card-banner">
-
                 {/* <a href="#" > */}
                 {/* src\jj-img\Austin\OffCampus\Acacia Cliffs\acacia5.jpg */}
                 {/* <img src={require('./acacia5.jpg')} alt="Acacia Cliffs" className="w-100"/> */}
@@ -45,9 +43,7 @@ const Box = () => {
                   <a href="#">The Enclave</a>
                 </h3>
 
-                <p className="card-text">
-                  Description:
-                </p>
+                <p className="card-text">Description:</p>
 
                 <ul className="card-list">
                   <li className="card-item">
@@ -83,7 +79,6 @@ const Box = () => {
 
                       <p className="author-title">Estate Agents</p>
                     </div> */}
-
                 </div>
                 <div className="card-footer-actions">
                   <button className="card-footer-actions-btn">
@@ -106,6 +101,5 @@ const Box = () => {
     </section>
   );
 };
-
 
 export default Box;

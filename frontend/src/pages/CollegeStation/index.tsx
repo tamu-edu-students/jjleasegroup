@@ -5,7 +5,6 @@ import Hero from "../../components/Hero";
 import FAQ from "../FAQ";
 
 const CollegeStation = () => {
-
   return (
     <div>
       {/* NavBar not function correctly once the window shrink */}

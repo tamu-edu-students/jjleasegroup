@@ -16,7 +16,9 @@ function NavBar() {
             <Nav.Link href="#link">FAQ</Nav.Link>
             <NavDropdown title="Leasing" id="basic-nav-dropdown">
               <NavDropdown.Item href="/Austin">Austin</NavDropdown.Item>
-              <NavDropdown.Item href="/CollegeStation">College Station</NavDropdown.Item>
+              <NavDropdown.Item href="/CollegeStation">
+                College Station
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

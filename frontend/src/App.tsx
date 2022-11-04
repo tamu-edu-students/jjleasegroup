@@ -1,11 +1,11 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ContactForm from "./components/ContactForm";
 import SignUp from "./components/SignUp";
 import LoginForm from "./components/LoginForm";
 import ChangePasswordForm from "./components/ChangePasswordForm";
-import Home from "./pages/home";
 import { deleteUser, getUser } from "./utils/cookie";
+import MyProfile from "./components/MyProfile";
+import Home from "./pages/Home";
 
 function App() {
   const Logout = () => {
@@ -38,6 +38,7 @@ function App() {
           path="/ChangePassword"
           element={<ChangePasswordForm {...getUser()} />}
         />
+        <Route path="/MyProfile" element={<MyProfile />} />
       </Routes>
     </BrowserRouter>
   );
