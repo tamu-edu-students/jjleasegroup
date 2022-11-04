@@ -1,5 +1,5 @@
 import APIService from "../../api/APIService";
-import {useState} from "react";
+import { useState } from "react";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -13,6 +13,8 @@ function SignUp() {
     new Date().toISOString().slice(0, 10)
   );
   const today = new Date().toISOString().slice(0, 10);
+  const [securityQuestion, setSecurityQuestion] = useState("0");
+  const [securityAnswer, setSecurityAnswer] = useState("");
 
   const handlePassword2 = (e: any) => {
     setPassword2(e.target.value);
@@ -29,6 +31,8 @@ function SignUp() {
       customer_phone: phone,
       customer_gender: gender,
       customer_date_of_birth: date_of_birth,
+      customer_security_question: securityQuestion,
+      customer_security_answer: securityAnswer,
     }).then((resp) => console.log(resp));
     window.location.href = "/LogIn";
   };
@@ -70,8 +74,8 @@ function SignUp() {
         className="form-control"
         onChange={(e) => setPhone(e.target.value)}
       />
-
       <label htmlFor="customer gender">select your gender:</label>
+      <br />
       <select
         name="customer_gender"
         id="customer_gender"
@@ -80,9 +84,10 @@ function SignUp() {
         <option value="m">Male</option>
         <option value="f">Female</option>
       </select>
-      <br/>
-      <br/>
-      <label htmlFor="customer date of birth">Start date:</label>
+      <br />
+      <br />
+      <label htmlFor="customer date of birth">your date of birth:</label>
+      <br />
       <input
         type="date"
         id="customer_date_of_birth"
@@ -92,9 +97,31 @@ function SignUp() {
         max={today}
         onChange={(e) => setDate_of_birth(e.target.value)}
       />
-
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <label htmlFor="security question">select your security question:</label>
+      <br />
+      <select
+        name="security_question"
+        id="security_question"
+        value={securityQuestion}
+        onChange={(e) => setSecurityQuestion(e.target.value)}
+      >
+        <option value="0">What is your mother's last name?</option>
+        <option value="1">Which city were you born in?</option>
+        <option value="2">What is your favorite movie?</option>
+      </select>
+      <br />
+      <br />
+      <input
+        type="text"
+        value={securityAnswer}
+        placeholder="enter your answer"
+        className="form-control"
+        onChange={(e) => setSecurityAnswer(e.target.value)}
+      />
+      <br />
+      <br />
       <button className="btn btn-primary" onClick={submitForm}>
         Submit
       </button>

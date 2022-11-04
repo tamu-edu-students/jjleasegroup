@@ -17,7 +17,7 @@ function LoginForm() {
       //push email and password to backend
       customer_email: details.email,
       customer_password: details.password,
-      verification_code: details.password
+      verification_code: details.password,
     }).then((resp) => {
       //TOCHANGE check password right or wrong here
       if (resp.code === "200") {
@@ -25,7 +25,7 @@ function LoginForm() {
 
         saveUser({
           name: details.name,
-          email: details.email
+          email: details.email,
         });
         // setUser({
         //   name: details.name,
