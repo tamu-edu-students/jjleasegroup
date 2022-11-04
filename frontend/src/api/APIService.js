@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "http://192.168.68.80:8000/";
 export default class APIService {
   static add_question_consulation(body) {
     console.log(JSON.stringify(body));
@@ -36,6 +36,26 @@ export default class APIService {
   static change_password(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "change_password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static forget_password(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "get_back_password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static get_question(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "get_question_text", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
