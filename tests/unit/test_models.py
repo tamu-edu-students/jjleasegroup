@@ -41,7 +41,10 @@ class CustomerTestCase(TestCase):
                                 customer_email='tester@tamu.edu',
                                 customer_phone=1231231234,
                                 customer_gender='m',
-                                customer_date_of_birth=datetime(2015, 10, 9))
+                                customer_date_of_birth=datetime(2015, 10, 9),
+                                customer_security_question=0,
+                                customer_security_answer='N'
+                                )
 
     def test_customer_username_label(self):
         customer = Customer.objects.get(customer_id=2)
@@ -56,5 +59,5 @@ class CustomerTestCase(TestCase):
     def test_customer_password_label(self):
         customer = Customer.objects.get(customer_id=2)
         max_length = customer._meta.get_field('customer_password').max_length
-        self.assertEquals(max_length, 50)
+        self.assertEquals(max_length, 88)
 
