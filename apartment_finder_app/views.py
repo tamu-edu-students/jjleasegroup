@@ -13,7 +13,7 @@ from apartment_finder_app.utils.code import check_code
 from apartment_finder_app.utils.forms import LoginForm, ChangePasswordForm, GetPasswordBackForm
 
 from apartment_finder_app.models import QuestionConsultation, Customer
-from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer
+from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer_full, CustomerSerializer_update, CustomerSerializer_pwd
 
 
 SALT = "CSCE606"

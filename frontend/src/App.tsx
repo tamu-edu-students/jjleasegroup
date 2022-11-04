@@ -6,6 +6,8 @@ import ChangePasswordForm from "./components/ChangePasswordForm";
 import { deleteUser, getUser } from "./utils/cookie";
 import MyProfile from "./components/MyProfile";
 import Home from "./pages/Home";
+import Austin from "./pages/Austin";
+import CollegeStation from "./pages/CollegeStation";
 
 function App() {
   const Logout = () => {
@@ -39,6 +41,8 @@ function App() {
           element={<ChangePasswordForm {...getUser()} />}
         />
         <Route path="/MyProfile" element={<MyProfile />} />
+        <Route path={"/Austin"} element={<Austin />} />
+        <Route path={"CollegeStation"} element={<CollegeStation />} />
       </Routes>
     </BrowserRouter>
   );
