@@ -23,6 +23,7 @@ function ForgetPassword() {
         console.log("answer is correct");
         setError("")
         setFlag(false)
+        window.location.href = "/Login";
       }else{
         //answer is wrong
         setError(resp.error_message);
