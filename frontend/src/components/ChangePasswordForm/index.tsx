@@ -23,25 +23,26 @@ function ChangePasswordForm(user: { name: string; email: string }) {
     console.log("Detail data:" + details.password);
     console.log("Detail new data:" + details.password_new);
     if (checkError === "") {
-    APIService.change_password({
-      //push email and password to backend
-      customer_email: user.email,
-      old_password: details.password,
-      new_password: details.password_new,
-    }).then((resp) => {
-      if (resp.code === "200") {
-        //check old password
-        setError("");
-        if (checkError === "") {
-          console.log("Password changed");
-          window.location.href = "/";
+      APIService.change_password({
+        //push email and password to backend
+        customer_email: user.email,
+        old_password: details.password,
+        new_password: details.password_new,
+      }).then((resp) => {
+        if (resp.code === "200") {
+          //check old password
+          setError("");
+          if (checkError === "") {
+            console.log("Password changed");
+            window.location.href = "/";
+          }
+        } else {
+          //old password matched
+          console.log(resp.error_message);
+          setError(resp.error_message);
         }
-      } else {
-        //old password matched
-        console.log(resp.error_message);
-        setError(resp.error_message);
-      }
-    }); }
+      });
+    }
   };
 
   const submitHandler = (e: any) => {

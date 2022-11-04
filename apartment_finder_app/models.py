@@ -7,9 +7,11 @@ class Customer(models.Model):
     customer_username = models.CharField(max_length=50)
     customer_password = models.CharField(max_length=88)
     customer_email = models.EmailField(max_length=50)
-    customer_phone = models.BigIntegerField()
+    customer_phone = models.CharField(max_length=30)
     customer_gender = models.CharField(max_length=1)
     customer_date_of_birth = models.DateField()
+    customer_security_question = models.IntegerField() # 0 = what is your mother's last name, 1 = which city were you born in, 2 = what is your favorite movie
+    customer_security_answer = models.CharField(max_length=50)
 
 
 class Admin(models.Model):
