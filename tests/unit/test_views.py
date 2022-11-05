@@ -4,7 +4,17 @@ from apartment_finder_app.models import QuestionConsultation, Customer
 from datetime import datetime
 import json
 
-'''
+
+class LoginTestCase(TestCase):
+    def test_view_url_exists_at_desired_location(self):
+        resp = self.client.get('/login/')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_redirect_if_not_logged_in(self):
+        resp = self.client.get('You have logged in! ')
+        self.assertRedirects(resp, '/login/')
+
+
 class QuestionConsultationTestCase(TestCase):
     @classmethod
     def setUp(self):
@@ -15,7 +25,10 @@ class QuestionConsultationTestCase(TestCase):
                                                      customer_email='test@tamu.edu',
                                                      customer_phone=9792345609,
                                                      customer_gender='m',
-                                                     customer_date_of_birth=datetime(2015, 10, 9))
+                                                     customer_date_of_birth=datetime(2015, 10, 9),
+                                                     customer_security_question='0',
+                                                     customer_security_answer='test'
+                                                     )
 
         self.test_question = QuestionConsultation.objects.create(question_purpose=1, apt_area=0, question_text='test',
                                                                  question_status=0,
@@ -48,30 +61,21 @@ class QuestionConsultationTestCase(TestCase):
         response = self.client.post(self.post_url, data, content_type="application/json", follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
         self.assertEquals(code, "404")
-'''
-
-
-class LoginTestCase(TestCase):
-    def test_view_url_exists_at_desired_location(self):
-        resp = self.client.get('/login/')
-        self.assertEqual(resp.status_code, 200)
-
-    def test_redirect_if_not_logged_in(self):
-        resp = self.client.get('You have logged in! ')
-        self.assertRedirects(resp, '/login/')
 
 
 class CustomerTestCase(TestCase):
     @classmethod
     def setUp(self):
         self.client = Client()
-        self.post_put_url = reverse('customer')
+        self.post_put_url = reverse('post/put_customer')
         self.test_customer = Customer.objects.create(customer_username='xixi',
                                                      customer_password='pwd',
                                                      customer_email='test@tamu.edu',
                                                      customer_phone=9792345609,
                                                      customer_gender='m',
-                                                     customer_date_of_birth=datetime(2015, 10, 9))
+                                                     customer_date_of_birth=datetime(2015, 10, 9),
+                                                     customer_security_question='0',
+                                                     customer_security_answer='test')
 
     def test_sign_up_200(self):
         data = {
@@ -80,7 +84,9 @@ class CustomerTestCase(TestCase):
             "customer_email": "trytry@tamu.edu",
             "customer_phone": "0001234567",
             "customer_gender": "m",
-            "customer_date_of_birth": "2000-09-09"
+            "customer_date_of_birth": "2000-09-09",
+            "customer_security_question": '0',
+            "customer_security_answer": 'test'
         }
         response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
@@ -93,7 +99,9 @@ class CustomerTestCase(TestCase):
             "customer_email": "trytry@tamu.edu2.0",
             "customer_phone": "0001234567",
             "customer_gender": "m",
-            "customer_date_of_birth": "2000-09-09"
+            "customer_date_of_birth": "2000-09-09",
+            "customer_security_question": '0',
+            "customer_security_answer": 'test'
         }
         response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
@@ -103,11 +111,13 @@ class CustomerTestCase(TestCase):
         data = {
             "customer_id": self.test_customer.customer_id,
             "customer_username": "hello",
-            "customer_password": "testpwdpwd",
+            # "customer_password": "testpwdpwd",
             "customer_email": "trytry@tamu.edu",
             "customer_phone": "0001234567",
             "customer_gender": "m",
-            "customer_date_of_birth": "2000-09-09"
+            "customer_date_of_birth": "2000-09-09",
+            "customer_security_question": '0',
+            "customer_security_answer": 'test'
         }
         response = self.client.put(self.post_put_url, data, content_type="application/json", follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
@@ -117,18 +127,20 @@ class CustomerTestCase(TestCase):
         data = {
             "customer_id": self.test_customer.customer_id,
             "customer_username": "hello",
-            "customer_password": "testpwdpwd",
+            # "customer_password": "testpwdpwd",
             "customer_email": "trytry@tamu.edu2.0",
             "customer_phone": "0001234567",
             "customer_gender": "m",
-            "customer_date_of_birth": "2000-09-09"
+            "customer_date_of_birth": "2000-09-09",
+            "customer_security_question": '0',
+            "customer_security_answer": 'test'
         }
-        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        response = self.client.put(self.post_put_url, data, content_type="application/json", follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
         self.assertEquals(code, "404")
 
     def test_delete_200(self):
-        delete_url = reverse('remove_customer', args=[self.test_customer.customer_id])
+        delete_url = reverse('get/delete_customer', args=[self.test_customer.customer_id])
         response = self.client.delete(delete_url, follow=True)
         code = json.loads(response.content.decode('utf-8'))["code"]
         self.assertEquals(code, "200")
