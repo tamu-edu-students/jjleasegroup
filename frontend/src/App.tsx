@@ -9,6 +9,7 @@ import { deleteUser, getUser } from "./utils/cookie";
 import MyProfile from "./components/MyProfile";
 import Austin from "./pages/Austin";
 import CollegeStation from "./pages/CollegeStation";
+import React from "react";
 
 
 function App() {
