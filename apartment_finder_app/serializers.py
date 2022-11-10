@@ -10,8 +10,21 @@ class QuestionConsultationSerializer(serializers.ModelSerializer):
                   'submission_date_time', 'customer_id')
 
 
-class CustomerSerializer(serializers.ModelSerializer):
+class CustomerSerializer_full(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ('customer_id', 'customer_username', 'customer_password', 'customer_email', 'customer_phone',
-                  'customer_gender', 'customer_date_of_birth')
+                  'customer_gender', 'customer_date_of_birth', 'customer_security_question', 'customer_security_answer')
+
+
+class CustomerSerializer_update(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ('customer_id', 'customer_username', 'customer_email', 'customer_phone',
+                  'customer_gender', 'customer_date_of_birth', 'customer_security_question', 'customer_security_answer')
+
+
+class CustomerSerializer_pwd(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ('customer_id', 'customer_password')
