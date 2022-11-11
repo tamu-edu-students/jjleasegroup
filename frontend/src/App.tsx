@@ -1,12 +1,14 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ContactForm from "./components/ContactForm";
 import SignUp from "./components/SignUp";
 import LoginForm from "./components/LoginForm";
 import ChangePasswordForm from "./components/ChangePasswordForm";
 import ForgetPassword from "./components/ForgetPassword";
-import Home from "./pages/home";
 import { deleteUser, getUser } from "./utils/cookie";
+import MyProfile from "./components/MyProfile";
+import Home from "./pages/home";
+import Austin from "./pages/Austin";
+import CollegeStation from "./pages/CollegeStation";
 
 
 function App() {
@@ -54,6 +56,9 @@ function App() {
           path="/ChangePassword"
           element={<ChangePasswordForm {...getUser()} />}
         />
+        <Route path="/MyProfile" element={<MyProfile />} />
+        <Route path={"/Austin"} element={<Austin />} />
+        <Route path={"CollegeStation"} element={<CollegeStation />} />
       </Routes>
     </BrowserRouter>
   );
