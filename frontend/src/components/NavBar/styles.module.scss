@@ -1,0 +1,28 @@
+@import '../../style/fonts.scss';
+
+.nav {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  color: #80B5EA;
+}
+
+.collapse {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #225D99;
+}

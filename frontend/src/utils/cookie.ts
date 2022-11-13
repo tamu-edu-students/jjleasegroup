@@ -1,7 +1,7 @@
 import cookie from "react-cookies";
 
 //保存
-function saveUser(user) {
+function saveUser(user: any) {
   cookie.save("userInfo", user, { path: "/" });
 }
 

@@ -1,8 +1,8 @@
 import NavBar from "../../components/NavBar";
-import Box from "../../components/Box";
+// import Box from "../../components/Box";
 import Footer from "../../components/Footer";
-import Hero from "../../components/Hero";
-import FAQ from "../FAQ";
+// import Hero from "../../components/Hero";
+// import FAQ from "../FAQ";
 
 const CollegeStation = () => {
   return (

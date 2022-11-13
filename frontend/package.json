@@ -16,7 +16,6 @@
     "react-bootstrap": "^2.5.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
-    "react-ion-icon": "^4.0.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "sass": "^1.55.0",
@@ -51,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-cookies": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.26.0",
