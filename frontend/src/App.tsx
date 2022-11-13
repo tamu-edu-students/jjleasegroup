@@ -4,7 +4,7 @@ import SignUp from "./components/SignUp";
 import LoginForm from "./components/LoginForm";
 import ChangePasswordForm from "./components/ChangePasswordForm";
 import ForgetPassword from "./components/ForgetPassword";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import { deleteUser, getUser } from "./utils/cookie";
 import MyProfile from "./components/MyProfile";
 import Austin from "./pages/Austin";
