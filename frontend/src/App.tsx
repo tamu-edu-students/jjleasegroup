@@ -8,6 +8,7 @@ import MyProfile from "./components/MyProfile";
 import Home from "./pages/Home";
 import Austin from "./pages/Austin";
 import CollegeStation from "./pages/CollegeStation";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   const Logout = () => {
@@ -42,7 +43,8 @@ function App() {
         />
         <Route path="/MyProfile" element={<MyProfile />} />
         <Route path={"/Austin"} element={<Austin />} />
-        <Route path={"CollegeStation"} element={<CollegeStation />} />
+        <Route path={"/CollegeStation"} element={<CollegeStation />} />\
+        <Route path={"/ContactUs"} element={<ContactUs />} />
       </Routes>
     </BrowserRouter>
   );
