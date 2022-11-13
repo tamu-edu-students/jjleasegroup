@@ -1,67 +1,44 @@
-import "./styles.module.scss";
-import { IonIcon } from "react-ion-icon";
+import styles from "./styles.module.scss";
+import logo from "./logo.svg";
 
 const Footer = () => {
   return (
-    <section>
-      <footer>
-        <div className="main">
-          <div className="col1">
-            <h3 className="heading">Get in touch</h3>
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Contact Us</a>
-              </li>
-              <li>
-                <a href="#">About us</a>
-              </li>
-              <li>
-                <a href="#">FAQ</a>
-              </li>
-              <li>
-                <a href="#">Leasing</a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col1">
-            <h3 className="heading">Phone</h3>
-
-            <li>
-              <a>+1-512-221-0777</a>
-            </li>
-
-            <li>
-              <a>+1-512-888-4656</a>
-            </li>
-          </div>
-
-          <div className="col3">
-            <h3 className="heading">Wechat</h3>
-            <div className="social">
-              <a href="#">
-                <IonIcon name="logo-wechat" />
-              </a>
-              {/* <a href="#">
-          <IonIcon name="mail-outline"/>
-        </a> */}
-            </div>
+    <div className={styles.footer}>
+      <div className={styles.heading}>
+        <div className={styles["heading-title"]}>
+          <img src={logo} alt="JJ" className={styles["heading-title-icon"]} />
+          <div className={styles["heading-title-text"]}>Get In Touch</div>
+        </div>
+        <div className={styles["heading-content"]}>
+          We'd love to hear from you
+        </div>
+      </div>
+      <div className={styles.lists}>
+        <div className={styles.email}>
+          <div className={styles["list-title"]}>Email</div>
+          <div className={styles["list-content"]}>jjgrouplease@gmail.com</div>
+          <div className={styles["list-content"]}>jjgroupleaseut@gmail.com</div>
+          <div className={styles["list-content"]}>
+            jjgroupleasetamu@gmail.com
           </div>
         </div>
-
-        {/* <p className="terms">
-    <a href="#">Terms of purchase</a>
-    <a href="#">Security and privacy</a>
-    <a href="#">Newsletter</a>
-  </p> */}
-      </footer>
-
-      {/* <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> */}
-    </section>
+        <div className={styles.phone}>
+          <div className={styles["list-title"]}>Phone</div>
+          <div className={styles["list-content"]}>+1-512-221-0777</div>
+          <div className={styles["list-content"]}>+1-512-888-4656</div>
+        </div>
+        <div className={styles.social}>
+          <div className={styles["list-title"]}>WeChat</div>
+          <img
+            src="wechat"
+            alt="WeChat_QR_Code"
+            className={styles["list-icon"]}
+          />
+        </div>
+      </div>
+      <div className={styles.divider} />
+      <div className={styles["copy-right"]}>© 2023 by JJtxhome Co.</div>
+    </div>
   );
 };
 

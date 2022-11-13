@@ -1,6 +1,6 @@
-const baseUrl = "http://192.168.68.80:8000/";
+const baseUrl = "http://127.0.0.1:8000/";
 export default class APIService {
-  static add_question_consulation(body) {
+  static add_question_consultation(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "question_consultation", {
       method: "POST",

@@ -1,5 +1,4 @@
 import "./styles.module.scss";
-import { IonIcon } from "react-ion-icon";
 
 const Box = () => {
   return (
@@ -22,13 +21,13 @@ const Box = () => {
 
                 <div className="banner-actions">
                   <button className="banner-actions-btn">
-                    <IonIcon name="location" />
+                    {/*<IonIcon name="location" />*/}
 
                     <address>Austin, Texas</address>
                   </button>
 
                   <button className="banner-actions-btn">
-                    <IonIcon name="camera" />
+                    {/*<IonIcon name="camera" />*/}
                     <span>4</span>
                   </button>
                 </div>
@@ -48,19 +47,19 @@ const Box = () => {
                 <ul className="card-list">
                   <li className="card-item">
                     <strong>3</strong>
-                    <IonIcon name="bed-outline" />
+                    {/*<IonIcon name="bed-outline" />*/}
                     <span>Bedrooms</span>
                   </li>
 
                   <li className="card-item">
                     <strong>2</strong>
-                    <IonIcon name="man-outline" />
+                    {/*<IonIcon name="man-outline" />*/}
                     <span>Bathrooms</span>
                   </li>
 
                   <li className="card-item">
                     <strong>3450</strong>
-                    <IonIcon name="square-outline" />
+                    {/*<IonIcon name="square-outline" />*/}
                     <span>Square Ft</span>
                   </li>
                 </ul>
@@ -82,15 +81,15 @@ const Box = () => {
                 </div>
                 <div className="card-footer-actions">
                   <button className="card-footer-actions-btn">
-                    <IonIcon name="resize-outline" />
+                    {/*<IonIcon name="resize-outline" />*/}
                   </button>
 
                   <button className="card-footer-actions-btn">
-                    <IonIcon name="heart-outline" />
+                    {/*<IonIcon name="heart-outline" />*/}
                   </button>
 
                   <button className="card-footer-actions-btn">
-                    <IonIcon name="add-circle-outline" />
+                    {/*<IonIcon name="add-circle-outline" />*/}
                   </button>
                 </div>
               </div>
