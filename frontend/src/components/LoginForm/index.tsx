@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import APIService from "../../api/APIService";
+import styles from "./styles.module.scss";
 import { saveUser } from "../../utils/cookie";
 
 function LoginForm() {
@@ -45,7 +46,7 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <div className={styles.form} onSubmit={submitHandler}>
       <div className="form-inner">
         <h2>Login</h2>
         <div className="form-group">
@@ -58,6 +59,7 @@ function LoginForm() {
             value={details.email}
           />
         </div>
+        
         <div className="form-group">
           <label htmlFor="password">password: </label>
           <input
@@ -73,7 +75,7 @@ function LoginForm() {
         <input type="submit" value="LOGIN" />
         {/*ERROR*/ error !== "" ? <div className="error">{error}</div> : ""}
       </div>
-    </form>
+    </div>
   );
 }
 
