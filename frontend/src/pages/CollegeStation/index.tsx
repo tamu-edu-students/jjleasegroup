@@ -1,5 +1,5 @@
 import NavBar from "../../components/NavBar";
-// import Box from "../../components/Box";
+import Card from "../../components/Card";
 import Footer from "../../components/Footer";
 // import Hero from "../../components/Hero";
 // import FAQ from "../FAQ";
@@ -11,7 +11,8 @@ const CollegeStation = () => {
       <NavBar />
       {/*<Box />*/}
       {/*<FAQ />*/}
-      <Footer />
+      {/* <Footer /> */}
+      <Card/>
     </div>
   );
 };
