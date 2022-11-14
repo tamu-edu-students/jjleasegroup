@@ -1,5 +1,6 @@
 import NavBar from "../../components/NavBar";
 import Card from "../../components/Card";
+import Box from "../../components/Box";
 import Footer from "../../components/Footer";
 // import Hero from "../../components/Hero";
 // import FAQ from "../FAQ";
@@ -9,7 +10,7 @@ const CollegeStation = () => {
     <div>
       {/* NavBar not function correctly once the window shrink */}
       <NavBar />
-      {/*<Box />*/}
+      <Box />
       {/*<FAQ />*/}
       {/* <Footer /> */}
       <Card/>

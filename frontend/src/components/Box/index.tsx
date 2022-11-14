@@ -2,102 +2,116 @@ import "./styles.module.scss";
 
 const Box = () => {
   return (
-    <section className="property" id="property">
-      <div className="container">
-        <p className="section-subtitle">Properties</p>
-
-        <h2 className="h2 section-title">Featured Listings</h2>
-
-        <ul className="property-list has-scrollbar">
-          <li>
-            <div className="property-card">
-              <figure className="card-banner">
-                {/* <a href="#" > */}
-                {/* src\jj-img\Austin\OffCampus\Acacia Cliffs\acacia5.jpg */}
-                {/* <img src={require('./acacia5.jpg')} alt="Acacia Cliffs" className="w-100"/> */}
-                {/* </a> */}
-
-                {/* <div className="card-badge green">For Rent</div> */}
-
-                <div className="banner-actions">
-                  <button className="banner-actions-btn">
-                    {/*<IonIcon name="location" />*/}
-
-                    <address>Austin, Texas</address>
-                  </button>
-
-                  <button className="banner-actions-btn">
-                    {/*<IonIcon name="camera" />*/}
-                    <span>4</span>
-                  </button>
-                </div>
-              </figure>
-
-              <div className="card-content">
-                <div className="card-price">
-                  <strong>$34,900</strong>/Month
-                </div>
-
-                <h3 className="h3 card-title">
-                  <a href="#">The Enclave</a>
-                </h3>
-
-                <p className="card-text">Description:</p>
-
-                <ul className="card-list">
-                  <li className="card-item">
-                    <strong>3</strong>
-                    {/*<IonIcon name="bed-outline" />*/}
-                    <span>Bedrooms</span>
-                  </li>
-
-                  <li className="card-item">
-                    <strong>2</strong>
-                    {/*<IonIcon name="man-outline" />*/}
-                    <span>Bathrooms</span>
-                  </li>
-
-                  <li className="card-item">
-                    <strong>3450</strong>
-                    {/*<IonIcon name="square-outline" />*/}
-                    <span>Square Ft</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="card-footer">
-                <div className="card-author">
-                  <figure className="author-avatar">
-                    {/* <img src="./assets/images/author.jpg" alt="William Seklo" className="w-100"> */}
-                  </figure>
-
-                  {/* <div>
-                      <p className="author-name">
-                        <a href="#">William Seklo</a>
-                      </p>
-
-                      <p className="author-title">Estate Agents</p>
-                    </div> */}
-                </div>
-                <div className="card-footer-actions">
-                  <button className="card-footer-actions-btn">
-                    {/*<IonIcon name="resize-outline" />*/}
-                  </button>
-
-                  <button className="card-footer-actions-btn">
-                    {/*<IonIcon name="heart-outline" />*/}
-                  </button>
-
-                  <button className="card-footer-actions-btn">
-                    {/*<IonIcon name="add-circle-outline" />*/}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
+    <div class="container">
+    <div class="box">
+      <div class="top">
+        <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271__340.jpg" alt="" />
+        <span
+          ><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i
+        ></span>
       </div>
-    </section>
+      <div class="bottom">
+        <h3>Home In Merrick Way</h3>
+        <p>
+          Enchanting three bedrooms, three bath home with spacious one
+          bedroom, one bath...
+        </p>
+        <div class="advants">
+          <div>
+            <span>Bedrooms</span>
+            <div><i class="fas fa-th-large"></i><span>3</span></div>
+          </div>
+          <div>
+            <span>Bathrooms</span>
+            <div><i class="fas fa-shower"></i><span>3</span></div>
+          </div>
+          <div>
+            <span>Area</span>
+            <div>
+              <i class="fas fa-vector-square"></i
+              ><span>4300<span>Sq Ft</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="price">
+          <span>For Sale</span>
+          <span>$540,000</span>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="top">
+        <img src="https://cdn.pixabay.com/photo/2014/07/31/00/30/vw-beetle-405876__340.jpg" alt="" />
+        <span
+          ><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i
+        ></span>
+      </div>
+      <div class="bottom">
+        <h3>Villa In Alexandria</h3>
+        <p>
+          Enjoy serenity of Deering Bay whole day from this spectacular North
+          and...
+        </p>
+        <div class="advants">
+          <div>
+            <span>Bedrooms</span>
+            <div><i class="fas fa-th-large"></i><span>3</span></div>
+          </div>
+          <div>
+            <span>Bathrooms</span>
+            <div><i class="fas fa-shower"></i><span>3.5</span></div>
+          </div>
+          <div>
+            <span>Area</span>
+            <div>
+              <i class="fas fa-vector-square"></i
+              ><span>3500<span>Sq Ft</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="price">
+          <span>For Sale</span>
+          <span>$825,000</span>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="top">
+        <img src="https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070__340.jpg" alt="" />
+        <span
+          ><i class="fas fa-heart"></i><i class="fas fa-exchange-alt"></i
+        ></span>
+      </div>
+      <div class="bottom">
+        <h3>Villa In Cairo</h3>
+        <p>
+          The very best waterfront location in Tahrir square and beside many
+          cool places
+        </p>
+        <div class="advants">
+          <div>
+            <span>Bedrooms</span>
+            <div><i class="fas fa-th-large"></i><span>3</span></div>
+          </div>
+          <div>
+            <span>Bathrooms</span>
+            <div><i class="fas fa-shower"></i><span>2</span></div>
+          </div>
+          <div>
+            <span>Area</span>
+            <div>
+              <i class="fas fa-vector-square"></i
+              ><span>1800<span>Sq Ft</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="price">
+          <span>For Sale</span>
+          <span>$410,000</span>
+        </div>
+      </div>
+    </div>
+  </div>
   );
 };
 
