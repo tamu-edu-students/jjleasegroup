@@ -1,6 +1,7 @@
 import { useState } from "react";
 import APIService from "../../api/APIService";
-
+import styles from "./styles.module.scss";
+import classNames from "../../utils/classNames";
 function ChangePasswordForm(user: { name: string; email: string }) {
   const [details, setDetails] = useState({
     name: "",
@@ -12,7 +13,7 @@ function ChangePasswordForm(user: { name: string; email: string }) {
   const [checkError, setCheckError] = useState("");
   const [error, setError] = useState("");
   //pass through detail
-
+  const inputClass = classNames(styles.box, styles.input);
   const checkOldPassword = (
     details: { password: string; password_new: string },
     checkError: string
@@ -59,12 +60,18 @@ function ChangePasswordForm(user: { name: string; email: string }) {
     }
   };
   return (
-    <form onSubmit={submitHandler}>
-      <div className="form-inner">
-        <h2>Change Password</h2>
-        <div className="form-group">
-          <label htmlFor="password">Old password: </label>
+    <div className={styles.form} >
+      <div className={styles.container}>
+        <div className={styles.textprompt}>
+            <label htmlFor="password">Old password: </label>
+            <label htmlFor="password">New password: </label>
+            <label htmlFor="password">Repeat password: </label>
+
+        </div>
+
+        <div className={styles.group_input}>
           <input
+            className={inputClass}
             type="password"
             name="password_old"
             id="password_old"
@@ -73,11 +80,8 @@ function ChangePasswordForm(user: { name: string; email: string }) {
             }
             value={details.password}
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">New password: </label>
           <input
+            className={inputClass}
             type="password"
             name="password_new"
             id="password_new"
@@ -86,11 +90,8 @@ function ChangePasswordForm(user: { name: string; email: string }) {
             }
             value={details.password_new}
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Repeat password: </label>
           <input
+            className={inputClass}
             type="password"
             name="password_rep"
             id="password_rep"
@@ -99,18 +100,17 @@ function ChangePasswordForm(user: { name: string; email: string }) {
             }
             value={details.password_rep}
           />
-          {
-            /*ERROR*/ checkError !== "" ? (
-              <div className="error">{checkError}</div>
-            ) : (
-              ""
-            )
-          }
         </div>
-        <input type="submit" value="Confirm" />
-        {/*ERROR*/ error !== "" ? <div className="error">{error}</div> : ""}
       </div>
-    </form>
+
+      <div className={styles.group}>
+        <button className={styles.button} onClick={submitHandler}>
+          submit
+        </button>
+        {/*ERROR*/ checkError !== "" ? (<div className={styles.error_message}>{"*"+checkError}</div>) : ("")}
+        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{"**"+error}</div> : ""}
+      </div>
+    </div>
   );
 }
 

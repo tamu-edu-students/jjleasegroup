@@ -1,0 +1,112 @@
+@import '../../style/fonts';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+.group_input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  white-space: nowrap;
+  gap :10px;
+  width: 95%;
+}
+.textprompt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  white-space: nowrap;
+  gap :30px;
+  font-size: 20px;
+  width: 45%;
+}
+.title {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #225D99;
+
+  margin-bottom: 10px;
+}
+
+.box {
+  width: 100%;
+  //height: 52px;
+  border: 3px solid #E3D7D7;
+  border-radius: 15px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #757575;
+
+  padding: 10px 20px;
+}
+.input {
+  //height: 156px;
+}
+
+.button {
+  width: 100px;
+  //height: 35px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+  background: #80B5EA;
+  border-radius: 10px;
+  border-color: #80B5EA;
+}
+
+.buttonforget {
+  width: 200px;
+  //height: 35px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+  background: #80B5EA;
+  border-radius: 10px;
+  border-color: #80B5EA;
+}
+.error_message{
+  font-size: 20px;
+  color:red;
+
+}

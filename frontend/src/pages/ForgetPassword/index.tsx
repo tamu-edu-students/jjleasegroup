@@ -3,9 +3,9 @@ import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
 import background from "./background.png";
 import map from "./map.png";
-import LoginForm from "../../components/LoginForm";
+import ForgetPassword from "../../components/ForgetPassword";
 
-const LoginPage = () => {
+const ForgetPasswordPage = () => {
   return (
     // <div className={styles.container}>
     <div>
@@ -20,8 +20,8 @@ const LoginPage = () => {
           />
         </div>
         <div className={styles["main-right"]}>
-          <div className={styles["main-right-title"]}>Login</div>
-          <LoginForm />
+          <div className={styles["main-right-title"]}>Security Question</div>
+          <ForgetPassword />
         </div>
       </div>
       <div className={styles.location}>
@@ -33,4 +33,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgetPasswordPage;

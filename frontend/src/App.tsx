@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ContactForm from "./components/ContactForm";
 import SignUp from "./components/SignUp";
-import LoginForm from "./components/LoginForm";
 import ChangePasswordForm from "./components/ChangePasswordForm";
-import ForgetPassword from "./components/ForgetPassword";
+import ForgetPasswordPage from "./pages/ForgetPassword";
+import ChangePassword from "./pages/ChangePassword";
 import Home from "./pages/Home";
+import LoginPage from "./pages/Login";
 import { deleteUser, getUser } from "./utils/cookie";
 import MyProfile from "./components/MyProfile";
 import Austin from "./pages/Austin";
@@ -23,21 +24,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/ContactForm" element={<ContactForm />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route 
-          path="/Login" 
-          element={
-              <div>
-                <LoginForm /> 
-                <button
-                onClick={() => {
-                  window.location.href = "/ForgetPassword";
-                }}
-              >
-                Forget password
-              </button>
-            </div>
-          } />
-        <Route path="/ForgetPassword" element={<ForgetPassword />} />
+
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path={"/ForgetPassword"} element={<ForgetPasswordPage />} />
         <Route
           path="/Success"
           element={
@@ -55,7 +44,7 @@ function App() {
         />
         <Route
           path="/ChangePassword"
-          element={<ChangePasswordForm {...getUser()} />}
+          element={<ChangePassword {...getUser()} />}
         />
         <Route path="/MyProfile" element={<MyProfile />} />
         <Route path={"/Austin"} element={<Austin />} />

@@ -1,7 +1,8 @@
 
 import APIService from "../../api/APIService";
 import { useState } from "react";
-
+import styles from "./styles.module.scss";
+import classNames from "../../utils/classNames";
 
 function ForgetPassword() {
   const [question, setQuestion] = useState("");
@@ -10,7 +11,7 @@ function ForgetPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [flag, setFlag] = useState(false);
-
+  const inputClass = classNames(styles.box, styles.input);
   const submitHandler = (e: any) => {
     e.preventDefault();
     APIService.forget_password({
@@ -53,14 +54,14 @@ function ForgetPassword() {
   }
   if(flag){ 
     return (
-      <form onSubmit={submitHandler}>
-        <div className="form-inner">
-              <h2>Forget Password</h2>
-          <div className="form-group">
-            <label htmlFor="text">{question}</label>
+      <div className={styles.form} >
+        <div className={styles.container_security}>
+          <div className={styles.question}>
+              <label htmlFor="text">{question}</label>
           </div>
-          <div className="form-group">
+          
             <input
+              className={inputClass}
               type="text"
               name="answer"
               id="text"
@@ -69,33 +70,42 @@ function ForgetPassword() {
               }
               value={answer}
             />
+          
+          <div className={styles.question}>
+            <label htmlFor="password">new password </label>
           </div>
-          <div className="form-group">
-          <label htmlFor="password">password: </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={(e) =>
-              setPasswordNew(e.target.value)
-            }
-            value={password_new}
-          />
+            <input
+              className={inputClass}
+              type="password"
+              name="password"
+              id="password"
+              onChange={(e) =>
+                setPasswordNew(e.target.value)
+              }
+              value={password_new}
+            />
+          
+          <div className={styles.container}>
+            <button className={styles.button} onClick={submitHandler}>
+              submit
+            </button>
+            
+          </div>
         </div>
-          <input type="submit" value="Check" />
-          {/*ERROR*/ error !== "" ? <div className="error">{error}</div> : ""}
-        </div>
-      </form>
+        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{error}</div> : ""}
+      </div>
     );
   }   
   else{
     return (
-      <form onSubmit={questionGetter}>
-        <div className="form-inner">
-          <h2>Forget Password</h2>
-          <div className="form-group">
+      <div className={styles.form}>
+        <div className={styles.container}>    
+          <div className={styles.group_text}>
             <label htmlFor="email">Email: </label>
+          </div>
+          <div className={styles.group}>
             <input
+              className={inputClass}
               type="email"
               name="emai"
               id="email"
@@ -103,10 +113,16 @@ function ForgetPassword() {
               value={email}
             />
           </div>
-          <input type="submit" value="Check" />
-          {/*ERROR*/ error !== "" ? <div className="error">{error}</div> : ""}
         </div>
-      </form>
+        <div className={styles.container}>
+          <button className={styles.button} onClick={questionGetter}>
+            submit
+          </button>
+          
+        </div>
+        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{error}</div> : ""}
+      
+      </div>
     );
   }
   

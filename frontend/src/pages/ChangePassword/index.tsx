@@ -3,9 +3,10 @@ import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
 import background from "./background.png";
 import map from "./map.png";
-import LoginForm from "../../components/LoginForm";
+import ChangePasswordForm from "../../components/ChangePasswordForm";
+import { getUser } from "../../utils/cookie";
 
-const LoginPage = () => {
+const ChangePassword =(user: { name: string; email: string }) => {
   return (
     // <div className={styles.container}>
     <div>
@@ -20,8 +21,8 @@ const LoginPage = () => {
           />
         </div>
         <div className={styles["main-right"]}>
-          <div className={styles["main-right-title"]}>Login</div>
-          <LoginForm />
+          <div className={styles["main-right-title"]}>Change Password</div>
+          <ChangePasswordForm {...getUser()}/>
         </div>
       </div>
       <div className={styles.location}>
@@ -33,4 +34,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ChangePassword;

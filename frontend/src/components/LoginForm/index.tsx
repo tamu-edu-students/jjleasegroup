@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import APIService from "../../api/APIService";
-import styles from "./styles.module.scss";
 import { saveUser } from "../../utils/cookie";
+import styles from "./styles.module.scss";
+import classNames from "../../utils/classNames";
+
 
 function LoginForm() {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
+  
+  const inputClass = classNames(styles.box, styles.input);
 
   const checkLogin = (details: {
     name: string;
@@ -32,7 +36,7 @@ function LoginForm() {
         //   name: details.name,
         //   email: details.email,
         // });
-        window.location.href = "/Success";
+        window.location.href = "/";
       } else {
         //TOCHANGE return wrong here password wrong
         setError(resp.error_message);
@@ -45,24 +49,29 @@ function LoginForm() {
     checkLogin(details);
   };
 
+  const forgetHandler = (e: any) => {
+    e.preventDefault();
+    window.location.href = "/ForgetPassword";
+  };
   return (
-    <div className={styles.form} onSubmit={submitHandler}>
-      <div className="form-inner">
-        <h2>Login</h2>
-        <div className="form-group">
+    <div className={styles.form} >
+      <div className={styles.container}>
+        <div className={styles.group_label}>
           <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            name="emai"
-            id="email"
-            onChange={(e) => setDetails({ ...details, email: e.target.value })}
-            value={details.email}
-          />
+          <label htmlFor="password">password: </label>
         </div>
         
-        <div className="form-group">
-          <label htmlFor="password">password: </label>
+        <div className={styles.group_input}>
           <input
+              className= {inputClass}
+              type="email"
+              name="emai"
+              id="email"
+              onChange={(e) => setDetails({ ...details, email: e.target.value })}
+              value={details.email}
+            />
+          <input
+            className= {inputClass}
             type="password"
             name="password"
             id="password"
@@ -72,9 +81,16 @@ function LoginForm() {
             value={details.password}
           />
         </div>
-        <input type="submit" value="LOGIN" />
-        {/*ERROR*/ error !== "" ? <div className="error">{error}</div> : ""}
       </div>
+      <div className={styles.container}>
+        <button className={styles.button} onClick={submitHandler}>
+          Login
+        </button>
+        <button className={styles.buttonforget} onClick={forgetHandler}>
+          Forget Password?
+        </button>          
+      </div>
+      {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{error}</div> : ""}
     </div>
   );
 }
