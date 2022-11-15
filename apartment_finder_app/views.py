@@ -81,16 +81,16 @@ def login(request):
         '''
         customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('customer_email')).first()
         if not customer_object:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！"}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""}, safe=False)
         input_password = make_password(password=form.cleaned_data.get('customer_password'), salt=SALT)
         if customer_object.customer_password != input_password:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！"}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""}, safe=False)
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
         request.session.set_expiry(60*60*24*7)
-        return JsonResponse({"code": "200", "error_message": ""}, safe=False)
+        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id}, safe=False)
 
-    return JsonResponse({"code": "404", "error_message": "not valid"}, safe=False)
+    return JsonResponse({"code": "404", "error_message": "not valid", "customer_id": ""}, safe=False)
 
 
 def image_code(request):
