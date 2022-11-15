@@ -2,7 +2,12 @@ import { useState } from "react";
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
-function ChangePasswordForm(user: { name: string; email: string }) {
+
+function ChangePasswordForm(user: {
+  customer_id: number;
+  name: string;
+  email: string;
+}) {
   const [details, setDetails] = useState({
     name: "",
     email: "",
@@ -60,13 +65,12 @@ function ChangePasswordForm(user: { name: string; email: string }) {
     }
   };
   return (
-    <div className={styles.form} >
+    <div className={styles.form}>
       <div className={styles.container}>
         <div className={styles.textprompt}>
-            <label htmlFor="password">Old password: </label>
-            <label htmlFor="password">New password: </label>
-            <label htmlFor="password">Repeat password: </label>
-
+          <label htmlFor="password">Old password: </label>
+          <label htmlFor="password">New password: </label>
+          <label htmlFor="password">Repeat password: </label>
         </div>
 
         <div className={styles.group_input}>
@@ -107,8 +111,20 @@ function ChangePasswordForm(user: { name: string; email: string }) {
         <button className={styles.button} onClick={submitHandler}>
           submit
         </button>
-        {/*ERROR*/ checkError !== "" ? (<div className={styles.error_message}>{"*"+checkError}</div>) : ("")}
-        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{"**"+error}</div> : ""}
+        {
+          /*ERROR*/ checkError !== "" ? (
+            <div className={styles.error_message}>{"*" + checkError}</div>
+          ) : (
+            ""
+          )
+        }
+        {
+          /*ERROR*/ error !== "" ? (
+            <div className={styles.error_message}>{"**" + error}</div>
+          ) : (
+            ""
+          )
+        }
       </div>
     </div>
   );

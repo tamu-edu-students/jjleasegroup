@@ -4,11 +4,10 @@ import { saveUser } from "../../utils/cookie";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
 
-
 function LoginForm() {
   const [details, setDetails] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
-  
+
   const inputClass = classNames(styles.box, styles.input);
 
   const checkLogin = (details: {
@@ -29,6 +28,7 @@ function LoginForm() {
         console.log("Login");
 
         saveUser({
+          id: resp.customer_id,
           name: details.name,
           email: details.email,
         });
@@ -54,24 +54,24 @@ function LoginForm() {
     window.location.href = "/ForgetPassword";
   };
   return (
-    <div className={styles.form} >
+    <div className={styles.form}>
       <div className={styles.container}>
         <div className={styles.group_label}>
           <label htmlFor="email">Email: </label>
           <label htmlFor="password">password: </label>
         </div>
-        
+
         <div className={styles.group_input}>
           <input
-              className= {inputClass}
-              type="email"
-              name="emai"
-              id="email"
-              onChange={(e) => setDetails({ ...details, email: e.target.value })}
-              value={details.email}
-            />
+            className={inputClass}
+            type="email"
+            name="emai"
+            id="email"
+            onChange={(e) => setDetails({ ...details, email: e.target.value })}
+            value={details.email}
+          />
           <input
-            className= {inputClass}
+            className={inputClass}
             type="password"
             name="password"
             id="password"
@@ -88,9 +88,15 @@ function LoginForm() {
         </button>
         <button className={styles.buttonforget} onClick={forgetHandler}>
           Forget Password?
-        </button>          
+        </button>
       </div>
-      {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{error}</div> : ""}
+      {
+        /*ERROR*/ error !== "" ? (
+          <div className={styles.error_message}>{error}</div>
+        ) : (
+          ""
+        )
+      }
     </div>
   );
 }

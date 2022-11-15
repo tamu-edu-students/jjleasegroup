@@ -83,6 +83,15 @@
 
       color: #225D99;
     }
+
+    &-bottom {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 }
 

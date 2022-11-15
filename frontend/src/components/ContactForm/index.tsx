@@ -2,6 +2,7 @@ import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
+import { getUser } from "../../utils/cookie";
 
 function ContactForm() {
   const [questionText, setQuestionText] = useState("");
@@ -15,7 +16,7 @@ function ContactForm() {
       question_text: questionPurpose,
       question_status: "0",
       submission_date_time: new Date().toISOString().slice(0, 19),
-      customer_id: "2",
+      customer_id: getUser().customer_id,
     }).then((resp) => console.log(resp));
   };
 

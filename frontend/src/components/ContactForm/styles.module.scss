@@ -1,4 +1,5 @@
 @import '../../style/fonts';
+@import '../../style/colors';
 
 .form {
   display: flex;
@@ -25,7 +26,7 @@
   line-height: 30px;
   /* identical to box height */
 
-  color: #225D99;
+  color: $branding-blue-medium;
 
   margin-bottom: 10px;
 }
@@ -38,7 +39,7 @@
 
   font-family: 'Poppins';
   font-style: normal;
-  color: #757575;
+  color: $semantic-gray-light;
 
   padding: 10px 20px;
 }
@@ -57,8 +58,8 @@
   line-height: 30px;
   /* identical to box height */
 
-  color: #FFFFFF;
-  background: #80B5EA;
+  color: white;
+  background: $branding-blue-light;
   border-radius: 10px;
-  border-color: #80B5EA;
+  border-color: $branding-blue-light;
 }

@@ -1,13 +1,12 @@
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
-import background from "./background.png";
-import map from "./map.png";
+import background from "../../asserts/pictures/background-square.png";
+import map from "../../asserts/pictures/map.png";
 import LoginForm from "../../components/LoginForm";
 
 const LoginPage = () => {
   return (
-    // <div className={styles.container}>
     <div>
       <NavBar />
       <div className={styles.main}>
@@ -22,6 +21,10 @@ const LoginPage = () => {
         <div className={styles["main-right"]}>
           <div className={styles["main-right-title"]}>Login</div>
           <LoginForm />
+          <div className={styles["main-right-bottom"]}>
+            <a href={"/ForgetPassword"}>Forget Password?</a>
+            <a href={"/SignUp"}>Sign Up</a>
+          </div>
         </div>
       </div>
       <div className={styles.location}>

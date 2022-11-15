@@ -2,12 +2,11 @@ import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
 import ContactForm from "../../components/ContactForm";
-import background from "./background.png";
-import map from "./map.png";
+import background from "../../asserts/pictures/background-square.png";
+import map from "../../asserts/pictures/map.png";
 
 const ContactUs = () => {
   return (
-    // <div className={styles.container}>
     <div>
       <NavBar />
       <div className={styles.main}>

@@ -1,10 +1,11 @@
 import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
+import { getUser } from "../../utils/cookie";
 
 function MyProfile() {
-  window.sessionStorage.setItem("customer_id", "17"); // TODO: use cookie instead
+  // window.sessionStorage.setItem("customer_id", "17"); // TODO: use cookie instead
 
-  const id = parseInt(window.sessionStorage.getItem("customer_id")!);
+  const id = parseInt(getUser().customer_id);
   const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
