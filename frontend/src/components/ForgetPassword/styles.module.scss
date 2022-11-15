@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 15px;
+  gap:10px;
   width: 100%;
   height: 100%;
 }
@@ -15,25 +15,30 @@
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 10px;
   width: 100%;
-  height:100%;
 }
-.group_label{
+.container_security {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+.group_text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   font-family: 'Poppins';
   font-style: normal;
-  font-size:20px;
   font-weight: 700;
-  gap :30px;
-  width: 50%;
-  height: 100%;
-  
+  gap :10px;
+  width: 25%;
+  font-size:25px;
 }
-.group_input {
+.question
+{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -43,6 +48,8 @@
   font-weight: 700;
   gap :10px;
   width: 100%;
+  font-size:15px;
+  white-space: nowrap;
 }
 
 .title {
@@ -71,17 +78,17 @@
   padding: 10px 20px;
 }
 .input {
-  //width: 250px;
+  //height: 156px;
 }
 
 .button {
-  width: 50%;
+  width: 100px;
   //height: 35px;
 
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 20px;
   line-height: 30px;
   /* identical to box height */
 
@@ -92,15 +99,14 @@
 }
 
 .buttonforget {
-  width: 50%;
+  width: 200px;
   //height: 35px;
 
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 20px;
   line-height: 30px;
-  white-space: nowrap;
   /* identical to box height */
 
   color: #FFFFFF;

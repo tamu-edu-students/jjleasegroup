@@ -3,6 +3,9 @@ from django.urls import reverse
 from apartment_finder_app.models import QuestionConsultation, Customer
 from datetime import datetime
 import json
+from django.contrib.auth.hashers import make_password
+
+SALT = "CSCE606"
 
 
 class LoginTestCase(TestCase):
@@ -145,3 +148,117 @@ class CustomerTestCase(TestCase):
         code = json.loads(response.content.decode('utf-8'))["code"]
         self.assertEquals(code, "200")
 
+
+class ChangePasswordCase(TestCase):
+    @classmethod
+    def setUp(cls):
+        cls.client = Client()
+        cls.post_put_url = reverse('change-password')
+        cls.test_customer = Customer.objects.create(customer_id=3,
+                                                    customer_username='alpaca',
+                                                    customer_password=make_password(password='123', salt=SALT),
+                                                    customer_email='tester1@tamu.edu',
+                                                    customer_phone=1231231234,
+                                                    customer_gender='m',
+                                                    customer_date_of_birth=datetime(2015, 10, 9),
+                                                    customer_security_question=0,
+                                                    customer_security_answer='N'
+                                                    )
+
+    def test_is_wrong_password(self):
+        data = {
+            "customer_email": "tester1@tamu.edu",
+            "old_password": "234",
+            "new_password": "345"
+        }
+        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        message = json.loads(response.content.decode('utf-8'))["error_message"]
+        self.assertEquals(code, "404")
+        self.assertEquals(message, 'Wrong password! ')
+
+    def test_is_same_password_as_before(self):
+        data = {
+            "customer_email": "tester1@tamu.edu",
+            "old_password": "123",
+            "new_password": "123"
+        }
+        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        message = json.loads(response.content.decode('utf-8'))["error_message"]
+        self.assertEquals(code, "404")
+        self.assertEquals(message, 'The new password cannot be the same as the previous one!')
+
+    def test_successful_change(self):
+        data = {
+            "customer_email": "tester1@tamu.edu",
+            "old_password": "123",
+            "new_password": "234"
+        }
+        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        message = json.loads(response.content.decode('utf-8'))["error_message"]
+        self.assertEquals(code, "200")
+        self.assertEquals(message, "")
+
+
+class GetBackPasswordCase(TestCase):
+    @classmethod
+    def setUp(cls):
+        cls.client = Client()
+        cls.post_put_url = reverse('get_back_password')
+        cls.test_customer = Customer.objects.create(customer_id=3,
+                                                    customer_username='alpaca',
+                                                    customer_password=make_password(password='123', salt=SALT),
+                                                    customer_email='tester1@tamu.edu',
+                                                    customer_phone=1231231234,
+                                                    customer_gender='m',
+                                                    customer_date_of_birth=datetime(2015, 10, 9),
+                                                    customer_security_question=0,
+                                                    customer_security_answer='N'
+                                                    )
+
+    def test_get_question(self):
+        data = {
+            "customer_email": "tester1@tamu.edu"
+        }
+        response_get = self.client.post(reverse('get_question_text'), data, content_type="application/json", follow=True)
+
+        question_text = json.loads(response_get.content.decode('utf-8'))["customer_security_question"]
+        self.assertEquals(question_text, "what is your mother's last name")
+
+    def test_is_customer_find(self):
+        data = {
+            "customer_email": "tester2@tamu.edu",
+            "new_password": "123",
+            'customer_security_answer': 'N'
+        }
+        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        message = json.loads(response.content.decode('utf-8'))["error_message"]
+        self.assertEquals(code, "404")
+        self.assertEquals(message, 'Account not found!')
+
+    def test_is_security_question_wrong(self):
+        data = {
+            "customer_email": "tester1@tamu.edu",
+            "new_password": "123",
+            'customer_security_answer': 'Y'
+        }
+        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        message = json.loads(response.content.decode('utf-8'))["error_message"]
+        self.assertEquals(code, "404")
+        self.assertEquals(message, "Wrong security question answer! ")
+
+    def test_is_security_question_right(self):
+        data = {
+            "customer_email": "tester1@tamu.edu",
+            "new_password": "123",
+            'customer_security_answer': 'N'
+        }
+        response = self.client.post(self.post_put_url, data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        message = json.loads(response.content.decode('utf-8'))["error_message"]
+        self.assertEquals(code, "200")
+        self.assertEquals(message, "")
