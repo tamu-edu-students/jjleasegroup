@@ -10,7 +10,7 @@ const CollegeStation = () => {
     <div>
       {/* NavBar not function correctly once the window shrink */}
       <NavBar />
-      <Box />
+      
       {/*<FAQ />*/}
       {/* <Footer /> */}
       <Card/>

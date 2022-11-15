@@ -1,8 +1,6 @@
 
 import styles from "./styles.module.scss";
 
-import { Screen } from "./Screen";
-// import React from "react";
 
 // const LISTMAGIN = 10;
 // const WIDTH = Dimensions.get("screen").width - LISTMAGIN * 2;
@@ -37,38 +35,28 @@ const Card = () =>{
                         Gardens Apartment
                     </div>
 
-                    <div className={styles.price}>
-                        price
-                    </div>
-
-                    <div className={styles.tag}>
-                        tag
-                    </div>
-
                     <div className={styles.des}>
-                        des
+                        A nice quiet place.
                     </div>
 
+                    <div className={styles.advants}>
+                        <div>
+                            <span>price:</span>
+                            <div  className={styles.price}><span>$1000</span></div>
+                        </div>
+
+                        <div className={styles.tag}>
+                            <span>tag:</span>
+                            <div><span>Near Campus</span></div>
+                        </div>
+                    
+                    </div>
+                   
                     <div className={styles.footer}>
                         <button className={styles.btn}>Contact Us</button>
                         <button className={styles["btn-outline"]}>More info</button>
                     </div>
             </div>
-
-            {/* <div className={styles.card}>
-                <div className={styles["card-header"]}>123 Main</div>
-                    <div className={styles.body}>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio 
-                        quis, accusamus culpa, facilis error, quibusdam vitae similique 
-                        cupiditate eos alias consequatur rem qui voluptatibus. Laboriosam 
-                        voluptas laudantium expedita iste deserunt.
-                    </div>
-
-                    <div className={styles.footer}>
-                        <button className={styles.btn}>Contact Us</button>
-                        <button className={styles["btn-outline"]}>More info</button>
-                    </div>
-            </div> */}
         </div>
     );
         
