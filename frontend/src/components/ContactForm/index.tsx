@@ -11,9 +11,9 @@ function ContactForm() {
 
   const submitForm = () => {
     APIService.add_question_consultation({
-      question_purpose: questionText,
+      question_purpose: questionPurpose,
       apt_area: aptArea,
-      question_text: questionPurpose,
+      question_text: questionText,
       question_status: "0",
       submission_date_time: new Date().toISOString().slice(0, 19),
       customer_id: getUser().customer_id,

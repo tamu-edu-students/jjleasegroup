@@ -4,13 +4,18 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import styles from "./styles.module.scss";
 import logo from "../../asserts/pictures/logo.svg";
-import { getUser } from "../../utils/cookie";
+import { getUser, deleteUser } from "../../utils/cookie";
 import { useEffect } from "react";
 
 function NavBar() {
   useEffect(() => {
     console.log(getUser());
   }, []);
+  const Logout = () => {
+    deleteUser();
+    window.location.href = "/Login";
+  };
+
   return (
     <Navbar className={styles.nav} expand="lg">
       <Container>

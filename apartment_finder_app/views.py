@@ -30,7 +30,7 @@ def question_consultation_API(request, question_id=0):
         if questions_serializer.is_valid():
             questions_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        # print(questions_serializer.errors)
+        print(questions_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
 
 
@@ -40,7 +40,7 @@ def customer_API(request, customer_id=0):
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         # print(customer_info)
-        customer_info_serializer = CustomerSerializer(data=customer_info)
+        customer_info_serializer = CustomerSerializer_full(data=customer_info)
         if customer_info_serializer.is_valid():
             customer_info_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
@@ -50,7 +50,7 @@ def customer_API(request, customer_id=0):
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         customer = Customer.objects.get(customer_id=customer_info['customer_id'])
-        customers_serializer = CustomerSerializer(customer, data=customer_info)
+        customers_serializer = CustomerSerializer_update(customer, data=customer_info)
         if customers_serializer.is_valid():
             customers_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)

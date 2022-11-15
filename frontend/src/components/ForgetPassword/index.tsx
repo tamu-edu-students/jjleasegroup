@@ -18,7 +18,7 @@ function ForgetPassword() {
       customer_security_answer: answer,
       new_password: password_new,
     }).then((resp) => {
-      if (resp.code === "200") {
+      if (resp.code == 200) {
         //answer is correct
         console.log("answer is correct");
         setError("");
@@ -37,7 +37,8 @@ function ForgetPassword() {
     APIService.get_question({
       customer_email: email,
     }).then((resp) => {
-      if (resp.code === "200") {
+      console.log(resp);
+      if (resp.code === 200) {
         console.log("Successfully get question!!!");
         setQuestion(resp.customer_security_question);
         setFlag(true);
