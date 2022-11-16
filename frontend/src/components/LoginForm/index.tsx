@@ -28,7 +28,7 @@ function LoginForm() {
         console.log("Login");
 
         saveUser({
-          id: resp.customer_id,
+          customer_id: resp.customer_id,
           name: details.name,
           email: details.email,
         });
