@@ -8,13 +8,11 @@ import { getUser, deleteUser } from "../../utils/cookie";
 import { useEffect } from "react";
 
 function NavBar() {
+  const userInfo = getUser();
+
   useEffect(() => {
-    console.log(getUser());
-  }, []);
-  const Logout = () => {
-    deleteUser();
-    window.location.href = "/Login";
-  };
+    console.log(userInfo);
+  });
 
   return (
     <Navbar className={styles.nav} expand="lg">
@@ -25,7 +23,6 @@ function NavBar() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse bsPrefix={"styles"} className={styles.collapse}>
-          {/*<Navbar.Collapse>*/}
           <Nav className="justify-content-end">
             <Nav.Link bsPrefix={"styles"} className={styles.item} href="/">
               Home
@@ -40,26 +37,44 @@ function NavBar() {
                 College Station
               </NavDropdown.Item>
             </NavDropdown>
+            <Nav.Link
+              bsPrefix={"styles"}
+              className={styles.item}
+              href={userInfo ? "/ContactUs" : "/Login"}
+            >
+              Contact Us
+            </Nav.Link>
+            {!userInfo ? (
+              <Nav.Link
+                bsPrefix={"styles"}
+                className={styles.item}
+                href="/Login"
+              >
+                Login
+              </Nav.Link>
+            ) : (
+              <NavDropdown
+                bsPrefix={"styles"}
+                className={styles.item}
+                title={userInfo.name}
+              >
+                <NavDropdown.Item href="/MyProfile">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/ChangePassword">
+                  Change Password
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item
+                  onClick={() => {
+                    deleteUser();
+                    window.location.href = "/";
+                  }}
+                >
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
-        {!getUser() ? (
-          <Nav.Link bsPrefix={"styles"} className={styles.item} href="/Login">
-            Login
-          </Nav.Link>
-        ) : (
-          <NavDropdown
-            bsPrefix={"styles"}
-            className={styles.item}
-            title={getUser().name}
-          >
-            <NavDropdown.Item href="/MyProfile">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="/ContactUs">Contact Us</NavDropdown.Item>
-            <NavDropdown.Item href="/ChangePassword">
-              Change Password
-            </NavDropdown.Item>
-            <NavDropdown.Item href="/Success">Logout</NavDropdown.Item>
-          </NavDropdown>
-        )}
       </Container>
     </Navbar>
   );

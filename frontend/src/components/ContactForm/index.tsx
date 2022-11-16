@@ -2,9 +2,13 @@ import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
-import { getUser } from "../../utils/cookie";
 
-function ContactForm() {
+type Props = {
+  userId: number;
+};
+
+function ContactForm(props: Props) {
+  const userId = props.userId;
   const [questionText, setQuestionText] = useState("");
   const [aptArea, setAptArea] = useState("0");
   const [questionPurpose, setQuestionPurpose] = useState("0");
@@ -16,7 +20,7 @@ function ContactForm() {
       question_text: questionText,
       question_status: "0",
       submission_date_time: new Date().toISOString().slice(0, 19),
-      customer_id: getUser().customer_id,
+      customer_id: userId,
     }).then((resp) => console.log(resp));
   };
 
