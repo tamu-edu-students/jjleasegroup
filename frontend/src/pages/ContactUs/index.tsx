@@ -5,7 +5,12 @@ import ContactForm from "../../components/ContactForm";
 import background from "../../asserts/pictures/background-square.png";
 import map from "../../asserts/pictures/map.png";
 
-const ContactUs = () => {
+type Props = {
+  userId: number;
+};
+
+const ContactUs = (props: Props) => {
+  const userId = props.userId;
   return (
     <div>
       <NavBar />
@@ -21,7 +26,7 @@ const ContactUs = () => {
         </div>
         <div className={styles["main-right"]}>
           <div className={styles["main-right-title"]}>Contact Form</div>
-          <ContactForm />
+          <ContactForm userId={userId} />
         </div>
       </div>
       <div className={styles.location}>

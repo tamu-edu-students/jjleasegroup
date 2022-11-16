@@ -4,11 +4,14 @@ import styles from "./styles.module.scss";
 import background from "../../asserts/pictures/background-square.png";
 import map from "../../asserts/pictures/map.png";
 import ChangePasswordForm from "../../components/ChangePasswordForm";
-import { getUser } from "../../utils/cookie";
 
-const ChangePassword = (user: { name: string; email: string }) => {
+type Props = {
+  userEmail: string;
+};
+
+const ChangePassword = (props: Props) => {
+  const userEmail = props.userEmail;
   return (
-    // <div className={styles.container}>
     <div>
       <NavBar />
       <div className={styles.main}>
@@ -22,7 +25,7 @@ const ChangePassword = (user: { name: string; email: string }) => {
         </div>
         <div className={styles["main-right"]}>
           <div className={styles["main-right-title"]}>Change Password</div>
-          <ChangePasswordForm {...getUser()} />
+          <ChangePasswordForm userEmail={userEmail} />
         </div>
       </div>
       <div className={styles.location}>

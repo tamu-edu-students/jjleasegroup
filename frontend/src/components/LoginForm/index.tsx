@@ -24,7 +24,7 @@ function LoginForm() {
       verification_code: details.password,
     }).then((resp) => {
       //TOCHANGE check password right or wrong here
-      if (resp.code === "200") {
+      if (resp.code == "200") {
         console.log("Login");
 
         saveUser({
@@ -32,10 +32,6 @@ function LoginForm() {
           name: details.name,
           email: details.email,
         });
-        // setUser({
-        //   name: details.name,
-        //   email: details.email,
-        // });
         window.location.href = "/";
       } else {
         //TOCHANGE return wrong here password wrong

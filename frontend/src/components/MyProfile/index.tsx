@@ -1,11 +1,14 @@
 import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
-import { getUser } from "../../utils/cookie";
 
-function MyProfile() {
-  // window.sessionStorage.setItem("customer_id", "17"); // TODO: use cookie instead
+type Props = {
+  userId: number;
+};
 
-  const id = parseInt(getUser().customer_id);
+function MyProfile(props: Props) {
+  const userId = props.userId;
+  // window.sessionStorage.setItem("customer_id", "17");
+
   const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +21,7 @@ function MyProfile() {
 
   const getCustomerInfo = (customer: any) => {
     // TODO: type this
-    // console.log(customer)
+    console.log(customer);
 
     setUsername(customer.customer_username);
     // setPassword(customer.customer_password);
@@ -47,14 +50,14 @@ function MyProfile() {
   // }
 
   useEffect(() => {
-    APIService.get_account_info(id).then((resp) => getCustomerInfo(resp));
+    APIService.get_account_info(userId).then((resp) => getCustomerInfo(resp));
   });
 
   const submitForm = () => {
     APIService.update_account_info(
       // id,
       {
-        customer_id: id,
+        customer_id: userId,
         customer_username: username,
         // "customer_password": password,
         customer_email: email,

@@ -3,11 +3,12 @@ import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
 
-function ChangePasswordForm(user: {
-  customer_id: number;
-  name: string;
-  email: string;
-}) {
+type Props = {
+  userEmail: string;
+};
+
+function ChangePasswordForm(props: Props) {
+  const userEmail = props.userEmail;
   const [details, setDetails] = useState({
     name: "",
     email: "",
@@ -25,17 +26,17 @@ function ChangePasswordForm(user: {
   ) => {
     console.log("=====step2 check old password=====");
     //testing email and password matching
-    console.log("User data:" + user.email);
+    console.log("User data:" + userEmail);
     console.log("Detail data:" + details.password);
     console.log("Detail new data:" + details.password_new);
     if (checkError === "") {
       APIService.change_password({
         //push email and password to backend
-        customer_email: user.email,
+        customer_email: userEmail,
         old_password: details.password,
         new_password: details.password_new,
       }).then((resp) => {
-        if (resp.code === "200") {
+        if (resp.code == "200") {
           //check old password
           setError("");
           if (checkError === "") {
