@@ -31,7 +31,7 @@ function SignUp() {
     console.log(password1);
     console.log(2);
     console.log(password2);
-    if (password1 === password2) {
+    if (password1 == password2) {
       setPassword(password1);
       console.log("password");
       console.log(password);
@@ -46,7 +46,7 @@ function SignUp() {
       customer_security_question: securityQuestion,
       customer_security_answer: securityAnswer,
     }).then((resp) => console.log(resp));
-    window.location.href = "/LogIn";
+    // window.location.href = "/LogIn";
   };
 
   return (

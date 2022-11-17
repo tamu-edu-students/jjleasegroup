@@ -46,6 +46,10 @@ def customer_API(request, customer_id=0):
             return JsonResponse({"code": "200"}, safe=False)
         # print(customer_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'GET':
+        customer = Customer.objects.get(customer_id=customer_id)
+        customer_info_serializer = CustomerSerializer_update(customer)
+        return JsonResponse(customer_info_serializer.data, safe=False)
     elif request.method == 'PUT':
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
