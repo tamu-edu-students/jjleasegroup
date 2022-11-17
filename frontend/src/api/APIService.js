@@ -84,4 +84,19 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+
+  static get_apt_info(body) {
+    console.log(JSON.stringify(body));
+    // ask Liao
+    return fetch(baseUrl + "get_question_text", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
 }
+
+
+
