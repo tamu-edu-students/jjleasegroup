@@ -83,9 +83,9 @@ function LoginForm() {
         <button className={styles.button} onClick={submitHandler}>
           Login
         </button>
-        <button className={styles.buttonforget} onClick={forgetHandler}>
-          Forget Password?
-        </button>
+        {/*<button className={styles.buttonforget} onClick={forgetHandler}>*/}
+        {/*  Forget Password?*/}
+        {/*</button>*/}
       </div>
       {
         /*ERROR*/ error !== "" ? (

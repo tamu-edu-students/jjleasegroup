@@ -12,10 +12,11 @@ import { useEffect, useState } from "react";
 import { getUser, UserInfo } from "./utils/cookie";
 
 function App() {
-  const [user, setUser] = useState<UserInfo | undefined>(getUser());
-  // useEffect(() => {
-  //   setUser(getUser());
-  // });
+  // const [user, setUser] = useState<UserInfo | undefined>(getUser());
+  const user = getUser();
+  useEffect(() => {
+    console.log(getUser());
+  });
 
   return (
     <BrowserRouter>

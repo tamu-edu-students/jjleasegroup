@@ -23,6 +23,7 @@ const LoginPage = () => {
           <LoginForm />
           <div className={styles["main-right-bottom"]}>
             <a href={"/SignUp"}>Sign Up</a>
+            <a href={"/ForgetPassword"}>Forget Password</a>
           </div>
         </div>
       </div>
