@@ -34,24 +34,13 @@ function MyProfile(props: Props) {
     console.log(username);
   };
 
-  // update_customer_info(customer){
-  //     console.log(customer)
-  //     this.setState({
-  //             customer_username: customer.customer_username,
-  //             // customer_password: customer.customer_password,
-  //             customer_email: customer.customer_email,
-  //             customer_phone: customer.customer_phone,
-  //             customer_gender: customer.customer_gender,
-  //             customer_date_of_birth: customer.customer_date_of_birth,
-  //             customer_security_question: customer.customer_security_question,
-  //             customer_security_answer: customer.customer_security_answer
-  //         },
-  //         () => console.log(username));
-  // }
-
   useEffect(() => {
-    APIService.get_account_info(userId).then((resp) => getCustomerInfo(resp));
-  });
+    console.log(userId);
+    APIService.get_account_info(userId).then((resp) => {
+      getCustomerInfo(resp);
+      console.log(resp);
+    });
+  }, [userId]);
 
   const submitForm = () => {
     APIService.update_account_info(

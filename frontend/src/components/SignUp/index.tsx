@@ -16,14 +16,26 @@ function SignUp() {
   const [securityQuestion, setSecurityQuestion] = useState("0");
   const [securityAnswer, setSecurityAnswer] = useState("");
 
-  const handlePassword2 = (e: any) => {
-    setPassword2(e.target.value);
-    if (password1 === password2) {
-      setPassword(password1);
-    }
-  };
+  // const handlePassword2 = (e: any) => {
+  //   console.log(1);
+  //   console.log(password1);
+  //   setPassword2(e.target.value);
+  //   if (password1 === password2) {
+  //     setPassword(password1);
+  //     console.log(password);
+  //   }
+  // };
 
   const submitForm = () => {
+    console.log(1);
+    console.log(password1);
+    console.log(2);
+    console.log(password2);
+    if (password1 === password2) {
+      setPassword(password1);
+      console.log("password");
+      console.log(password);
+    }
     APIService.sign_up({
       customer_username: username,
       customer_password: password,
@@ -58,7 +70,8 @@ function SignUp() {
         value={password2}
         placeholder="repeat your password"
         className="form-control"
-        onChange={handlePassword2}
+        // onChange={handlePassword2}
+        onChange={(e) => setPassword2(e.target.value)}
       />
       <input
         type="text"

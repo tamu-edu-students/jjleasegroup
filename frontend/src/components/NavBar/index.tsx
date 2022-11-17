@@ -10,9 +10,9 @@ import { useEffect } from "react";
 function NavBar() {
   const userInfo = getUser();
 
-  useEffect(() => {
-    console.log(userInfo);
-  });
+  // useEffect(() => {
+  //   console.log(userInfo);
+  // });
 
   return (
     <Navbar className={styles.nav} expand="lg">
@@ -56,7 +56,8 @@ function NavBar() {
               <NavDropdown
                 bsPrefix={"styles"}
                 className={styles.item}
-                title={userInfo.name}
+                // title={userInfo.name}
+                title={userInfo.id}
               >
                 <NavDropdown.Item href="/MyProfile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/ChangePassword">
