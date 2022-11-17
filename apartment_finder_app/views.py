@@ -92,7 +92,7 @@ def login(request):
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
         request.session.set_expiry(60*60*24*7)
-        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id}, safe=False)
+        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id, "name": customer_object.customer_username}, safe=False)
 
     return JsonResponse({"code": "404", "error_message": "not valid", "customer_id": ""}, safe=False)
 

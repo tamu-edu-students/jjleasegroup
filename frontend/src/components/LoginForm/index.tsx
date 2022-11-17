@@ -26,10 +26,11 @@ function LoginForm() {
       //TOCHANGE check password right or wrong here
       if (resp.code == "200") {
         console.log("Login");
+        console.log(resp.name);
 
         saveUser({
           id: resp.customer_id,
-          name: details.name,
+          name: resp.name,
           email: details.email,
         });
         window.location.href = "/";

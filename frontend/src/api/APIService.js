@@ -24,7 +24,7 @@ export default class APIService {
 
   static get_account_info(customer_id) {
     // console.log(customer_id)
-    return fetch(baseUrl + "customer" + customer_id.toString(), {
+    return fetch(baseUrl + "customer/" + customer_id.toString(), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

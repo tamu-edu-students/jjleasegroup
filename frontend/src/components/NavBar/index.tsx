@@ -56,8 +56,7 @@ function NavBar() {
               <NavDropdown
                 bsPrefix={"styles"}
                 className={styles.item}
-                // title={userInfo.name}
-                title={userInfo.id}
+                title={userInfo.name}
               >
                 <NavDropdown.Item href="/MyProfile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/ChangePassword">
