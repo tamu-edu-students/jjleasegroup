@@ -1,10 +1,14 @@
 import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
 
-function MyProfile() {
-  window.sessionStorage.setItem("customer_id", "17"); // TODO: use cookie instead
+type Props = {
+  userId: number;
+};
 
-  const id = parseInt(window.sessionStorage.getItem("customer_id")!);
+function MyProfile(props: Props) {
+  const userId = props.userId;
+  // window.sessionStorage.setItem("customer_id", "17");
+
   const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +21,7 @@ function MyProfile() {
 
   const getCustomerInfo = (customer: any) => {
     // TODO: type this
-    // console.log(customer)
+    console.log(customer);
 
     setUsername(customer.customer_username);
     // setPassword(customer.customer_password);
@@ -30,30 +34,19 @@ function MyProfile() {
     console.log(username);
   };
 
-  // update_customer_info(customer){
-  //     console.log(customer)
-  //     this.setState({
-  //             customer_username: customer.customer_username,
-  //             // customer_password: customer.customer_password,
-  //             customer_email: customer.customer_email,
-  //             customer_phone: customer.customer_phone,
-  //             customer_gender: customer.customer_gender,
-  //             customer_date_of_birth: customer.customer_date_of_birth,
-  //             customer_security_question: customer.customer_security_question,
-  //             customer_security_answer: customer.customer_security_answer
-  //         },
-  //         () => console.log(username));
-  // }
-
   useEffect(() => {
-    APIService.get_account_info(id).then((resp) => getCustomerInfo(resp));
-  });
+    console.log(userId);
+    APIService.get_account_info(userId).then((resp) => {
+      getCustomerInfo(resp);
+      console.log(resp);
+    });
+  }, [userId]);
 
   const submitForm = () => {
     APIService.update_account_info(
       // id,
       {
-        customer_id: id,
+        customer_id: userId,
         customer_username: username,
         // "customer_password": password,
         customer_email: email,

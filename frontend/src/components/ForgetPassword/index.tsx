@@ -1,4 +1,3 @@
-
 import APIService from "../../api/APIService";
 import { useState } from "react";
 import styles from "./styles.module.scss";
@@ -17,15 +16,15 @@ function ForgetPassword() {
     APIService.forget_password({
       customer_email: email,
       customer_security_answer: answer,
-      new_password: password_new
-    }).then((resp) =>{
-      if(resp.code == "200"){
+      new_password: password_new,
+    }).then((resp) => {
+      if (resp.code == 200) {
         //answer is correct
         console.log("answer is correct");
-        setError("")
-        setFlag(false)
+        setError("");
+        setFlag(false);
         window.location.href = "/Login";
-      }else{
+      } else {
         //answer is wrong
         setError(resp.error_message);
         console.log(resp.error_message);
@@ -33,73 +32,71 @@ function ForgetPassword() {
     });
   };
   const questionGetter = (e: any) => {
-    console.log("email is"+ email);
+    console.log("email is" + email);
     e.preventDefault();
     APIService.get_question({
       customer_email: email,
-    }).then((resp) =>{
-      if(resp.code == "200"){
-        console.log("Successfully get question!!!")
-        console.log(console.log("Successfully get question!!!"))
+    }).then((resp) => {
+      console.log(resp);
+      if (resp.code === 200) {
+        console.log("Successfully get question!!!");
         setQuestion(resp.customer_security_question);
         setFlag(true);
-        setError("")
-
-      }else{
-        console.log("Wrong email!!!")
-        setError(resp.error_message)
+        setError("");
+      } else {
+        console.log("Wrong email!!!");
+        setError(resp.error_message);
       }
-    }
-    );
-  }
-  if(flag){ 
+    });
+  };
+  if (flag) {
     return (
-      <div className={styles.form} >
+      <div className={styles.form}>
         <div className={styles.container_security}>
           <div className={styles.question}>
-              <label htmlFor="text">{question}</label>
+            <label htmlFor="text">{question}</label>
           </div>
-          
-            <input
-              className={inputClass}
-              type="text"
-              name="answer"
-              id="text"
-              onChange={(e) =>
-                setAnswer(e.target.value)
-              }
-              value={answer}
-            />
-          
+
+          <input
+            className={inputClass}
+            type="text"
+            name="answer"
+            id="text"
+            onChange={(e) => setAnswer(e.target.value)}
+            value={answer}
+          />
+
           <div className={styles.question}>
             <label htmlFor="password">new password </label>
           </div>
-            <input
-              className={inputClass}
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) =>
-                setPasswordNew(e.target.value)
-              }
-              value={password_new}
-            />
-          
+          <input
+            className={inputClass}
+            type="password"
+            name="password"
+            id="password"
+            onChange={(e) => setPasswordNew(e.target.value)}
+            value={password_new}
+          />
+
           <div className={styles.container}>
             <button className={styles.button} onClick={submitHandler}>
               submit
             </button>
-            
           </div>
         </div>
-        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{error}</div> : ""}
+        {
+          /*ERROR*/ error !== "" ? (
+            <div className={styles.error_message}>{error}</div>
+          ) : (
+            ""
+          )
+        }
       </div>
     );
-  }   
-  else{
+  } else {
     return (
       <div className={styles.form}>
-        <div className={styles.container}>    
+        <div className={styles.container}>
           <div className={styles.group_text}>
             <label htmlFor="email">Email: </label>
           </div>
@@ -118,13 +115,17 @@ function ForgetPassword() {
           <button className={styles.button} onClick={questionGetter}>
             submit
           </button>
-          
         </div>
-        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{error}</div> : ""}
-      
+        {
+          /*ERROR*/ error !== "" ? (
+            <div className={styles.error_message}>{error}</div>
+          ) : (
+            ""
+          )
+        }
       </div>
     );
   }
-  
 }
+
 export default ForgetPassword;

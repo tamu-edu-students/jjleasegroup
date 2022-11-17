@@ -3,19 +3,24 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
 
-function ContactForm() {
+type Props = {
+  userId: number;
+};
+
+function ContactForm(props: Props) {
+  const userId = props.userId;
   const [questionText, setQuestionText] = useState("");
   const [aptArea, setAptArea] = useState("0");
   const [questionPurpose, setQuestionPurpose] = useState("0");
 
   const submitForm = () => {
     APIService.add_question_consultation({
-      question_purpose: questionText,
+      question_purpose: questionPurpose,
       apt_area: aptArea,
-      question_text: questionPurpose,
+      question_text: questionText,
       question_status: "0",
       submission_date_time: new Date().toISOString().slice(0, 19),
-      customer_id: "2",
+      customer_id: userId,
     }).then((resp) => console.log(resp));
   };
 

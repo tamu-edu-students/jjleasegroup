@@ -1,8 +1,8 @@
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
-import background from "./background.png";
-import map from "./map.png";
+import background from "../../asserts/pictures/background-square.png";
+import map from "../../asserts/pictures/map.png";
 import ForgetPassword from "../../components/ForgetPassword";
 
 const ForgetPasswordPage = () => {

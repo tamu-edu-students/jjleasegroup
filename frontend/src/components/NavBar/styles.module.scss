@@ -1,4 +1,5 @@
-@import '../../style/fonts.scss';
+@import '../../style/fonts';
+@import '../../style/colors';
 
 .nav {
   background-color: white;
@@ -9,14 +10,27 @@
 }
 
 .brand {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
-  color: #80B5EA;
+  font-size: 30px;
+  color: $branding-blue-light;
+  text-decoration: none;
 }
 
 .collapse {
+  display: flex!important;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.item {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
@@ -24,5 +38,7 @@
   line-height: 30px;
   /* identical to box height */
 
-  color: #225D99;
+  color: $branding-blue-medium;
+  text-decoration: none;
+  margin: 0 10px;
 }

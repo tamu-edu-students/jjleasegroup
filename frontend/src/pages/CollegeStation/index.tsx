@@ -1,19 +1,24 @@
 import NavBar from "../../components/NavBar";
 import Card from "../../components/Card";
-import Box from "../../components/Box";
 import Footer from "../../components/Footer";
-// import Hero from "../../components/Hero";
-// import FAQ from "../FAQ";
+import styles from "./styles.module.scss";
 
 const CollegeStation = () => {
   return (
     <div>
-      {/* NavBar not function correctly once the window shrink */}
       <NavBar />
-      
-      {/*<FAQ />*/}
-      {/* <Footer /> */}
-      <Card/>
+      <div className={styles.container}>
+        <div className={styles.title}>
+          On TAMU Campus Apartments (塔木校园附近公寓)
+        </div>
+        <div className={styles["card-container"]}>
+          <Card />
+          {/*<Card />*/}
+          {/*<Card />*/}
+          {/*<Card />*/}
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 };

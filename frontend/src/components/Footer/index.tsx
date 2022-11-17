@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import logo from "./logo.svg";
+import logo from "../../asserts/pictures/logo.svg";
 
 const Footer = () => {
   return (

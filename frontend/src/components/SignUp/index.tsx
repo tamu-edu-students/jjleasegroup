@@ -1,5 +1,6 @@
 import APIService from "../../api/APIService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getUser, saveUser } from "../../utils/cookie";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -16,14 +17,15 @@ function SignUp() {
   const [securityQuestion, setSecurityQuestion] = useState("0");
   const [securityAnswer, setSecurityAnswer] = useState("");
 
-  const handlePassword2 = (e: any) => {
-    setPassword2(e.target.value);
+  useEffect(() => {
     if (password1 === password2) {
       setPassword(password1);
     }
-  };
+  }, [password1, password2]);
 
   const submitForm = () => {
+    console.log("password");
+    console.log(password);
     APIService.sign_up({
       customer_username: username,
       customer_password: password,
@@ -33,8 +35,10 @@ function SignUp() {
       customer_date_of_birth: date_of_birth,
       customer_security_question: securityQuestion,
       customer_security_answer: securityAnswer,
-    }).then((resp) => console.log(resp));
-    window.location.href = "/LogIn";
+    }).then((resp) => {
+      console.log(resp);
+    });
+    window.location.href = "/Login";
   };
 
   return (
@@ -58,7 +62,8 @@ function SignUp() {
         value={password2}
         placeholder="repeat your password"
         className="form-control"
-        onChange={handlePassword2}
+        // onChange={handlePassword2}
+        onChange={(e) => setPassword2(e.target.value)}
       />
       <input
         type="text"

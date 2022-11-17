@@ -1,12 +1,18 @@
 import cookie from "react-cookies";
 
+export type UserInfo = {
+  id: number;
+  name: string;
+  email: string;
+};
+
 //保存
-function saveUser(user: any) {
-  cookie.save("userInfo", user, { path: "/" });
+function saveUser(userInfo: UserInfo) {
+  cookie.save("userInfo", userInfo, { path: "/" });
 }
 
 //读取
-function getUser() {
+function getUser(): UserInfo | undefined {
   return cookie.load("userInfo");
 }
 

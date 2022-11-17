@@ -30,7 +30,7 @@ def question_consultation_API(request, question_id=0):
         if questions_serializer.is_valid():
             questions_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        # print(questions_serializer.errors)
+        print(questions_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
 
 
@@ -40,17 +40,23 @@ def customer_API(request, customer_id=0):
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         # print(customer_info)
-        customer_info_serializer = CustomerSerializer(data=customer_info)
+        customer_info_serializer = CustomerSerializer_full(data=customer_info)
         if customer_info_serializer.is_valid():
             customer_info_serializer.save()
-            return JsonResponse({"code": "200"}, safe=False)
+            customer = Customer.objects.get(customer_email=customer_info['customer_email'])
+            # print(customer)
+            return JsonResponse({"code": "200", "id": customer.customer_id}, safe=False)
         # print(customer_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'GET':
+        customer = Customer.objects.get(customer_id=customer_id)
+        customer_info_serializer = CustomerSerializer_update(customer)
+        return JsonResponse(customer_info_serializer.data, safe=False)
     elif request.method == 'PUT':
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         customer = Customer.objects.get(customer_id=customer_info['customer_id'])
-        customers_serializer = CustomerSerializer(customer, data=customer_info)
+        customers_serializer = CustomerSerializer_update(customer, data=customer_info)
         if customers_serializer.is_valid():
             customers_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
@@ -81,16 +87,16 @@ def login(request):
         '''
         customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('customer_email')).first()
         if not customer_object:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！"}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""}, safe=False)
         input_password = make_password(password=form.cleaned_data.get('customer_password'), salt=SALT)
         if customer_object.customer_password != input_password:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！"}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""}, safe=False)
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
         request.session.set_expiry(60*60*24*7)
-        return JsonResponse({"code": "200", "error_message": ""}, safe=False)
+        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id, "name": customer_object.customer_username}, safe=False)
 
-    return JsonResponse({"code": "404", "error_message": "not valid"}, safe=False)
+    return JsonResponse({"code": "404", "error_message": "not valid", "customer_id": ""}, safe=False)
 
 
 def image_code(request):

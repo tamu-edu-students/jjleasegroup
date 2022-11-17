@@ -1,0 +1,9 @@
+@import '../../style/fonts';
+@import '../../style/colors';
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

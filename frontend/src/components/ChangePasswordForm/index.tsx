@@ -2,7 +2,13 @@ import { useState } from "react";
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
-function ChangePasswordForm(user: { name: string; email: string }) {
+
+type Props = {
+  userEmail: string;
+};
+
+function ChangePasswordForm(props: Props) {
+  const userEmail = props.userEmail;
   const [details, setDetails] = useState({
     name: "",
     email: "",
@@ -20,17 +26,17 @@ function ChangePasswordForm(user: { name: string; email: string }) {
   ) => {
     console.log("=====step2 check old password=====");
     //testing email and password matching
-    console.log("User data:" + user.email);
+    console.log("User data:" + userEmail);
     console.log("Detail data:" + details.password);
     console.log("Detail new data:" + details.password_new);
     if (checkError === "") {
       APIService.change_password({
         //push email and password to backend
-        customer_email: user.email,
+        customer_email: userEmail,
         old_password: details.password,
         new_password: details.password_new,
       }).then((resp) => {
-        if (resp.code === "200") {
+        if (resp.code == "200") {
           //check old password
           setError("");
           if (checkError === "") {
@@ -60,13 +66,12 @@ function ChangePasswordForm(user: { name: string; email: string }) {
     }
   };
   return (
-    <div className={styles.form} >
+    <div className={styles.form}>
       <div className={styles.container}>
         <div className={styles.textprompt}>
-            <label htmlFor="password">Old password: </label>
-            <label htmlFor="password">New password: </label>
-            <label htmlFor="password">Repeat password: </label>
-
+          <label htmlFor="password">Old password: </label>
+          <label htmlFor="password">New password: </label>
+          <label htmlFor="password">Repeat password: </label>
         </div>
 
         <div className={styles.group_input}>
@@ -107,8 +112,20 @@ function ChangePasswordForm(user: { name: string; email: string }) {
         <button className={styles.button} onClick={submitHandler}>
           submit
         </button>
-        {/*ERROR*/ checkError !== "" ? (<div className={styles.error_message}>{"*"+checkError}</div>) : ("")}
-        {/*ERROR*/ error !== "" ? <div className={styles.error_message}>{"**"+error}</div> : ""}
+        {
+          /*ERROR*/ checkError !== "" ? (
+            <div className={styles.error_message}>{"*" + checkError}</div>
+          ) : (
+            ""
+          )
+        }
+        {
+          /*ERROR*/ error !== "" ? (
+            <div className={styles.error_message}>{"**" + error}</div>
+          ) : (
+            ""
+          )
+        }
       </div>
     </div>
   );

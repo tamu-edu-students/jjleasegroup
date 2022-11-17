@@ -1,11 +1,13 @@
 import Accordion from "react-bootstrap/Accordion";
+import styles from "./styles.module.scss";
 
 const FAQ = () => {
   return (
-    <Accordion defaultActiveKey="0">
+    <Accordion className={styles.container} defaultActiveKey="">
       <Accordion.Item eventKey="0">
         <Accordion.Header>
-          What's JJ GroupLease? JJ团租是什么组织？
+          <div>What's JJ GroupLease?</div>
+          <div>JJ团租是什么组织？</div>
         </Accordion.Header>
         <Accordion.Body>
           <p>

@@ -1,4 +1,4 @@
-const baseUrl = "http://192.168.68.80:8000/";
+const baseUrl = "http://127.0.0.1:8000/";
 export default class APIService {
   static add_question_consultation(body) {
     console.log(JSON.stringify(body));
@@ -24,7 +24,7 @@ export default class APIService {
 
   static get_account_info(customer_id) {
     // console.log(customer_id)
-    return fetch(baseUrl + "customer" + customer_id.toString(), {
+    return fetch(baseUrl + "customer/" + customer_id.toString(), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
