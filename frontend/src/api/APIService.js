@@ -87,7 +87,7 @@ export default class APIService {
 
   static get_apt_info(body) {
     console.log(JSON.stringify(body));
-    return fetch(baseUrl + "get_question_text", {
+    return fetch(baseUrl + "apt_info", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
