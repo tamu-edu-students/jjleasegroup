@@ -46,7 +46,9 @@ def customer_API(request, customer_id=0):
         customer_info_serializer = CustomerSerializer_full(data=customer_info)
         if customer_info_serializer.is_valid():
             customer_info_serializer.save()
-            return JsonResponse({"code": "200"}, safe=False)
+            customer = Customer.objects.get(customer_email=customer_info['customer_email'])
+            # print(customer)
+            return JsonResponse({"code": "200", "id": customer.customer_id}, safe=False)
         # print(customer_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'GET':

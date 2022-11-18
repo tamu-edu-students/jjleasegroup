@@ -48,10 +48,6 @@
   margin-bottom: 10px;
 }
 
-.des{
-  font-size: .8rem;
-  margin-bottom: 10px;
-}
 
 .footer{
   margin-top: 1rem;
@@ -97,6 +93,42 @@
 
 }
 
-.tag {
+.magrin {
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tag{
+    font-family: 'Open Sans', sans-serif;
+    font-size: .9rem;
+    display: block;
+    padding: 0.3em 0.85em;
+    margin: 0.5em;
+    text-transform: uppercase;
+    border: 2px solid #28242f;
+    border-radius: 2em;
+    width: 40%;
+
+    // justify-content: center;
+    // align-items: center;
+
+    transition: transform 0.2s;
+    transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
+
+    &:hover {
+      transform: scale(1.025);
+      background: linear-gradient(to right, #fbfbfb, #0dbde5);
+      // -webkit-background-clip: text;
+      // -webkit-text-fill-color: transparent;
+    }
+
+}
+
+.TagGrid{
+  display: flex;
+}
+
+.address{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
