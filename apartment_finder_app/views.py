@@ -186,12 +186,12 @@ def apt_info_api(request, apt_id=0):
         return JsonResponse(questions_serializer.data, safe=False, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         apartment_info = JSONParser().parse(request)
-        # print(apartment_info)
+        print(apartment_info)
         apartment_info_serializer = ApartmentInfoSerializer(data=apartment_info)
         if apartment_info_serializer.is_valid():
             apartment_info_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        # print(apartment_info_serializer.errors)
+        print(apartment_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'PUT':
         apartment_info = JSONParser().parse(request)

@@ -34,6 +34,6 @@ class CustomerSerializer_pwd(serializers.ModelSerializer):
 class ApartmentInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ApartmentInfo
-        fields = ('apt_id', 'apt_name', 'apt_state', 'apt_city', 'apt_street', 'apt_zipcode',
+        fields = ('apt_id', 'apt_name', 'apt_city', 'apt_street', 'apt_zipcode',
                   'apt_price_low', 'apt_price_high', 'apt_tag_near_campus', 'apt_tag_furnished', 'apt_tag_free_parking',
                   'apt_tag_free_we', 'apt_tag_free_internet', 'apt_url', 'apt_picture_url')

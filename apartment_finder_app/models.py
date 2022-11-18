@@ -36,18 +36,18 @@ class QuestionConsultation(models.Model):
 class ApartmentInfo(models.Model):
     apt_id = models.AutoField(primary_key=True)
     apt_name = models.CharField(max_length=100)
-    apt_state = models.CharField(max_length=20)
     apt_city = models.IntegerField()  # 0 = College Station, 1 = Austin, 2 = Houston, 3 = Dallas
     apt_street = models.CharField(max_length=100)
     apt_zipcode = models.CharField(max_length=20)
     apt_price_low = models.IntegerField()
     apt_price_high = models.IntegerField(blank=True, null=True)
-    apt_tag_near_campus = models.IntegerField()     # 0 = no, 1 = yes
-    apt_tag_furnished = models.IntegerField()  # 0 = no, 1 = yes
-    apt_tag_free_parking = models.IntegerField()  # 0 = no, 1 = yes
-    apt_tag_free_we = models.IntegerField()  # 0 = no, 1 = yes
-    apt_tag_free_internet = models.IntegerField()  # 0 = no, 1 = yes
-    apt_url = models.CharField(max_length=100)
-    apt_picture_url = models.CharField(max_length=100)
+    apt_tag_near_campus = models.SmallIntegerField()     # 0 = no, 1 = yes
+    apt_tag_furnished = models.SmallIntegerField()  # 0 = no, 1 = yes
+    apt_tag_free_parking = models.SmallIntegerField()  # 0 = no, 1 = yes
+    apt_tag_free_we = models.SmallIntegerField()  # 0 = no, 1 = yes
+    apt_tag_free_internet = models.SmallIntegerField()  # 0 = no, 1 = yes
+    apt_url = models.URLField(max_length=300)
+    apt_picture_url = models.URLField(max_length=1024)
+    models.SmallIntegerField()
 
 
