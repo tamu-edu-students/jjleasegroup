@@ -1,0 +1,76 @@
+@import '../../style/fonts';
+@import '../../style/colors';
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.item {
+  width: 100%;
+  height: max-content;
+  position: relative;
+
+  &-title {
+    position: absolute;
+    left: 10%;
+    top: 25%;
+    z-index: 100;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 67px;
+    line-height: 67px;
+    /* or 100% */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  &-background {
+    width: 100%;
+    z-index: 0;
+
+    &-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      background: rgba(34, 93, 153, 0.6);
+      z-index: 50;
+    }
+  }
+}
+
+.faqs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 84px 55px 0px;
+  background-color: $semantic-pink;
+  width: 100%;
+
+  &-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 67px;
+    /* identical to box height, or 168% */
+    color: $branding-blue-dark;
+    margin-bottom: 30px;
+  }
+}
+

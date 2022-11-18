@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "http://192.168.68.80:8000/";
 export default class APIService {
   static add_question_consultation(body) {
     console.log(JSON.stringify(body));
@@ -77,6 +77,16 @@ export default class APIService {
   static get_question(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "get_question_text", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static add_apt_info(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "apt_info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
