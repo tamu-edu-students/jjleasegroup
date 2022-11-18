@@ -87,7 +87,6 @@ export default class APIService {
 
   static get_apt_info(body) {
     console.log(JSON.stringify(body));
-    // ask Liao
     return fetch(baseUrl + "get_question_text", {
       method: "GET",
       headers: {

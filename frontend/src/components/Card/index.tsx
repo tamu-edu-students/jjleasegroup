@@ -71,20 +71,20 @@ const Card = () =>{
                 
                     <div className={styles.advants}>
                         <div>
-                            <span>price:</span>
+                            {/* <span>price:</span> */}
                             <div  className={styles.price}><span>$1000 - 3000</span></div>
                         </div>
 
                         <div className={styles.margin}>
                             <div className={styles.TagGrid}>
                                 <div className={styles.tag}>Near Campus</div>
-                                <div className={styles.tag}>Near Campus</div>
+                                <div className={styles.tag}>Furnished</div>
                             </div>
                             <div className={styles.TagGrid}>
-                                <div className={styles.tag}>Near Campus</div>
-                                <div className={styles.tag}>Near Campus</div>
+                                <div className={styles.tag}>Free Parking</div>
+                                <div className={styles.tag}>Free Uiltility</div>
                             </div>
-                            <div className={styles.tag}>Near Campus</div>
+                            <div className={styles.tag}>Free wifi</div>
 
                         </div>
                     
