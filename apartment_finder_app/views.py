@@ -11,11 +11,14 @@ from apartment_finder_app import models
 from apartment_finder_app.utils.code import check_code
 from apartment_finder_app.utils.forms import LoginForm, ChangePasswordForm, GetPasswordBackForm
 
-from apartment_finder_app.models import QuestionConsultation, Customer
-from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer_full, CustomerSerializer_update, CustomerSerializer_pwd
-
+from apartment_finder_app.models import QuestionConsultation, Customer, ApartmentInfo
+from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer_full, \
+    CustomerSerializer_update, CustomerSerializer_pwd
+from apartment_finder_app.serializers import ApartmentInfoSerializer
 
 SALT = "CSCE606"
+
+
 # Create your views here.
 @csrf_exempt
 def question_consultation_API(request, question_id=0):
@@ -85,14 +88,17 @@ def login(request):
         '''
         customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('customer_email')).first()
         if not customer_object:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""},
+                                safe=False)
         input_password = make_password(password=form.cleaned_data.get('customer_password'), salt=SALT)
         if customer_object.customer_password != input_password:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""},
+                                safe=False)
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
-        request.session.set_expiry(60*60*24*7)
-        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id, "name": customer_object.customer_username}, safe=False)
+        request.session.set_expiry(60 * 60 * 24 * 7)
+        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id,
+                             "name": customer_object.customer_username}, safe=False)
 
     return JsonResponse({"code": "404", "error_message": "not valid", "customer_id": ""}, safe=False)
 
@@ -170,3 +176,35 @@ def get_back_password(request):
             customer_password=new_password)
         return JsonResponse({"code": "200", "error_message": ""}, safe=False)
     return JsonResponse({"code": "404", "error_message": "Not valid!"}, safe=False)
+
+
+@csrf_exempt
+def apt_info_api(request, apt_id=0):
+    if request.method == 'GET':
+        apartments = ApartmentInfo.objects.all()
+        questions_serializer = ApartmentInfoSerializer(apartments, many=True)
+        return JsonResponse(questions_serializer.data, safe=False, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        apartment_info = JSONParser().parse(request)
+        # print(apartment_info)
+        apartment_info_serializer = ApartmentInfoSerializer(data=apartment_info)
+        if apartment_info_serializer.is_valid():
+            apartment_info_serializer.save()
+            return JsonResponse({"code": "200"}, safe=False)
+        # print(apartment_info_serializer.errors)
+        return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'PUT':
+        apartment_info = JSONParser().parse(request)
+        apartment = ApartmentInfo.objects.filter(apt_id=apartment_info['apt_id']).first()
+        if apartment is None:
+            return JsonResponse({"code": "404"}, safe=False)
+        apartment_serializer = ApartmentInfoSerializer(apartment, data=apartment_info)
+        if apartment_serializer.is_valid():
+            apartment_serializer.save()
+            return JsonResponse({"code": "200"}, safe=False)
+        # print(customers_serializer.errors)
+        return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'DELETE':
+        apartment = ApartmentInfo.objects.filter(apt_id=apt_id).first()
+        apartment.delete()
+        return JsonResponse({"code": "200"}, safe=False)
