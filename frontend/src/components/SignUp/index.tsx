@@ -1,6 +1,5 @@
 import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
-import { getUser, saveUser } from "../../utils/cookie";
 
 function SignUp() {
   const [username, setUsername] = useState("");
@@ -36,9 +35,12 @@ function SignUp() {
       customer_security_question: securityQuestion,
       customer_security_answer: securityAnswer,
     }).then((resp) => {
-      console.log(resp);
+      if (resp.code == "200") {
+        window.location.href = "/Login";
+      } else {
+        console.log("failed");
+      }
     });
-    window.location.href = "/Login";
   };
 
   return (

@@ -43,9 +43,20 @@ export default class APIService {
     }).then((resp) => resp.json());
   }
 
-  static add_log_in(body) {
+  static customer_log_in(body) {
     console.log(JSON.stringify(body));
-    return fetch(baseUrl + "login", {
+    return fetch(baseUrl + "customer_login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+
+  static admin_log_in(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "admin_login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

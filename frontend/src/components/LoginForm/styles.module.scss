@@ -1,4 +1,5 @@
 @import '../../style/fonts';
+@import '../../style/colors';
 
 .form {
   display: flex;
@@ -25,6 +26,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+
   font-family: 'Poppins';
   font-style: normal;
   font-size: 20px;
@@ -32,6 +34,8 @@
   gap: 30px;
   width: 50%;
   height: 100%;
+
+  color: $branding-blue-medium;
 
 }
 
@@ -94,26 +98,21 @@
   border-color: #80B5EA;
 }
 
-//.buttonforget {
-//  width: 50%;
-//  //height: 35px;
-//
-//  font-family: 'Poppins';
-//  font-style: normal;
-//  font-weight: 500;
-//  font-size: 10px;
-//  line-height: 30px;
-//  white-space: nowrap;
-//  /* identical to box height */
-//
-//  color: #FFFFFF;
-//  background: #80B5EA;
-//  border-radius: 10px;
-//  border-color: #80B5EA;
-//}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Poppins';
+}
+.radio {
+  margin-right: 10px;
+}
 
 .error_message {
   font-size: 20px;
   color: red;
-
 }
