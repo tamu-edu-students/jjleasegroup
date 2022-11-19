@@ -1,6 +1,6 @@
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 
 // const LISTMAGIN = 10;
@@ -22,38 +22,27 @@ function Card() {
     const [Url,setUrl] = useState("");
     const [PicUrl,setPicUrl] = useState("");
 
-    // const get_Apt_Info = (apt: any) =>{
-    //     console.log(apt);
-    //     setName(apt.Name);
-    //     setState(apt.State);
-    //     setCity(apt.City);
-    //     setStreet(apt.Street);
-    //     setZipCode(apt.ZipCode);
-    //     setPriceLow(apt.PriceLow);
-    //     setPriceHigh(apt.PriceHigh);
-    //     setTagCampus(apt.TagCampus);
-    //     setTagFurnished(apt.TagFurnished);
-    //     setTagParking(apt.TagParking);
-    //     setTagWE(apt.TagWE);
-    //     setTagInternet(apt.TagInternet);
-    //     setUrl(apt.Url);
-    //     setPicUrl(apt.PicUrl);
-    // };
-    APIService.get_apt_info({
-        apt_name: Name,
-        apt_city: City, 
-        apt_street: Street,
-        apt_zipcode: ZipCode,
-        apt_price_low: PriceLow,
-        apt_price_high: PriceHigh,
-        apt_tag_near_campus: TagCampus,
-        apt_tag_furnished: TagFurnished,
-        apt_tag_free_parking: TagParking,
-        apt_tag_free_we: TagWE, 
-        apt_tag_free_internet: TagInternet,
-        apt_url: Url,
-        apt_picture_url: PicUrl, 
-    })
+
+    useEffect(() => {
+        APIService.get_apt_info().then((resp) => {
+            console.log(resp);
+            console.log('200');
+            setName(resp[0].apt_name);
+            setStreet(resp[0].apt_street);
+            setCity(resp[0].apt_city);
+            setZipCode(resp[0].apt_zipcode);
+            setPriceHigh(resp[0].apt_price_high);
+            setPriceLow(resp[0].apt_price_low);
+            setTagInternet(resp[0].apt_tag_free_internet);
+            setTagParking(resp[0].apt_tag_free_parking);
+            setTagFurnished(resp[0].apt_tag_furnished);
+            setTagCampus(resp[0].apt_tag_near_campus);
+            setTagWE(resp[0].apt_tag_free_we);
+            setUrl(resp[0].apt_url);
+            setPicUrl(resp[0].apt_picture_url);
+
+        });
+    });
 
 
     return (
@@ -61,7 +50,7 @@ function Card() {
         <div className={styles.grid}>
             <div className={styles.card}>
                 <div className={styles["card-header"]}>
-                    <img className={styles["card-image"]} src="https://source.unsplash.com/6WrKKQcEnXk"/>
+                    <img className={styles["card-image"]} src="https://drive.google.com/uc?export=view&id=1pdARSw-qu7-ESYwDZulRZWo8BLoR_xB2"/>
                 </div>
                     <div className={styles.name}>
                         {Name}
@@ -74,7 +63,7 @@ function Card() {
                         </div>
 
                         <div className={styles.address}>
-                            207 street, City, Texas, Zipcode
+                            {Street}, {City}, Texas, {ZipCode}
                         </div>
 
                         <div className={styles.margin}>
@@ -94,7 +83,7 @@ function Card() {
                    
                     <div className={styles.footer}>
                         <button className={styles.btn}>Contact Us</button>
-                        <button className={styles["btn-outline"]}>More Info</button>
+                        <button className={styles["btn-outline"]}><a href={Url}>More Info</a></button>
                     </div>
             </div>
         </div>

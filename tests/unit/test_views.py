@@ -272,7 +272,6 @@ class ApartmentInfoTestCase(TestCase):
         cls.get_post_url = reverse('get_post_apt')
         cls.test_apt = ApartmentInfo.objects.create(apt_id=1,
                                                     apt_name='The Junction',
-                                                    apt_state='Texas',
                                                     apt_city=0,
                                                     apt_street='2415 Junction Boys Road',
                                                     apt_zipcode='77845',
@@ -289,7 +288,6 @@ class ApartmentInfoTestCase(TestCase):
         cls.test_data = {
             'apt_id': 2,
             'apt_name': 'ParkWest',
-            'apt_state': 'Texas',
             'apt_city': 0,
             'apt_street': '503 George Bush Dr W',
             'apt_zipcode': '77840',
