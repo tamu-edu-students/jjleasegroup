@@ -33,6 +33,7 @@ function LoginForm() {
           name: resp.name,
           email: details.email,
         });
+        setError("");
         window.location.href = "/";
       } else {
         //TOCHANGE return wrong here password wrong
