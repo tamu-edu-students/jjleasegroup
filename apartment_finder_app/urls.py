@@ -4,7 +4,8 @@ from apartment_finder_app import views
 from django.urls import path
 
 urlpatterns = [
-    url(r'^login', views.login, name='login'),
+    url(r'^customer_login', views.customer_login, name='customer_login'),
+    url(r'^admin_login', views.admin_login, name='admin_login'),
     path('image/code/', views.image_code),
     url(r'^change_password', views.change_password, name='change_password'),
     url(r'^get_back_password', views.get_back_password, name='get_back_password'),

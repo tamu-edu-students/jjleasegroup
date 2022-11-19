@@ -42,14 +42,14 @@ def customer_API(request, customer_id=0):
     if request.method == 'POST':
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
-        # print(customer_info)
+        print(customer_info)
         customer_info_serializer = CustomerSerializer_full(data=customer_info)
         if customer_info_serializer.is_valid():
             customer_info_serializer.save()
             customer = Customer.objects.get(customer_email=customer_info['customer_email'])
             # print(customer)
             return JsonResponse({"code": "200", "id": customer.customer_id}, safe=False)
-        # print(customer_info_serializer.errors)
+        print(customer_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'GET':
         customer = Customer.objects.get(customer_id=customer_id)
@@ -72,7 +72,7 @@ def customer_API(request, customer_id=0):
 
 
 @csrf_exempt
-def login(request):
+def customer_login(request):
     if request.method == 'GET':
         # form = LoginForm()
         # return render(request, 'login.html', {'form': form})
@@ -88,22 +88,40 @@ def login(request):
             form.add_error('verification_code', 'Wrong Verification Code! ')
             return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
         '''
-        customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('customer_email')).first()
+        customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('email')).first()
         if not customer_object:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""},
-                                safe=False)
-        input_password = make_password(password=form.cleaned_data.get('customer_password'), salt=SALT)
+            return JsonResponse({"code": "404", "error_message": "Wrong email！", "id": ""}, safe=False)
+        input_password = make_password(password=form.cleaned_data.get('password'), salt=SALT)
         if customer_object.customer_password != input_password:
-            return JsonResponse({"code": "404", "error_message": "Wrong email or password！", "customer_id": ""},
-                                safe=False)
+            return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
-        request.session.set_expiry(60 * 60 * 24 * 7)
-        return JsonResponse({"code": "200", "error_message": "", "customer_id": customer_object.customer_id,
-                             "name": customer_object.customer_username}, safe=False)
+        request.session.set_expiry(60*60*24*7)
+        return JsonResponse({"code": "200", "error_message": "", "id": customer_object.customer_id, "name": customer_object.customer_username}, safe=False)
 
-    return JsonResponse({"code": "404", "error_message": "not valid", "customer_id": ""}, safe=False)
+    return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
 
+@csrf_exempt
+def admin_login(request):
+    if request.method == 'GET':
+        return JsonResponse({}, safe=False)
+
+    form = LoginForm(data=JSONParser().parse(request))
+    if form.is_valid():
+        user_input_code = form.cleaned_data.pop('verification_code')
+        real_image_code = request.session.get('image_code', "")
+        admin_object = models.Admin.objects.filter(admin_email=form.cleaned_data.get('email')).first()
+        if not admin_object:
+            return JsonResponse({"code": "404", "error_message": "You are not an admin！", "id": ""}, safe=False)
+        input_password = make_password(password=form.cleaned_data.get('password'), salt=SALT)
+        if admin_object.admin_password != input_password:
+            return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
+
+        request.session['info'] = {'id': admin_object.admin_id, 'email': admin_object.admin_email}
+        request.session.set_expiry(60*60*24*7)
+        return JsonResponse({"code": "200", "error_message": "", "id": admin_object.admin_id, "name": admin_object.admin_username}, safe=False)
+
+    return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
 
 def image_code(request):
     img, code_string = check_code()

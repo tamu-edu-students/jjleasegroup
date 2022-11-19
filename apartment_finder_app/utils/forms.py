@@ -2,13 +2,13 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-    customer_email = forms.EmailField(
-        label='customer_email',
+    email = forms.EmailField(
+        label='email',
         widget=forms.TextInput,
         required=True   # cannot be empty
     )
-    customer_password = forms.CharField(
-        label='customer_password',
+    password = forms.CharField(
+        label='password',
         widget=forms.PasswordInput(render_value=True),
         required=True  # cannot be empty
     )

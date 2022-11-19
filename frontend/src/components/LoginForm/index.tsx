@@ -4,53 +4,43 @@ import { saveUser } from "../../utils/cookie";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
 
+type Info = {
+  // name: string;
+  email: string;
+  password: string;
+};
+
 function LoginForm() {
-  const [details, setDetails] = useState({ name: "", email: "", password: "" });
+  // const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const inputClass = classNames(styles.box, styles.input);
 
-  const checkLogin = (details: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
-    //testing email and password matching
-    //console.log(details.email);
-    APIService.add_log_in({
+  const checkLogin = (info: Info) => {
+    const api = isAdmin ? APIService.admin_log_in : APIService.customer_log_in;
+    api({
       //push email and password to backend
-      customer_email: details.email,
-      customer_password: details.password,
-      verification_code: details.password,
+      email: email,
+      password: password,
+      verification_code: password,
     }).then((resp) => {
-      //TOCHANGE check password right or wrong here
       if (resp.code == "200") {
-        console.log("Login");
-        console.log(resp.name);
-
         saveUser({
-          id: resp.customer_id,
+          id: resp.id,
           name: resp.name,
-          email: details.email,
+          email: email,
         });
         setError("");
         window.location.href = "/";
       } else {
-        //TOCHANGE return wrong here password wrong
         setError(resp.error_message);
       }
     });
   };
-  //pass through detail
-  const submitHandler = (e: any) => {
-    e.preventDefault();
-    checkLogin(details);
-  };
 
-  const forgetHandler = (e: any) => {
-    e.preventDefault();
-    window.location.href = "/ForgetPassword";
-  };
   return (
     <div className={styles.form}>
       <div className={styles.container}>
@@ -63,38 +53,38 @@ function LoginForm() {
           <input
             className={inputClass}
             type="email"
-            name="emai"
+            name="email"
             id="email"
-            onChange={(e) => setDetails({ ...details, email: e.target.value })}
-            value={details.email}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
           <input
             className={inputClass}
             type="password"
             name="password"
             id="password"
-            onChange={(e) =>
-              setDetails({ ...details, password: e.target.value })
-            }
-            value={details.password}
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </div>
       </div>
-      <div className={styles.container}>
-        <button className={styles.button} onClick={submitHandler}>
-          Login
-        </button>
-        {/*<button className={styles.buttonforget} onClick={forgetHandler}>*/}
-        {/*  Forget Password?*/}
-        {/*</button>*/}
+      <div className={styles.row}>
+        <input
+          type="checkbox"
+          name="admin"
+          id="admin"
+          className={styles.radio}
+          onChange={(e) => setIsAdmin(e.target.checked)}
+        />
+        <label htmlFor="admin">Login as Admin</label>
       </div>
-      {
-        /*ERROR*/ error !== "" ? (
-          <div className={styles.error_message}>{error}</div>
-        ) : (
-          ""
-        )
-      }
+      <button
+        className={styles.button}
+        onClick={() => checkLogin({ email, password })}
+      >
+        Login
+      </button>
+      {error && <div className={styles.error_message}>{error}</div>}
     </div>
   );
 }

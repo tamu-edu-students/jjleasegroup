@@ -3,18 +3,18 @@ from apartment_finder_app.views import LoginForm, ChangePasswordForm, GetPasswor
 
 
 class LoginFormTest(TestCase):
-    def test_customer_email_field_label(self):
+    def test_email_field_label(self):
         form = LoginForm()
-        self.assertTrue(form.fields['customer_email'].label is None or
-                        form.fields['customer_email'].label == 'customer_email')
+        self.assertTrue(form.fields['email'].label is None or
+                        form.fields['email'].label == 'email')
 
     def test_is_form_not_valid(self):
-        form_data = {'customer_email': 'test', 'customer_password': '123', 'verification_code': '123'}
+        form_data = {'email': 'test', 'password': '123', 'verification_code': '123'}
         form = LoginForm(data=form_data)
         self.assertFalse(form.is_valid())
 
     def test_is_form_valid(self):
-        form_data = {'customer_email': 'test@tamu.edu', 'customer_password': '123', 'verification_code': '123'}
+        form_data = {'email': 'test@tamu.edu', 'password': '123', 'verification_code': '123'}
         form = LoginForm(data=form_data)
         self.assertTrue(form.is_valid())
 
