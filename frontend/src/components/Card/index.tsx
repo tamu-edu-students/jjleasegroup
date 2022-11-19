@@ -50,7 +50,7 @@ function Card() {
         <div className={styles.grid}>
             <div className={styles.card}>
                 <div className={styles["card-header"]}>
-                    <img className={styles["card-image"]} src="https://drive.google.com/uc?export=view&id=1pdARSw-qu7-ESYwDZulRZWo8BLoR_xB2"/>
+                    <img className={styles["card-image"]} src={PicUrl}/>
                 </div>
                     <div className={styles.name}>
                         {Name}
