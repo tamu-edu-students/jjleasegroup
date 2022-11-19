@@ -33,6 +33,7 @@ function LoginForm() {
           name: resp.name,
           email: email,
         });
+        setError("");
         window.location.href = "/";
       } else {
         setError(resp.error_message);

@@ -1,0 +1,153 @@
+@import '../../style/fonts';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+.section{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.group_text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  gap :40px;
+  width: 20%;
+  font-size:25px;
+  padding: 0px,0px,0px
+}
+
+.group_input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  gap :10px;
+  width: 50%;
+  font-size:25px;
+}
+.group_tags {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  width: 100%;
+  font-size:25px;
+  gap:25px;
+}
+.tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size:15px;
+  gap:5px;
+  white-space: nowrap;
+}
+
+.price_group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-size:25px;
+  color: red;
+}
+.box {
+  width: 100%;
+  //height: 52px;
+  border: 3px solid #E3D7D7;
+  border-radius: 15px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #757575;
+
+  padding: 10px 20px;
+}
+.input {
+  //height: 156px;
+}
+.box_price {
+  width: 100%;
+  //height: 52px;
+  border: 3px solid #E3D7D7;
+  border-radius: 15px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #757575;
+
+  padding: 10px 20px;
+}
+.box_price::placeholder {
+
+  font-size: 15px;
+}
+
+.button {
+  width: 100px;
+  //height: 35px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+  background: #80B5EA;
+  border-radius: 10px;
+  border-color: #80B5EA;
+}
+
+.buttonforget {
+  width: 200px;
+  //height: 35px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+  background: #80B5EA;
+  border-radius: 10px;
+  border-color: #80B5EA;
+}
+.error_message{
+  font-size: 20px;
+  color:red;
+}

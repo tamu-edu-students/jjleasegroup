@@ -75,6 +75,7 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+
   static forget_password(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "get_back_password", {
@@ -85,9 +86,30 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+
   static get_question(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "get_question_text", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+
+  static get_apt_info() {
+    return fetch(baseUrl + "apt_info", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((resp) => resp.json());
+  }
+
+  static add_apt_info(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "apt_info", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
