@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from apartment_finder_app.models import QuestionConsultation, Customer
+from apartment_finder_app.models import QuestionConsultation, Customer, ApartmentInfo
 from datetime import datetime
 import json
 from django.contrib.auth.hashers import make_password
@@ -222,7 +222,8 @@ class GetBackPasswordCase(TestCase):
         data = {
             "customer_email": "tester1@tamu.edu"
         }
-        response_get = self.client.post(reverse('get_question_text'), data, content_type="application/json", follow=True)
+        response_get = self.client.post(reverse('get_question_text'), data, content_type="application/json",
+                                        follow=True)
 
         question_text = json.loads(response_get.content.decode('utf-8'))["customer_security_question"]
         self.assertEquals(question_text, "what is your mother's last name")
@@ -262,3 +263,75 @@ class GetBackPasswordCase(TestCase):
         message = json.loads(response.content.decode('utf-8'))["error_message"]
         self.assertEquals(code, "200")
         self.assertEquals(message, "")
+
+
+class ApartmentInfoTestCase(TestCase):
+    @classmethod
+    def setUp(cls):
+        cls.client = Client()
+        cls.get_post_url = reverse('get_post_apt')
+        cls.test_apt = ApartmentInfo.objects.create(apt_id=1,
+                                                    apt_name='The Junction',
+                                                    apt_city=0,
+                                                    apt_street='2415 Junction Boys Road',
+                                                    apt_zipcode='77845',
+                                                    apt_price_low=500,
+                                                    apt_price_high=600,
+                                                    apt_tag_near_campus=0,
+                                                    apt_tag_furnished=1,
+                                                    apt_tag_free_parking=0,
+                                                    apt_tag_free_we=0,
+                                                    apt_tag_free_internet=1,
+                                                    apt_url='https://thejunctionatcollegestation.com/',
+                                                    apt_picture_url="howdy.png",
+                                                    )
+        cls.test_data = {
+            'apt_id': 2,
+            'apt_name': 'ParkWest',
+            'apt_city': 0,
+            'apt_street': '503 George Bush Dr W',
+            'apt_zipcode': '77840',
+            'apt_price_low': 600,
+            'apt_price_high': 800,
+            'apt_tag_near_campus': 0,
+            'apt_tag_furnished': 1,
+            'apt_tag_free_parking': 0,
+            'apt_tag_free_we': 0,
+            'apt_tag_free_internet': 1,
+            'apt_url': 'https://www.parkwestlife.com/',
+            'apt_picture_url': "howdy.png",
+        }
+
+    def test_get(self):
+        resp = self.client.get(self.get_post_url)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_post_200(self):
+        response = self.client.post(self.get_post_url, self.test_data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        self.assertEquals(code, "200")
+
+    def test_post_404(self):
+        del self.test_data['apt_name']
+        response = self.client.post(self.get_post_url, self.test_data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        self.assertEquals(code, "404")
+
+    def test_update_200(self):
+        self.client.post(self.get_post_url, self.test_data, content_type="application/json", follow=True)
+        self.test_data['apt_zipcode'] = '77825'
+        response = self.client.put(self.get_post_url, self.test_data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        self.assertEquals(code, "200")
+
+    def test_update_404(self):
+        self.test_data['zipcode'] = '77825'
+        response = self.client.put(self.get_post_url, self.test_data, content_type="application/json", follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        self.assertEquals(code, "404")
+
+    def test_delete_200(self):
+        delete_url = reverse('delete_apt', args=[self.test_apt.apt_id])
+        response = self.client.delete(delete_url, follow=True)
+        code = json.loads(response.content.decode('utf-8'))["code"]
+        self.assertEquals(code, "200")

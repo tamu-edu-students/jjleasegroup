@@ -1,25 +1,44 @@
-// import Box from "../../components/Box";
+
 import Footer from "../../components/Footer";
-// import Hero from "../../components/Hero";
-// import FAQ from "../FAQ";
+import Card from "../../components/Card";
 import NavBar from "../../components/NavBar";
+import styles from "./styles.module.scss";
 
 const Austin = () => {
   return (
     <div>
-      {/* NavBar not function correctly once the window shrink */}
       <NavBar />
-      <iframe
-        src="https://www.abor.com/for-rent?filters={%22geohash%22:%229v6mh2fb56t4,9v6eecdbgkvh%22}"
-        width="100%"
-        height="1000px"
-        style={{ border: "1px" }}
-      />
+      <div className={styles.container}>
+        <div className={styles.title}>
+          Apartments (UT校园附近公寓)
+        </div>
+        
+        <div className={styles["card-container"]}>
+          <Card />
+          {/*<Card />*/}
+          {/*<Card />*/}
+          {/*<Card />*/}
+        </div>
+      </div>
 
-      {/*<Box />*/}
-      {/*<FAQ />*/}
+      <div className={styles.container}>
+        <div className={styles.title}>
+            Individual Leases (獨棟房子)
+        </div>
+    
+        <iframe 
+            src="https://www.abor.com/for-rent?filters={%22geohash%22:%229v6mh2fb56t4,9v6eecdbgkvh%22}"
+            width="100%"
+            height="1000px"
+            style={{ border: "1px" }}
+          /> 
+      </div>
       <Footer />
     </div>
+
+
+
+
   );
 };
 

@@ -1,5 +1,5 @@
 from django.test import TestCase
-from apartment_finder_app.models import QuestionConsultation, Customer
+from apartment_finder_app.models import QuestionConsultation, Customer, ApartmentInfo
 from datetime import datetime
 
 '''
@@ -61,3 +61,38 @@ class CustomerTestCase(TestCase):
         max_length = customer._meta.get_field('customer_password').max_length
         self.assertEquals(max_length, 88)
 
+
+class ApartmentInfoTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        ApartmentInfo.objects.create(apt_id=1,
+                                     apt_name='The Junction',
+                                     apt_state='Texas',
+                                     apt_city=0,
+                                     apt_street='2415 Junction Boys Road',
+                                     apt_zipcode='77845',
+                                     apt_price_low=500,
+                                     apt_price_high=600,
+                                     apt_tag_near_campus=0,
+                                     apt_tag_furnished=1,
+                                     apt_tag_free_parking=0,
+                                     apt_tag_free_we=0,
+                                     apt_tag_free_internet=1,
+                                     apt_url='https://thejunctionatcollegestation.com/',
+                                     apt_picture_url="howdy.png",
+                                     )
+
+    def test_apt_street_label(self):
+        apt = ApartmentInfo.objects.get(apt_id=1)
+        field_label = apt._meta.get_field('apt_url').verbose_name
+        self.assertEquals(field_label, 'apt url')
+
+    def test_apt_price_high_label(self):
+        apt = ApartmentInfo.objects.get(apt_id=1)
+        field_label = apt._meta.get_field('apt_price_high').verbose_name
+        self.assertEquals(field_label, 'apt price high')
+
+    def test_apt_zipcode_label(self):
+        apt = ApartmentInfo.objects.get(apt_id=1)
+        field_label = apt._meta.get_field('apt_zipcode').verbose_name
+        self.assertEquals(field_label, 'apt zipcode')

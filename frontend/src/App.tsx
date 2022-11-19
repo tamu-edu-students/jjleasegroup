@@ -10,6 +10,7 @@ import CollegeStation from "./pages/CollegeStation";
 import ContactUs from "./pages/ContactUs";
 import { useEffect, useState } from "react";
 import { getUser, UserInfo } from "./utils/cookie";
+import Admin from "./pages/Admin";
 
 function App() {
   // const [user, setUser] = useState<UserInfo | undefined>(getUser());
@@ -27,6 +28,7 @@ function App() {
         <Route path="/ForgetPassword" element={<ForgetPasswordPage />} />
         <Route path="/Austin" element={<Austin />} />
         <Route path="/CollegeStation" element={<CollegeStation />} />
+        <Route path="/Admin" element={<Admin />} />
         {user && [
           <Route
             path="/ChangePassword"
