@@ -29,7 +29,7 @@ pip3 install mysqlclient
 ```
 
 
-1. git clone the repo and migrate the django database
+4. git clone the repo and migrate the django database
 ```
 yum install git
 git clone https://github.com/tamu-edu-students/jjleasegroup.git
@@ -58,3 +58,8 @@ pip3 install
    typing-extensions==4.4.0
 python3 manage.py migrate
 ```
+
+5. Last, add ec2 DNS to settings.py
+   ```
+   
+   ```
