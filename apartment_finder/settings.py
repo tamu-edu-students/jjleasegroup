@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#^ymbuz_t+fa!#c4y*l_7)u0ebmu)$-b+#i8n1pzo(#s@*)7g+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.68.80', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.68.80', '0.0.0.0', '127.0.0.1','ec2-18-233-157-141.compute-1.amazonaws.com']
 
 
 # Application definition
@@ -81,28 +81,28 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apartment_finder',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '!YYmm186014',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
 }
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apartment_finder',
-        'USER': 'root',
-        'PASSWORD': 'ljwk449!',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
-    }
-}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'apartment_finder',
+#         'USER': 'root',
+#         'PASSWORD': 'ljwk449!',
+#         'HOST': '127.0.0.1',
+#         'PORT': 3306,
+#     }
+# }
 
 
 
@@ -137,6 +137,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+SECURE_SSL_REDIRECT = False
+
 
 
 # Static files (CSS, JavaScript, Images)
