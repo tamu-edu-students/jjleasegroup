@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'apartment_finder_app.apps.ApartmentFinderAppConfig'
+    'apartment_finder_app.apps.ApartmentFinderAppConfig',
+    'django_extensions',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
