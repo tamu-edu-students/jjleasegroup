@@ -41,7 +41,10 @@ python3 manage.py migrate
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
-5. Last, add ec2 DNS to settings.py
-   ```
-   
-   ```
+5. add ec2 DNS to settings.py and APIService.js
+   - settings.py:
+      ```
+      ALLOWED_HOSTS =['ec2-.....']
+      ```
+   - APIService.js: 
+    ``` const baseUrl = "https://ec2-18-233-157-141.compute-1.amazonaws.com:8000/"; ```
