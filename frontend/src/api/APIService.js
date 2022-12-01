@@ -1,4 +1,4 @@
-const baseUrl = "https://ec2-18-233-157-141.compute-1.amazonaws.com:8000/";
+const baseUrl = "http://ec2-18-233-157-141.compute-1.amazonaws.com:8000/";
 export default class APIService {
   static add_question_consultation(body) {
     console.log(JSON.stringify(body));
@@ -103,7 +103,7 @@ export default class APIService {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-	"Access-Control-Allow-Origin": "https://ec2-deploy-2.d55nij51nmuro.amplifyapp.com/Austin",
+	"Access-Control-Allow-Origin": "https://ec2-deploy-2.d55nij51nmuro.amplifyapp.com/*",
       },
     }).then((resp) => resp.json());
   }
