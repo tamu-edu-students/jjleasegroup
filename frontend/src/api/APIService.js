@@ -103,7 +103,7 @@ export default class APIService {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-	"Access-Control-Allow-Origin": "https://ec2-deploy-2.d55nij51nmuro.amplifyapp.com",
+	"Access-Control-Allow-Origin": "https://ec2-deploy-2.d55nij51nmuro.amplifyapp.com/*",
       },
     }).then((resp) => resp.json());
   }
