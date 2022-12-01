@@ -1,4 +1,4 @@
-const baseUrl = "ec2-18-233-157-141.compute-1.amazonaws.com:8000/";
+const baseUrl = "http://ec2-18-233-157-141.compute-1.amazonaws.com:8000/";
 export default class APIService {
   static add_question_consultation(body) {
     console.log(JSON.stringify(body));
