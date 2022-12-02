@@ -1,0 +1,141 @@
+.grid{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width:100%;
+}
+
+.card{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background: white;
+  padding: 1rem;
+  border : none;
+  border-radius: .25rem;
+  &-header{
+    font-size: 1.5rem;
+    margin-bottom: .5rem;
+  }
+
+  &-image {
+    display: block;
+    width: 100%;
+    max-height: 100px;
+    border : none;
+    border-radius: .25rem;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    transition: 200ms transform ease-in-out;
+  }
+}
+.address{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+
+}
+.name{
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+
+.footer{
+  margin-top: 1rem;
+}
+
+.btn{
+  --color: hsl(200, 50%, 50%);
+  background: var(--color);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  border-radius: .25em;
+  cursor: pointer;
+
+  &-outline{
+    background: none;
+    border:  1px solid hsl(200, 50%, 50%);
+    color: hsl(200, 50%, 50%);
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    border-radius: .25em;
+    cursor: pointer;
+  }
+}
+
+.btn:hover {
+  background: hsl(200, 50%, 60%);
+}
+
+.btn-outline:hover {
+  background: hsl(200, 50%, 90%);
+}
+
+
+.btn + .btn-outline{
+  margin-left: 1rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: rgba(43, 187, 175, 0.829);
+
+}
+
+.magrin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tag{
+    font-family: 'Open Sans', sans-serif;
+    font-size: .9rem;
+    display: block;
+    padding: 0.3em 0.85em;
+    margin: 0.5em;
+    text-transform: uppercase;
+    border: 2px solid #28242f;
+    border-radius: 2em;
+    width: 40%;
+
+    // justify-content: center;
+    // align-items: center;
+
+    transition: transform 0.2s;
+    transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
+
+    &:hover {
+      transform: scale(1.025);
+      background: linear-gradient(to right, #fbfbfb, #0dbde5);
+      // -webkit-background-clip: text;
+      // -webkit-text-fill-color: transparent;
+    }
+
+}
+
+.TagGrid{
+  display: flex;
+}
+
+.address{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.button_group{
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  &:edit {
+    color:blue;
+
+  }
+}

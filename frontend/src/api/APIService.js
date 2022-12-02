@@ -117,4 +117,14 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+  static get_apt_info(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "apt_info", {//change to url
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
 }
