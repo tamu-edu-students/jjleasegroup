@@ -22,21 +22,42 @@ function EditAptInfo() {
   const [error, setError] = useState("");
   const inputClass = classNames(styles.box, styles.input);
 
-  const [results, setResults] = 
-    useState([{name: "", street: "", city: "",}]);
+  const [results, setResults] = useState([{ id: "1", name: "test", 
+  city: "0", street: "test street", zipcode: "test_zip",
+  price_low: "test_low", price_high: "test_high", near_campus: false,
+  furnished: false, free_parking: false, free_we: false,
+  free_internet: false, url: "test_url", picture_url: "test_pic_url"},]);
+
   const aptInfoGetter = (e: any) => {
     e.preventDefault();
-    setResults(results => [...results, { name: "1", street: "street",city: "city"}]);
-      console.log(results);
-      
+    //setResults();
+    console.log(results);
+  
     APIService.get_apt_info({
       apt_name: searchName, 
     }).then((resp) => {
       if (resp.code === 200) {
         console.log("sucessfully get apt info!");
         setError("");
-        //setResults(results => [...results, { name: resp.name, street: resp.street,city: resp.city}]);
-        setResults(results => [...results, { name: "1", street: "street",city: "city"}]);
+        //loop through all results and generate an array.
+        for(let i = 0; i< resp.length;i++ ){
+          setResults(results=>[...results, 
+          { id: resp[i].apt_id,
+            name: resp[i].apt_name,
+            city: resp[i].apt_city,
+            street:  resp[i].apt_street,
+            zipcode:  resp[i].apt_zipcode,
+            price_low:  resp[i].apt_price_low,
+            price_high: resp[i].apt_price_high,
+            near_campus:resp[i].apt_near_campus,
+            furnished:  resp[i].apt_furnished,
+            free_parking: resp[i].apt_free_parking,
+            free_we:  resp[i].apt_free_we,
+            free_internet: resp[i].apt_free_internet,
+            url: resp[i].apt_url,
+            picture_url: resp[i].apt_picture_url
+          }])
+        }
       } else {
         //didnt sent 
         console.log(resp.error_message);
@@ -45,6 +66,10 @@ function EditAptInfo() {
       }
     });
   }
+  const SearchResults = results.map((searchResult,index, array) =>
+    <SearchResult {...searchResult}/>
+  );
+
   const submitHandler = (e: any) => {
     e.preventDefault();
     console.log(details);
@@ -90,7 +115,7 @@ function EditAptInfo() {
         </button>
       </div>
       <div className={styles.search_result}>
-        <SearchResult {...details} />
+        {SearchResults}
       </div>
     </div>
   );
