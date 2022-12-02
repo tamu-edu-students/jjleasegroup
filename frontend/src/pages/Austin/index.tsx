@@ -14,10 +14,23 @@ const Austin = () => {
         </div>
         
         <div className={styles["card-container"]}>
-          <Card />
-          {/*<Card />*/}
-          {/*<Card />*/}
-          {/*<Card />*/}
+          {/* The card has to be dynamically fetched from the database.
+          APIService.get_apt_info().resp[i] contains all info of an apartment.
+          If resp[i].apt_city == 1, then we need to display all these instance in Austin
+          If resp[i].apt_city == 0, then we need to dispaly all these instance in College station
+          */}
+          
+          <div className={styles.wrapper}>
+
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+            <Card />
+         
+          </div>
+
         </div>
       </div>
 

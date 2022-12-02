@@ -66,6 +66,9 @@ function Card() {
                             {Street}, {City}, Texas, {ZipCode}
                         </div>
 
+                        {/* These tag had to display dynammically. 
+                        If TagCampus == 1, then <div className={styles.tag}>Near Campus</div>
+                        If Furnished == 0, then don't have to display anything*/}
                         <div className={styles.margin}>
                             <div className={styles.TagGrid}>
                                 <div className={styles.tag}>Near Campus</div>
