@@ -129,13 +129,18 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.button_group{
+.textlink{
 
   display: flex;
-  align-items: center;
+  align-items: row;
   justify-content: space-around;
-  &:edit {
-    color:blue;
+  gap:5px;
+  &-edit {
+    color:rgb(0, 145, 255);
+
+  }
+  &-delete {
+    color:rgb(255, 34, 0);
 
   }
 }
