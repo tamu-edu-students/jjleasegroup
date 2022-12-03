@@ -91,6 +91,9 @@ function ContactForm(props: Props) {
         <button className={styles.button} onClick={submitForm}>
           Submit
         </button>
+
+
+        {/* Scheduling feature embedded */}
       </div>
 
       <div className={styles.container}>
