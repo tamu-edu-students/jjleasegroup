@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import APIService from "../../api/APIService";
 import { saveUser } from "../../utils/cookie";
 import styles from "./styles.module.scss";
@@ -40,7 +40,9 @@ function LoginForm() {
       }
     });
   };
-
+  useEffect(() => {
+    getRoboTest();
+  }, [details]);
   return (
     <div className={styles.form}>
       <div className={styles.container}>
@@ -77,6 +79,15 @@ function LoginForm() {
           onChange={(e) => setIsAdmin(e.target.checked)}
         />
         <label htmlFor="admin">Login as Admin</label>
+      </div>
+      <div className={styles.row}>
+        <input
+          type="checkbox"
+          name="admin"
+          id="admin"
+          className={styles.radio}
+          onChange={(e) => setIsAdmin(e.target.checked)}
+        />
       </div>
       <button
         className={styles.button}

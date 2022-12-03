@@ -156,4 +156,13 @@ export default class APIService {
       },
     }).then((resp) => resp.json());
   }
+  static delete_apt_info(apt_info) {
+    // console.log(customer_id)
+    return fetch(baseUrl + "apt_info/" + apt_info.toString(), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((resp) => resp.json());
+  }
 }
