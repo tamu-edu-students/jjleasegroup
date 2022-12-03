@@ -1,7 +1,7 @@
 import NavBar from "../../components/NavBar";
-import Card from "../../components/Card";
 import Footer from "../../components/Footer";
 import styles from "./styles.module.scss";
+import Card_CS from "../../components/Card_CS";
 
 const CollegeStation = () => {
   return (
@@ -12,7 +12,7 @@ const CollegeStation = () => {
           Apartments (塔木校园附近公寓)
         </div>
         <div className={styles["card-container"]}>
-          <Card />
+          <Card_CS />
         </div>
       </div>
 
