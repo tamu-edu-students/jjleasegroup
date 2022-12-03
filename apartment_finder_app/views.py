@@ -6,6 +6,7 @@ from rest_framework import status
 from django.contrib.auth.hashers import make_password
 
 from io import BytesIO
+from pybase64 import b64encode
 
 from apartment_finder_app import models
 from apartment_finder_app.utils.code import check_code
@@ -74,26 +75,25 @@ def customer_API(request, customer_id=0):
 @csrf_exempt
 def customer_login(request):
     if request.method == 'GET':
-        # form = LoginForm()
-        # return render(request, 'login.html', {'form': form})
         return JsonResponse({}, safe=False)
 
     form = LoginForm(data=JSONParser().parse(request))
-    # form = LoginForm(data=request.POST)
     if form.is_valid():
         user_input_code = form.cleaned_data.pop('verification_code')
         real_image_code = request.session.get('image_code', "")
-        '''
-        if real_image_code.upper() != user_input_code.upper():
-            form.add_error('verification_code', 'Wrong Verification Code! ')
-            return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
-        '''
+        # print("user_input_code ", user_input_code)
+        # print("real_image_code ", real_image_code)
+
         customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('email')).first()
         if not customer_object:
             return JsonResponse({"code": "404", "error_message": "Wrong email！", "id": ""}, safe=False)
         input_password = make_password(password=form.cleaned_data.get('password'), salt=SALT)
         if customer_object.customer_password != input_password:
             return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
+
+        # if real_image_code.upper() != user_input_code.upper():
+        #     form.add_error('verification_code', 'Wrong Verification Code! ')
+        #     return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
 
         request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
         request.session.set_expiry(60*60*24*7)
@@ -118,6 +118,10 @@ def admin_login(request):
         if admin_object.admin_password != input_password:
             return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
 
+        # if real_image_code.upper() != user_input_code.upper():
+        #     form.add_error('verification_code', 'Wrong Verification Code! ')
+        #     return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
+
         request.session['info'] = {'id': admin_object.admin_id, 'email': admin_object.admin_email}
         request.session.set_expiry(60*60*24*7)
         return JsonResponse({"code": "200", "error_message": "", "id": admin_object.admin_id, "name": admin_object.admin_username}, safe=False)
@@ -125,6 +129,7 @@ def admin_login(request):
     return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
 
 
+@csrf_exempt
 def image_code(request):
     img, code_string = check_code()
 
@@ -133,7 +138,8 @@ def image_code(request):
 
     stream = BytesIO()
     img.save(stream, 'png')
-    return HttpResponse(stream.getvalue())
+    b64_img = b64encode(stream.getvalue())
+    return JsonResponse({"image": bytes.decode(b64_img)}, safe=False)
 
 
 @csrf_exempt
