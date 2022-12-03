@@ -60,6 +60,7 @@ function SearchResult(details : Props) {
 
   useEffect(() => {
     decideCity();
+    console.log("using effect");
   }, [details]);
 
   return(

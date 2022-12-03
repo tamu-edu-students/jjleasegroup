@@ -28,6 +28,11 @@ function EditAptInfo() {
   furnished: false, free_parking: false, free_we: false,
   free_internet: false, url: "test_url", picture_url: "test_pic_url"},]);
   
+  const initialResult = [{ id: "0", name: "test", 
+  city: "0", street: "test street", zipcode: "test_zip",
+  price_low: "test_low", price_high: "test_high", near_campus: false,
+  furnished: false, free_parking: false, free_we: false,
+  free_internet: false, url: "test_url", picture_url: "test_pic_url"},]
   const aptInfoGetter = (e: any) => {
     e.preventDefault();
     //setResults();
@@ -39,7 +44,7 @@ function EditAptInfo() {
       console.log("sucessfully get apt info!");
       console.log(resp);
       setError("");
-    
+      setResults(initialResult);
       //loop through all results and generate an array.
       for(let i = 0; i< resp.length;i++ ){
         console.log("setting apt" + resp[i].apt_name);
@@ -60,11 +65,12 @@ function EditAptInfo() {
           picture_url: resp[i].apt_picture_url
         }])
       }
-
     });
   }
   const SearchResults = results.map((searchResult,index, array) =>
-    <SearchResult {...searchResult}/>
+    {if(index!=0){
+      return <SearchResult {...searchResult}/>
+    }}
   );
 
   return(

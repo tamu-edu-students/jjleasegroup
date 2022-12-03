@@ -156,12 +156,11 @@ export default class APIService {
       },
     }).then((resp) => resp.json());
   }
-  static delete_apt_info(apt_info) {
+  static get_image_robocheck() {
     // console.log(customer_id)
-    return fetch(baseUrl + "apt_info/" + apt_info.toString(), {
-      method: "DELETE",
+    return fetch(baseUrl + "image_code/", {
+      method: "GET",
       headers: {
-        "Content-Type": "application/json",
       },
     }).then((resp) => resp.json());
   }
