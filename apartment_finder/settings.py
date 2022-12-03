@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['192.168.68.80', '0.0.0.0', '127.0.0.1','ec2-18-233-157-141.compute-1.amazonaws.com', '107.23.23.155']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [

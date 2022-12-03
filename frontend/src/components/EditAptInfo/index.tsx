@@ -1,215 +1,97 @@
 import APIService from "../../api/APIService";
 import { useState } from "react";
 import styles from "./styles.module.scss";
+import SearchResult from "../SearchResult";
 import classNames from "../../utils/classNames";
-
+import { type } from "os";
+type Props = {
+  id:string; name:string; city:string; 
+  street:string; zipcode:string; price_low:string; price_high:string;
+  near_campus:boolean; furnished:boolean; free_parking:boolean;
+  free_we:boolean; free_internet:boolean; url:string;picture_url:string;
+};
 function EditAptInfo() {
+ 
   const [details, setDetails] = 
-    useState({ id: "", name: "", 
-    city: "0", street: "", zipcode: "",
-    price_low: "", price_high: "", near_campus: false,
+    useState({ id: "", name: "test_name", 
+    city: "0", street: "test_street", zipcode: "test_zip",
+    price_low: "1", price_high: "2", near_campus: false,
     furnished: false, free_parking: false, free_we: false,
-    free_internet: false, url: "", picture_url: ""});
+    free_internet: false, url: "test_url", picture_url: "test_pic_url"});
+  const [searchName, setSearchName] = useState("");
   const [error, setError] = useState("");
   const inputClass = classNames(styles.box, styles.input);
-  const priceInputClass = classNames(styles.box_price, styles.input);
-  const submitHandler = (e: any) => {
+
+  const [results, setResults] = useState([{ id: "1", name: "test", 
+  city: "0", street: "test street", zipcode: "test_zip",
+  price_low: "test_low", price_high: "test_high", near_campus: false,
+  furnished: false, free_parking: false, free_we: false,
+  free_internet: false, url: "test_url", picture_url: "test_pic_url"},]);
+  
+  const initialResult = [{ id: "0", name: "test", 
+  city: "0", street: "test street", zipcode: "test_zip",
+  price_low: "test_low", price_high: "test_high", near_campus: false,
+  furnished: false, free_parking: false, free_we: false,
+  free_internet: false, url: "test_url", picture_url: "test_pic_url"},]
+  const aptInfoGetter = (e: any) => {
     e.preventDefault();
-    console.log(details);
-    APIService.add_apt_info({
-      apt_name: details.name, 
-      apt_city: details.city, 
-      apt_street: details.street, 
-      apt_zipcode: details.zipcode,
-      apt_price_low: details.price_low,
-      apt_price_high: details.price_high, 
-      apt_tag_near_campus: details.near_campus ? 1 : 0 ,
-      apt_tag_furnished: details.furnished ? 1 : 0 , 
-      apt_tag_free_parking: details.free_parking ? 1 : 0 , 
-      apt_tag_free_we: details.free_we ? 1 : 0 ,
-      apt_tag_free_internet: details.free_internet ? 1 : 0 , 
-      apt_url: details.url, 
-      apt_picture_url: details.picture_url,
+    //setResults();
+    console.log(results);
+  
+    APIService.search_apt_info({
+      key_word: searchName, 
     }).then((resp) => {
-      if (resp.code === 200) {
-        console.log("sucessfully sent apt info!");
-        setError("");
-        
-      } else {
-        //didnt sent 
-        console.log(resp.error_message);
-        setError(resp.error_message);
+      console.log("sucessfully get apt info!");
+      console.log(resp);
+      setError("");
+      setResults(initialResult);
+      //loop through all results and generate an array.
+      for(let i = 0; i< resp.length;i++ ){
+        console.log("setting apt" + resp[i].apt_name);
+        setResults(results=>[...results, 
+        { id: resp[i].apt_id,
+          name: resp[i].apt_name,
+          city: resp[i].apt_city,
+          street:  resp[i].apt_street,
+          zipcode:  resp[i].apt_zipcode,
+          price_low:  resp[i].apt_price_low,
+          price_high: resp[i].apt_price_high,
+          near_campus:resp[i].apt_near_campus,
+          furnished:  resp[i].apt_furnished,
+          free_parking: resp[i].apt_free_parking,
+          free_we:  resp[i].apt_free_we,
+          free_internet: resp[i].apt_free_internet,
+          url: resp[i].apt_url,
+          picture_url: resp[i].apt_picture_url
+        }])
       }
     });
-  };
+  }
+  const SearchResults = results.map((searchResult,index, array) =>
+    {if(index!=0){
+      return <SearchResult {...searchResult}/>
+    }}
+  );
 
-  return (
-    <div className={styles.form}>
-      <div className={styles.section}>
-        <div className={styles.container}>
-          
-          <div className={styles.group_text}>
-            <label htmlFor="name">Name </label>
-            <label htmlFor="city">City  </label>
-            <label htmlFor="street">Street  </label>
-            <label htmlFor="ZipCode">Zip Code  </label>
-            <label htmlFor="Price">Price  </label>
-            <label htmlFor="url">URL </label>
-            <label htmlFor="picture_url">Pic URL </label>
-          </div>
-
-          <div className={styles.group_input}>
-            <input
+  return(
+    <div className={styles.search_container}>
+      <div className={styles.search_bar}>
+        <input
               className={inputClass}
-              type="name"
-              name="name"
-              id="name"
-              onChange={(e) => setDetails({ ...details, name: e.target.value })}
-              value={details.name}
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Enter Apartment Name Here"
+              onChange={(e) => setSearchName(e.target.value)}
             />
-            <select
-              className={styles.box}
-              name="apt_city"
-              id="apt_city"
-              onChange={(e) => setDetails({...details, city: e.target.value})}
-              value={details.city}
-            >
-              <option value="0">College Station</option>
-              <option value="1">Austin</option>
-              <option value="2">Houston</option>
-            </select>
-            <input
-              className={inputClass}
-              type="text"
-              name="street"
-              id="street"
-              onChange={(e) => setDetails({ ...details, street: e.target.value })}
-              value={details.street}
-            />
-            <input
-              className={inputClass}
-              type="text"
-              name="ZipCode"
-              id="ZipCode"
-              onChange={(e) => setDetails({ ...details, zipcode: e.target.value })}
-              value={details.zipcode}
-            />
-            <div className={styles.price_group}>
-              <input
-                className={priceInputClass}
-                type="number"
-                name="price_low"
-                id="price_low"
-                placeholder="lowest"
-                onChange={(e) => setDetails({ ...details, price_low: e.target.value })}
-                value={details.price_low}
-              />
-              <input
-                className={priceInputClass}
-                type="number"
-                name="price_high"
-                id="price_high"
-                placeholder="highest"
-                onChange={(e) => setDetails({ ...details, price_high: e.target.value })}
-                value={details.price_high}
-              />
-            </div>
-            <input
-              className={inputClass}
-              type="text"
-              id="url"
-              name="url"
-              onChange={(e) => setDetails({ ...details, url: e.target.value })}
-              value={details.url}
-            />
-            <input
-              className={inputClass}
-              type="text"
-              name="picture_url"
-              id="picture_url"
-              onChange={(e) => setDetails({ ...details, picture_url: e.target.value })}
-              value={details.picture_url}
-            />
-
-          </div>
-        </div>
-        
-        <div className={styles.group_tags}>
-            <div className={styles.tags}>
-              <label htmlFor="checkbox">near campus:</label>
-              <input
-                  type="checkbox"
-                  id="tags"
-                  name="tags"
-                  value="near campus"
-                  onChange={() => setDetails({ ...details, near_campus: !details.near_campus})}
-                  checked={details.near_campus}
-                />
-            </div>
-            <div className={styles.tags}>
-              <label htmlFor="checkbox">furnished:</label>
-              <input
-                  type="checkbox"
-                  id="tags"
-                  name="tags"
-                  value="furnished"
-                  onChange={() => setDetails({ ...details, furnished: !details.furnished})}
-                  checked={details.furnished}
-                />
-            </div>
-            <div className={styles.tags}>
-              <label htmlFor="checkbox">free parking:</label>
-              <input
-                  type="checkbox"
-                  id="tags"
-                  name="tags"
-                  value="free_parking"
-                  onChange={() => setDetails({ ...details, free_parking: !details.free_parking})}
-                  checked={details.free_parking}
-                />
-            </div>
-          </div>
-          <div className={styles.group_tags}>
-            <div className={styles.tags}>
-                <label htmlFor="checkbox">free water/electricity:</label>
-                <input
-                    type="checkbox"
-                    id="tags"
-                    name="tags"
-                    value="free_we"
-                    onChange={() => setDetails({ ...details, free_we: !details.free_we})}
-                    checked={details.free_we}
-                  />
-              </div>
-              <div className={styles.tags}>
-                <label htmlFor="checkbox">free internet:</label>
-                <input
-                    type="checkbox"
-                    id="tags"
-                    name="tags"
-                    value="free_internet"
-                    onChange={() => setDetails({ ...details, free_internet: !details.free_internet})}
-                    checked={details.free_internet}
-                  />
-              </div>
-            </div>
-            <div className={styles.container}>
-
-        <button className={styles.buttonforget} onClick={submitHandler}>
-          submit
+        <button className={styles.button_search} onClick={aptInfoGetter}>
+          search
         </button>
       </div>
+      <div className={styles.search_result}>
+        {SearchResults}
       </div>
-      
-
-      {
-        /*ERROR error !== "" ? (
-          <div className={styles.error_message}>{error}</div>
-        ) : (
-          ""
-        )*/
-      }
-    </div> 
+    </div>
   );
 
 }

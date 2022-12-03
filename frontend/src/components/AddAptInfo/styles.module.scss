@@ -14,72 +14,11 @@
   gap: 15px;
 
 }
-.card{
-  font-family: 'Open Sans', sans-serif;
-  background: white;
-  padding: 1rem;
-  border : none;
-  border-radius: .25rem;
-  box-shadow: 0 2px 10px 0 rgba(0,0,0, .5);
-  max-width: 400px;
-
-  &-header{
-    font-size: 1.5rem;
-    margin-bottom: .5rem;
-  }
-
-  &-image {
-    display: flex;
-    width: 100%;
-    max-height: 200px;
-    aspect-ratio: 16 / 9;
-    align-items: flex-start;
-    justify-content: flex-start;
-    transition: 200ms transform ease-in-out;
-  }
-
-
-}
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  width: 100%;
-}
-.search_container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
-  gap: 15px;
-  width: 100%;
-}
-.search_bar {
-  
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
-  gap: 15px;
-  width: 65%;
-}
-.search_result {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
-  gap: 15px;
   width: 100%;
 }
 .group_text {
@@ -119,16 +58,6 @@
   width: 100%;
   font-size:25px;
   gap:25px;
-}
-.group_image {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 700;
-  font-size:15px;
-  width:35%;
 }
 .tags {
   display: flex;
@@ -206,21 +135,6 @@
   width: 200px;
   //height: 35px;
 
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 30px;
-  /* identical to box height */
-
-  color: #FFFFFF;
-  background: #80B5EA;
-  border-radius: 10px;
-  border-color: #80B5EA;
-}
-.button_search {
-  width: 200px;
-  height: 48px;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
