@@ -108,24 +108,6 @@ export default class APIService {
     }).then((resp) => resp.json());
   }
 
-  static get_apt_info_austin() {
-    return fetch(baseUrl + "apt_info", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((resp) => resp.json());
-  }
-
-  static get_apt_info_colleg_station() {
-    return fetch(baseUrl + "apt_info", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((resp) => resp.json());
-  }
-
   static add_apt_info(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "apt_info", {
