@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:8000/";
+const baseUrl = "http://192.168.68.72:8000/";
 export default class APIService {
   static add_question_consultation(body) {
     console.log(JSON.stringify(body));
@@ -115,6 +115,53 @@ export default class APIService {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static get_apt_info(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "apt_info", {//change to url
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static search_apt_info(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "search_apt", {//change to url
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static edit_apt_info(body) {
+    console.log(JSON.stringify(body));
+    return fetch(baseUrl + "apt_info", {//change to url
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((resp) => resp.json());
+  }
+  static delete_apt_info(apt_info) {
+    // console.log(customer_id)
+    return fetch(baseUrl + "apt_info/" + apt_info.toString(), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((resp) => resp.json());
+  }
+  static get_image_robocheck() {
+    // console.log(customer_id)
+    return fetch(baseUrl + "image_code/", {
+      method: "GET",
+      headers: {
+      },
     }).then((resp) => resp.json());
   }
 }

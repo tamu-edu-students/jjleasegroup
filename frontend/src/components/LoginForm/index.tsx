@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import APIService from "../../api/APIService";
 import { saveUser } from "../../utils/cookie";
 import styles from "./styles.module.scss";
@@ -14,18 +14,20 @@ function LoginForm() {
   // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [roboCheckAnswer, setRoboCheckAnswer] = useState("");
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const [imageString, setImageString] = useState("");
   const inputClass = classNames(styles.box, styles.input);
 
   const checkLogin = (info: Info) => {
     const api = isAdmin ? APIService.admin_log_in : APIService.customer_log_in;
+    console.log("answer is" + roboCheckAnswer);
     api({
       //push email and password to backend
       email: email,
       password: password,
-      verification_code: password,
+      verification_code: roboCheckAnswer,
     }).then((resp) => {
       if (resp.code == "200") {
         saveUser({
@@ -40,13 +42,23 @@ function LoginForm() {
       }
     });
   };
+  const getRoboTest= () =>{
+    APIService.get_image_robocheck().then((resp) => {
+      console.log(resp.image);
+      setImageString(resp.image);
+    });
 
+  }
+  useEffect(() => {
+    getRoboTest();
+  }, []);
   return (
     <div className={styles.form}>
       <div className={styles.container}>
         <div className={styles.group_label}>
           <label htmlFor="email">Email: </label>
           <label htmlFor="password">password: </label>
+          
         </div>
 
         <div className={styles.group_input}>
@@ -66,6 +78,7 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
+
         </div>
       </div>
       <div className={styles.row}>
@@ -84,6 +97,17 @@ function LoginForm() {
       >
         Login
       </button>
+      <div className={styles.roboCheck}>
+          <img src={`data:image/png;base64,${imageString}`}/>
+          <input
+            className={inputClass}
+            type="robocheck"
+            name="robocheck"
+            id="robocheck"
+            onChange={(e) => setRoboCheckAnswer(e.target.value)}
+            value={roboCheckAnswer}
+          />
+      </div>
       {error && <div className={styles.error_message}>{error}</div>}
     </div>
   );
