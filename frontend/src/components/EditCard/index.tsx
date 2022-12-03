@@ -17,7 +17,6 @@ function EditCard(details : Props) {
   price_low: "1", price_high: "2", near_campus: false,
   furnished: false, free_parking: false, free_we: false,
   free_internet: false, url: "test_url", picture_url: "test_pic_url"});
-  const [editing, setEditing] = useState(false);
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const decideCity = () => {
@@ -33,7 +32,8 @@ function EditCard(details : Props) {
   const submitHandler = (e: any) => {
     e.preventDefault();
     console.log(details);
-    APIService.add_apt_info({
+    APIService.edit_apt_info({
+      apt_id: tempDetail.id,
       apt_name: tempDetail.name, 
       apt_city: tempDetail.city, 
       apt_street: tempDetail.street, 
