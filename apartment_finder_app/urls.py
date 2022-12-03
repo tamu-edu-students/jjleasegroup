@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^customer/([0-9]+)$', views.customer_API, name='get/delete_customer'),
     url(r'^apt_info$', views.apt_info_api, name='get_post_apt'),
     url(r'^apt_info/([0-9]+)$', views.apt_info_api, name='delete_apt'),
+    url(r'search_apt', views.apt_search, name='search_apt')
 ]

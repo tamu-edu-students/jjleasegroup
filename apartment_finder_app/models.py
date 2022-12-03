@@ -48,6 +48,5 @@ class ApartmentInfo(models.Model):
     apt_tag_free_internet = models.SmallIntegerField()  # 0 = no, 1 = yes
     apt_url = models.URLField(max_length=300)
     apt_picture_url = models.URLField(max_length=1024)
-    models.SmallIntegerField()
 
 
