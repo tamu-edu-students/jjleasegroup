@@ -101,6 +101,7 @@ def customer_login(request):
 
     return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
 
+
 @csrf_exempt
 def admin_login(request):
     if request.method == 'GET':
@@ -122,6 +123,7 @@ def admin_login(request):
         return JsonResponse({"code": "200", "error_message": "", "id": admin_object.admin_id, "name": admin_object.admin_username}, safe=False)
 
     return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
+
 
 def image_code(request):
     img, code_string = check_code()
@@ -202,8 +204,8 @@ def get_back_password(request):
 def apt_info_api(request, apt_id=0):
     if request.method == 'GET':
         apartments = ApartmentInfo.objects.all()
-        questions_serializer = ApartmentInfoSerializer(apartments, many=True)
-        return JsonResponse(questions_serializer.data, safe=False, status=status.HTTP_200_OK)
+        apartments_serializer = ApartmentInfoSerializer(apartments, many=True)
+        return JsonResponse(apartments_serializer.data, safe=False, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         apartment_info = JSONParser().parse(request)
         print(apartment_info)
@@ -228,3 +230,12 @@ def apt_info_api(request, apt_id=0):
         apartment = ApartmentInfo.objects.filter(apt_id=apt_id).first()
         apartment.delete()
         return JsonResponse({"code": "200"}, safe=False)
+
+
+@csrf_exempt
+def apt_search(request):
+    apt_string = JSONParser().parse(request)['key_word']
+    apartments = ApartmentInfo.objects.filter(apt_name__icontains=apt_string)
+    selected_apartments_serializer = ApartmentInfoSerializer(apartments, many=True)
+    print(selected_apartments_serializer.data)
+    return JsonResponse(selected_apartments_serializer.data, safe=False, status=status.HTTP_200_OK)
