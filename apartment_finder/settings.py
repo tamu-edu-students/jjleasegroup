@@ -84,28 +84,28 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # for Kelvin's local machine
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apartment_finder',
-        'USER': 'root',
-        'PASSWORD': '!YYmm186014',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
-    }
-}
-
-# for Liao's local machine
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'apartment_finder',
 #         'USER': 'root',
-#         'PASSWORD': 'ljwk449!',
+#         'PASSWORD': '!YYmm186014',
 #         'HOST': '127.0.0.1',
-#         'PORT': 3306,
+#         'PORT': '3306'
 #     }
 # }
+
+# for Liao's local machine
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'apartment_finder',
+        'USER': 'root',
+        'PASSWORD': 'ljwk449!',
+        'HOST': '127.0.0.1',
+        'PORT': 3306,
+    }
+}
 
 
 
