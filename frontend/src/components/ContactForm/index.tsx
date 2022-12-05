@@ -2,6 +2,7 @@ import APIService from "../../api/APIService";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
+import { InlineWidget } from "react-calendly";
 
 type Props = {
   userId: number;
@@ -90,7 +91,19 @@ function ContactForm(props: Props) {
         <button className={styles.button} onClick={submitForm}>
           Submit
         </button>
+
+
+        {/* Scheduling feature embedded */}
       </div>
+
+      <div className={styles.container}>
+        <div className={styles.title}>
+            Schdeule Meeting:
+        </div>
+      </div>
+        <div className={styles.embed}>
+            <InlineWidget url="https://calendly.com/ky1015/15-mins-meeting" />
+        </div>
     </div>
   );
 }

@@ -8,6 +8,14 @@
   padding: 5% 5%;
 }
 
+
+
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,20px);
+
+}
+
 .title {
   font-family: 'Poppins';
   font-style: normal;
@@ -22,5 +30,9 @@
 
 .card-container {
   float: left;
+}
 
+.embed{
+  min-width:500px;
+  height:630px;
 }

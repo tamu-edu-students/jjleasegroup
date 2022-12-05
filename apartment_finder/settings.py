@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-#^ymbuz_t+fa!#c4y*l_7)u0ebmu)$-b+#i8n1pzo(#s@*)7g+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.68.72', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.68.80', '0.0.0.0', '127.0.0.1','ec2-18-233-157-141.compute-1.amazonaws.com', '107.23.23.155']
+
 
 
 # Application definition
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'apartment_finder_app.apps.ApartmentFinderAppConfig'
+    'apartment_finder_app.apps.ApartmentFinderAppConfig',
+    'django_extensions',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -81,28 +83,29 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-'''
+# for Kelvin's local machine
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'apartment_finder',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '!YYmm186014',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
 }
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apartment_finder',
-        'USER': 'root',
-        'PASSWORD': 'ljwk449!',
-        'HOST': '127.0.0.1',
-        'PORT': 3306,
-    }
-}
+
+# for Liao's local machine
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'apartment_finder',
+#         'USER': 'root',
+#         'PASSWORD': 'ljwk449!',
+#         'HOST': '127.0.0.1',
+#         'PORT': 3306,
+#     }
+# }
 
 
 
@@ -137,6 +140,17 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+CORS_REPLACE_HTTPS_REFERER      = False
+HOST_SCHEME                     = "http://"
+SECURE_PROXY_SSL_HEADER         = None
+SECURE_SSL_REDIRECT             = False
+SESSION_COOKIE_SECURE           = False
+CSRF_COOKIE_SECURE              = False
+SECURE_HSTS_SECONDS             = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
+SECURE_FRAME_DENY               = False
+
 
 
 # Static files (CSS, JavaScript, Images)
