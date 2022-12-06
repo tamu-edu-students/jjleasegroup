@@ -28,7 +28,7 @@ const Card_CS = () =>{
     ]);
     
     const aptInfoGetter = () => {
-        APIService.get_apt_info().then((resp) => {       
+        APIService.get_apt_info_card().then((resp) => {       
             console.log("sucessfully get apt info!"); 
 
             for(let i = 0; i< resp.length; i++ ){
