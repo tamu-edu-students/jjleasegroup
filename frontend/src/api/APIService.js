@@ -101,11 +101,11 @@ export default class APIService {
     }).then((resp) => resp.json());
   }
 
-  static get_apt_info() {
+  static get_apt_info_card() {
     return fetch(baseUrl + "apt_info", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
     }).then((resp) => resp.json());
   }
