@@ -4,6 +4,7 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
+from django.core.cache import cache
 
 from io import BytesIO
 from pybase64 import b64encode
@@ -80,9 +81,7 @@ def customer_login(request):
     form = LoginForm(data=JSONParser().parse(request))
     if form.is_valid():
         user_input_code = form.cleaned_data.pop('verification_code')
-        real_image_code = request.session.get('image_code', "")
-        # print("user_input_code ", user_input_code)
-        # print("real_image_code ", real_image_code)
+        real_image_code = cache.get('image_code')
 
         customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('email')).first()
         if not customer_object:
@@ -91,12 +90,10 @@ def customer_login(request):
         if customer_object.customer_password != input_password:
             return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
 
-        # if real_image_code.upper() != user_input_code.upper():
-        #     form.add_error('verification_code', 'Wrong Verification Code! ')
-        #     return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
+        if real_image_code is None or real_image_code.upper() != user_input_code.upper():
+            form.add_error('verification_code', 'Wrong Verification Code! ')
+            return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
 
-        request.session['info'] = {'id': customer_object.customer_id, 'email': customer_object.customer_email}
-        request.session.set_expiry(60*60*24*7)
         return JsonResponse({"code": "200", "error_message": "", "id": customer_object.customer_id, "name": customer_object.customer_username}, safe=False)
 
     return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
@@ -110,7 +107,7 @@ def admin_login(request):
     form = LoginForm(data=JSONParser().parse(request))
     if form.is_valid():
         user_input_code = form.cleaned_data.pop('verification_code')
-        real_image_code = request.session.get('image_code', "")
+        real_image_code = cache.get('image_code')
         admin_object = models.Admin.objects.filter(admin_email=form.cleaned_data.get('email')).first()
         if not admin_object:
             return JsonResponse({"code": "404", "error_message": "You are not an admin！", "id": ""}, safe=False)
@@ -118,12 +115,10 @@ def admin_login(request):
         if admin_object.admin_password != input_password:
             return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
 
-        # if real_image_code.upper() != user_input_code.upper():
-        #     form.add_error('verification_code', 'Wrong Verification Code! ')
-        #     return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
+        if real_image_code is None or real_image_code.upper() != user_input_code.upper():
+            form.add_error('verification_code', 'Wrong Verification Code! ')
+            return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
 
-        request.session['info'] = {'id': admin_object.admin_id, 'email': admin_object.admin_email}
-        request.session.set_expiry(60*60*24*7)
         return JsonResponse({"code": "200", "error_message": "", "id": admin_object.admin_id, "name": admin_object.admin_username}, safe=False)
 
     return JsonResponse({"code": "404", "error_message": "not valid", "id": ""}, safe=False)
@@ -133,8 +128,7 @@ def admin_login(request):
 def image_code(request):
     img, code_string = check_code()
 
-    request.session['image_code'] = code_string
-    request.session.set_expiry(60)
+    cache.set("image_code", code_string, 60 * 2)
 
     stream = BytesIO()
     img.save(stream, 'png')
@@ -214,12 +208,10 @@ def apt_info_api(request, apt_id=0):
         return JsonResponse(apartments_serializer.data, safe=False, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         apartment_info = JSONParser().parse(request)
-        print(apartment_info)
         apartment_info_serializer = ApartmentInfoSerializer(data=apartment_info)
         if apartment_info_serializer.is_valid():
             apartment_info_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        print(apartment_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'PUT':
         apartment_info = JSONParser().parse(request)
@@ -243,5 +235,4 @@ def apt_search(request):
     apt_string = JSONParser().parse(request)['key_word']
     apartments = ApartmentInfo.objects.filter(apt_name__icontains=apt_string)
     selected_apartments_serializer = ApartmentInfoSerializer(apartments, many=True)
-    print(selected_apartments_serializer.data)
     return JsonResponse(selected_apartments_serializer.data, safe=False, status=status.HTTP_200_OK)
