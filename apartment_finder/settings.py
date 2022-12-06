@@ -56,9 +56,39 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'apartment_finder_app.middleware.auth.AuthMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'POST',
+    'PUT'
+)
+
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+)
+
+CACHES = {
+    'default' : {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 ROOT_URLCONF = 'apartment_finder.urls'
 
 TEMPLATES = [
@@ -84,28 +114,28 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # for Kelvin's local machine
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apartment_finder',
-        'USER': 'root',
-        'PASSWORD': '!YYmm186014',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
-    }
-}
-
-# for Liao's local machine
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'apartment_finder',
 #         'USER': 'root',
-#         'PASSWORD': 'ljwk449!',
+#         'PASSWORD': '!YYmm186014',
 #         'HOST': '127.0.0.1',
-#         'PORT': 3306,
+#         'PORT': '3306'
 #     }
 # }
+
+# for Liao's local machine
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'apartment_finder',
+        'USER': 'root',
+        'PASSWORD': 'ljwk449!',
+        'HOST': '127.0.0.1',
+        'PORT': 3306,
+    }
+}
 
 
 
