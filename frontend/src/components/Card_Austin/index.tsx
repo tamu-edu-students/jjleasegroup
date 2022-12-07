@@ -30,7 +30,7 @@ const Card_Austin = () =>{
             console.log("sucessfully get apt info!"); 
 
             for(let i = 0; i< resp.length; i++ ){
-                if (resp[i].apt_city === '1'){
+                if (resp[i].apt_city === 1){
                     setResults(results => [...results, {
                         id: resp[i].apt_id,
                         name: resp[i].apt_name,
@@ -56,7 +56,7 @@ const Card_Austin = () =>{
       }, []);
    
     const renderApt = results.slice(1+(results.length/2)).map((Apt) =>  
-        <div className={styles.card}>
+        <div className={styles.card} key={Apt.id} >
             <div className={styles["card-header"]}>
                 <img className={styles["card-image"]} src={Apt.picture_url}/>
             </div>
