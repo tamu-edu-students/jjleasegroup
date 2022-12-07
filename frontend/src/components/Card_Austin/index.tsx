@@ -75,7 +75,7 @@ const Card_Austin = () =>{
                     {Apt.street}, Austin, Texas, {Apt.zipcode}
                 </div>
 
-                <div className={styles.margin}>
+                {/* <div className={styles.margin}>
                     <div className={styles.TagGrid}>
                         <div className={styles.tag}>Near Campus</div>
                         <div className={styles.tag}>Furnished</div>
@@ -85,7 +85,7 @@ const Card_Austin = () =>{
                         <div className={styles.tag}>Free Uiltility</div>
                     </div>
                     <div className={styles.tag}>Free wifi</div>
-                </div>
+                </div> */}
             
             </div>
         

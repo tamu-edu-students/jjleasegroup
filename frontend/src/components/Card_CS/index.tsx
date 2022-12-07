@@ -1,7 +1,6 @@
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
 import React, { useState,useEffect } from "react"
-// import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 
 
@@ -11,7 +10,7 @@ const Card_CS = () =>{
 
 
     const [results, setResults] = useState([{ 
-        id: "1", name: "test", 
+        id: "1", name: "Null", 
         city: "0", 
         street: "test street", 
         zipcode: "test_zip",
@@ -28,8 +27,8 @@ const Card_CS = () =>{
     
     const aptInfoGetter = () => {
         APIService.get_apt_info_card().then((resp) => {       
-            console.log("sucessfully get apt info!"); 
-            console.log(resp[0]);
+            
+            // console.log(resp[1].apt_free_parking);
 
             for(let i = 0; i< resp.length; i++ ){
                 if (resp[i].apt_city === 0){
@@ -41,7 +40,7 @@ const Card_CS = () =>{
                         zipcode:  resp[i].apt_zipcode,
                         price_low:  resp[i].apt_price_low,
                         price_high: resp[i].apt_price_high,
-                        near_campus:resp[i].apt_near_campus,
+                        near_campus: resp[i].apt_near_campus,
                         furnished:  resp[i].apt_furnished,
                         free_parking: resp[i].apt_free_parking,
                         free_we:  resp[i].apt_free_we,
@@ -51,15 +50,17 @@ const Card_CS = () =>{
                         }]);
                 }
             }
+            console.log("sucessfully get apt info!"); 
         });
     }
     useEffect(() => {
         aptInfoGetter();
       }, []);
-   
-    const renderApt = results.slice(1+(results.length/2)).map((Apt) =>  
-        <div className={styles.card} key={Apt.id}>
-            <div className={styles["card-header"]}>
+    
+    const renderApt = results.slice(1+(results.length/2)).map((Apt) => 
+        
+        <div className={styles.card}>
+            <div className={styles["card-header"]} key={Apt.id}>
                 <img className={styles["card-image"]} src={Apt.picture_url}/>
             </div>
         
@@ -67,19 +68,26 @@ const Card_CS = () =>{
                 {Apt.name}
             </div>
         
-            <div className={styles.advants}>
-                <div>
-                    {/* <span>price:</span> */}
-                    <div  className={styles.price}><span>${Apt.price_low} - {Apt.price_high}</span></div>
-                </div>
+             
+                   
+            <div  className={styles.price}><span>${Apt.price_low} - {Apt.price_high}</span></div>
+        
 
-                <div className={styles.address}>
-                    {Apt.street}, Austin, Texas, {Apt.zipcode}
-                </div>
+            <div className={styles.address}>
+                {Apt.street}, Austin, Texas, {Apt.zipcode}
+            </div>
 
-                <div className={styles.margin}>
-                    <div className={styles.TagGrid}>
-                        <div className={styles.tag}>Near Campus</div>
+           
+            <button className={styles.btn}>Contact Us</button>
+            <button className={styles["btn-outline"]}><a href={Apt.url}>More Info</a></button>
+
+            <div className={styles.footer}>   
+                    {/* <div className={styles.TagGrid}>
+
+                        {Apt.near_campus === false &&
+                            <div className={styles.tag}>Near Campus</div>
+                        }
+                        
                         <div className={styles.tag}>Furnished</div>
                     </div>
                     <div className={styles.TagGrid}>
@@ -87,22 +95,20 @@ const Card_CS = () =>{
                         <div className={styles.tag}>Free Uiltility</div>
                     </div>
                     <div className={styles.tag}>Free wifi</div>
-                </div>
-            
-            </div>
-        
-            <div className={styles.footer}>
-                <button className={styles.btn}>Contact Us</button>
-                <button className={styles["btn-outline"]}><a href={Apt.url}>More Info</a></button>
+                 */}
             </div>
         </div>  
     );
 
+
+
     
     return (
-       
         <div className={styles.grid}>
-            {renderApt}
+           
+                {renderApt}
+                {/* {renderTags} */}
+            
         </div>
         
     );
