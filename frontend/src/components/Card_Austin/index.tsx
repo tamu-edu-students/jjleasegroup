@@ -30,7 +30,7 @@ const Card_Austin = () =>{
             console.log("sucessfully get apt info!"); 
 
             for(let i = 0; i< resp.length; i++ ){
-                if (resp[i].apt_city === "1"){
+                if (resp[i].apt_city === '1'){
                     setResults(results => [...results, {
                         id: resp[i].apt_id,
                         name: resp[i].apt_name,
