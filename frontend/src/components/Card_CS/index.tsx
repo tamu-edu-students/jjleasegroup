@@ -1,7 +1,7 @@
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
 import React, { useState,useEffect } from "react"
-import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
+// import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 
 
@@ -9,7 +9,6 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 const Card_CS = () =>{
 
-    const [city,setCity] = useState("");
 
     const [results, setResults] = useState([{ 
         id: "1", name: "test", 
@@ -30,9 +29,10 @@ const Card_CS = () =>{
     const aptInfoGetter = () => {
         APIService.get_apt_info_card().then((resp) => {       
             console.log("sucessfully get apt info!"); 
+            console.log(resp[0]);
 
             for(let i = 0; i< resp.length; i++ ){
-                if (resp[i].apt_city == "0"){
+                if (resp[i].apt_city === 0){
                     setResults(results => [...results, {
                         id: resp[i].apt_id,
                         name: resp[i].apt_name,
@@ -58,7 +58,7 @@ const Card_CS = () =>{
       }, []);
    
     const renderApt = results.slice(1+(results.length/2)).map((Apt) =>  
-        <div className={styles.card}>
+        <div className={styles.card} key={Apt.id}>
             <div className={styles["card-header"]}>
                 <img className={styles["card-image"]} src={Apt.picture_url}/>
             </div>

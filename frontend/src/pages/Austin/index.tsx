@@ -3,37 +3,12 @@ import Footer from "../../components/Footer";
 import Card_Austin from "../../components/Card_Austin";
 import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
-import { useState,useEffect } from "react";
-import APIService from "../../api/APIService";
 
 
 
 const Austin = () => {
-  // const [Length,setLength] = useState("");
-  const [City,setCity] = useState("");
+
   
-  
-//   useEffect(() => {
-//     APIService.get_apt_info().then((resp) => {
-//       // apts = [resp[1],resp[3]]
-//       const apts = [];
-
-//       for (let i = 0; i < resp.length; i++) {
-//         // setCity(resp[0].apt_city);
-//         if (resp[i].apt_city == "1"){
-//           apts.push(resp[i]);
-//           // console.log("Austin");
-//         }
-//       }
-//         // setLength(resp.length);
-        
-//         // console.log(apts[0].apt_street);
-//         // instead of resp[0], it should be resp[i]
-//         // setCity(resp[0].apt_city);
-
-//     });
-// });
-
 
   return (
     <div>
