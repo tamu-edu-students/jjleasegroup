@@ -1,7 +1,7 @@
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
 import React, { useState,useEffect } from "react"
-import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
+// import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 
 
@@ -9,8 +9,6 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 const Card_CS = () =>{
 
-
-    const [city,setCity] = useState("");
 
     const [results, setResults] = useState([{ 
         id: "1", name: "test", 
@@ -34,7 +32,7 @@ const Card_CS = () =>{
             console.log(resp[0]);
 
             for(let i = 0; i< resp.length; i++ ){
-                if (resp[i].apt_city == "0"){
+                if (resp[i].apt_city === "0"){
                     setResults(results => [...results, {
                         id: resp[i].apt_id,
                         name: resp[i].apt_name,
