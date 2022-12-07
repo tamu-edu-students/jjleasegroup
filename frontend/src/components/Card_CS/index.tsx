@@ -9,6 +9,7 @@ import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
 const Card_CS = () =>{
 
+
     const [city,setCity] = useState("");
 
     const [results, setResults] = useState([{ 
@@ -30,6 +31,7 @@ const Card_CS = () =>{
     const aptInfoGetter = () => {
         APIService.get_apt_info_card().then((resp) => {       
             console.log("sucessfully get apt info!"); 
+            console.log(resp[0]);
 
             for(let i = 0; i< resp.length; i++ ){
                 if (resp[i].apt_city == "0"){
