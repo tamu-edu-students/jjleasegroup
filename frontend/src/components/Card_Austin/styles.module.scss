@@ -126,23 +126,14 @@
   padding: 0.3em 0.85em;
   margin: 0.5em;
   justify-content: space-between;
-  // text-transform: uppercase;
+
   border: 2px solid #28242f;
   border-radius: 2em;
-  // width: 20%;
 
-  // justify-content: center;
-  // align-items: center;
 
   transition: transform 0.2s;
   transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
 
-  // &:hover {
-  //   transform: scale(1.025);
-  //   background: linear-gradient(to right, #fbfbfb, #0dbde5);
-  //   // -webkit-background-clip: text;
-  //   // -webkit-text-fill-color: transparent;
-  // }
 
 }
 

@@ -26,12 +26,13 @@ function Card_Austin() {
     
     const aptInfoGetter = () => {
         APIService.get_apt_info_card().then((resp) => {       
-            console.log("sucessfully get apt info!"); 
+            
+            // console.log(resp[1].apt_free_parking);
 
             for(let i = 0; i< resp.length; i++ ){
                 if (resp[i].apt_city === 1){
-                    
                     setResults(results => [...results, {
+                        
                         id: resp[i].apt_id,
                         name: resp[i].apt_name,
                         city: resp[i].apt_city,
@@ -39,19 +40,18 @@ function Card_Austin() {
                         zipcode:  resp[i].apt_zipcode,
                         price_low:  resp[i].apt_price_low,
                         price_high: resp[i].apt_price_high,
-
-                        near_campus: resp[i].apt_near_campus,
-                        furnished:  resp[i].apt_furnished,
-                        free_parking: resp[i].apt_free_parking,
-                        free_we:  resp[i].apt_free_we,
-                        free_internet: resp[i].apt_free_internet,
-                        
+                        near_campus: resp[i].apt_tag_near_campus,
+                        furnished:  resp[i].apt_tag_furnished,
+                        free_parking: resp[i].apt_tag_free_parking,
+                        free_we:  resp[i].apt_tag_free_we,
+                        free_internet: resp[i].apt_tag_free_internet,
                         url: resp[i].apt_url,
                         picture_url: resp[i].apt_picture_url
+                    
                     }]);
                 }
-                
             }
+            console.log("sucessfully get apt info!"); 
         });
     }
 
@@ -62,10 +62,7 @@ function Card_Austin() {
    
     
     const renderApt = results.slice(1+(results.length/2)).map((Apt) => 
-     
-        // let a = {Apt.near_campus};
         <div className={styles.card}>
-            {Apt.near_campus}
             <div className={styles["card-header"]} key={Apt.id}>
                 <img className={styles["card-image"]} src={Apt.picture_url}/>
             </div>
@@ -88,20 +85,15 @@ function Card_Austin() {
 
             <div className={styles.footer}>   
                 <div className={styles.TagGrid}>
-                
-                    <div className={styles.tag}>Near Campus: {Apt.near_campus ? "Yes": "No"}</div>
-                    <div className={styles.tag}>Furnished: {Apt.furnished ? "Yes": "No"}</div>
-                    {/* {Apt.near_campus 
-                            ? <div className={styles.tag}>Near Campus</div> 
-                            : <div></div>} </div> */}
+                    {Apt.near_campus ? <div className={styles.tag}>Near Campus</div> : <div></div>}
+                    {Apt.furnished ? <div className={styles.tag}>Furniture Included</div> : <div></div>}
                 </div>    
                 
                 <div className={styles.TagGrid}>
-                    <div className={styles.tag}>Free Parking: {Apt.free_parking ? "Yes":"No"} </div>
-                    <div className={styles.tag}>Free Uiltility: {Apt.free_parking ? "Yes":"No"}</div>
-                </div>
+                    {Apt.free_parking ? <div className={styles.tag}>Free parking</div> : <div></div>}
+                    {Apt.free_we ? <div className={styles.tag}>Uiltity fee included</div> : <div></div>}                </div>
                 <div className={styles.TagGrid}>
-                    <div className={styles.tag}>Free wifi: {Apt.free_parking ? "Yes":"No"}</div>    
+                    {Apt.free_internet ? <div className={styles.tag}>Provide Internet</div> : <div></div>}
                 </div>    
                 
             </div>
