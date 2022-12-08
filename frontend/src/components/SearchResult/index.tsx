@@ -69,9 +69,8 @@ function SearchResult(details : Props) {
   return(
     <div className={styles.grid}>
       <div className={styles.card}>
-        <div className={styles.number}>{tempDetail.id}</div>
         <div className={styles["card-header"]}>
-            <img className={styles["card-image"]} src={"https://thejunctionatcollegestation.com/wp-content/smush-webp/2022/03/pool.png.webp"}/>
+            <img className={styles["card-image"]} src={tempDetail.picture_url}/>
         </div>
         <div className={styles.name}>
             {tempDetail.name}
