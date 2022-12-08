@@ -1,5 +1,5 @@
-const baseUrl = "https://jjgroup-django.herokuapp.com/";
-// const baseUrl = "http://127.0.0.1:8000/";
+// const baseUrl = "https://jjgroup-django.herokuapp.com/";
+const baseUrl = "http://127.0.0.1:8000/";
 
 
 export default class APIService {
@@ -27,7 +27,17 @@ export default class APIService {
 
   static get_account_info(customer_id) {
     // console.log(customer_id)
-    return fetch(baseUrl + "customer/" + customer_id.toString(), {
+    return fetch(baseUrl + "customer/id=" + customer_id.toString(), {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((resp) => resp.json());
+  }
+
+  static check_email(email) {
+    console.log(email)
+    return fetch(baseUrl + "customer/email=" + email.toString(), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -45,6 +55,26 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+
+  static get_messages_by_customer(customer_id) {
+        // console.log(customer_id)
+        return fetch(baseUrl + 'question_consultation/customer=' + customer_id.toString(), {
+            'method': 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(resp => resp.json())
+    }
+
+  static get_message_by_id(question_id) {
+        // console.log(question_id)
+        return fetch(baseUrl + 'question_consultation/question=' + question_id.toString(), {
+            'method': 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(resp => resp.json())
+    }
 
   static customer_log_in(body) {
     console.log(JSON.stringify(body));
@@ -140,6 +170,7 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+
   static edit_apt_info(body) {
     console.log(JSON.stringify(body));
     return fetch(baseUrl + "apt_info", {//change to url
@@ -150,6 +181,7 @@ export default class APIService {
       body: JSON.stringify(body),
     }).then((resp) => resp.json());
   }
+
   static delete_apt_info(apt_info) {
     // console.log(customer_id)
     return fetch(baseUrl + "apt_info/" + apt_info.toString(), {
@@ -159,6 +191,7 @@ export default class APIService {
       },
     }).then((resp) => resp.json());
   }
+
   static get_image_robocheck() {
     // console.log(customer_id)
     return fetch(baseUrl + "image_code/", {

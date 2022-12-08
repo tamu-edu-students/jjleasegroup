@@ -1,0 +1,129 @@
+@import '../../style/fonts';
+@import '../../style/colors';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.group_label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 700;
+  gap: 37.5px;
+  width: 50%;
+  height: 100%;
+
+  color: $branding-blue-medium;
+
+}
+
+.group_input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  gap: 15px;
+  width: 100%;
+}
+
+.title {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #225D99;
+
+  margin-bottom: 10px;
+}
+
+.box {
+  width: 100%;
+  //height: 52px;
+  border: 3px solid #E3D7D7;
+  border-radius: 15px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #757575;
+
+  padding: 10px 20px;
+}
+
+.input {
+  //width: 250px;
+}
+
+.button {
+  width: 100%;
+  //height: 35px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+  background: #80B5EA;
+  border-radius: 10px;
+  border-color: #80B5EA;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Poppins';
+}
+.roboCheck {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap:15px;
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Poppins';
+}
+.radio {
+  margin-right: 10px;
+}
+
+.error_message {
+  font-size: 10px;
+  color: red;
+}
