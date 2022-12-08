@@ -70,7 +70,7 @@ const Card_CS = () =>{
       
 
           <div className={styles.address}>
-              {Apt.street}, Austin, Texas, {Apt.zipcode}
+              {Apt.street}, College Station, Texas, {Apt.zipcode}
           </div>
 
           
