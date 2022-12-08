@@ -26,8 +26,9 @@ class Admin(models.Model):
 class QuestionConsultation(models.Model):
     question_id = models.AutoField(primary_key=True)
     question_purpose = models.IntegerField()  # 0 = xxx, 1 = xxx
-    apt_area = models.IntegerField()  # 0 = College Station, 1 = Austin, 2 = Houstonquit
+    apt_area = models.IntegerField()  # 0 = College Station, 1 = Austin, 2 = Houston
     question_text = models.TextField()
+    question_reply = models.TextField(default='')
     question_status = models.IntegerField()  # 1 = answered, 0 = not annswered
     submission_date_time = models.DateTimeField()
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)

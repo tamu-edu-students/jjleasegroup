@@ -8,7 +8,7 @@ class QuestionConsultationSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionConsultation
         fields = ('question_id', 'question_purpose', 'apt_area', 'question_text', 'question_status',
-                  'submission_date_time', 'customer_id')
+                  'submission_date_time', 'customer_id', 'question_reply')
 
 
 class CustomerSerializer_full(serializers.ModelSerializer):
