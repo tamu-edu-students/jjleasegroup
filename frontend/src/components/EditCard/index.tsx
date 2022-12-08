@@ -48,8 +48,9 @@ function EditCard(details : Props) {
       apt_url: tempDetail.url, 
       apt_picture_url: tempDetail.picture_url,
     }).then((resp) => {
-      if (resp.code === 200) {
+      if (resp.code == 200) {
         console.log("sucessfully sent apt info!");
+        window.location.reload();
         setError("");
       } else {
         //didnt sent 

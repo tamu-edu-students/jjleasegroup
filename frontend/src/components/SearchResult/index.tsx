@@ -10,6 +10,7 @@ type Props = {
   free_we:boolean; free_internet:boolean; url:string;picture_url:string;
 };
 function SearchResult(details : Props) {
+  const before = details;
   const numbers= [1,2,3,4,5,5];
   const inputClass = classNames(styles.box, styles.input);
   const priceInputClass = classNames(styles.box_price, styles.input);
@@ -23,6 +24,7 @@ function SearchResult(details : Props) {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const decideCity = () => {
+    //delete before['index'];
     setTempDetail(details);
     if(details.city == "0"){
       setCity("College Station");
@@ -46,6 +48,7 @@ function SearchResult(details : Props) {
     APIService.delete_apt_info(tempDetail.id).then((resp) => {
       console.log(resp);
       if(resp.code ==200){
+        window.location.reload();
         console.log("Sucessfully deleted!!!");
       }else{
         console.log("Something wrong at delete apt!!!");
@@ -66,7 +69,7 @@ function SearchResult(details : Props) {
   return(
     <div className={styles.grid}>
       <div className={styles.card}>
-        <div className={styles.number}>1</div>
+        <div className={styles.number}>{tempDetail.id}</div>
         <div className={styles["card-header"]}>
             <img className={styles["card-image"]} src={"https://thejunctionatcollegestation.com/wp-content/smush-webp/2022/03/pool.png.webp"}/>
         </div>
