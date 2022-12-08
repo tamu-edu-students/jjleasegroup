@@ -1,6 +1,6 @@
 import APIService from "../../api/APIService";
 import styles from "./styles.module.scss";
-import React, { useState,useEffect } from "react"
+import { useState,useEffect } from "react"
 
 
 
@@ -70,7 +70,7 @@ const Card_CS = () =>{
       
 
           <div className={styles.address}>
-              {Apt.street}, Austin, Texas, {Apt.zipcode}
+              {Apt.street}, College Station, Texas, {Apt.zipcode}
           </div>
 
           

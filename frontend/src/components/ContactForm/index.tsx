@@ -98,12 +98,12 @@ function ContactForm(props: Props) {
 
       <div className={styles.container}>
         <div className={styles.title}>
-            Schdeule Meeting:
+            Schdeule A Meeting With US:
         </div>
-      </div>
         <div className={styles.embed}>
             <InlineWidget url="https://calendly.com/ky1015/15-mins-meeting" />
         </div>
+      </div>
     </div>
   );
 }
