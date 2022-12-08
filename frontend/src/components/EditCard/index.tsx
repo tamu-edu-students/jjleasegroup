@@ -26,7 +26,7 @@ function EditCard(details : Props) {
     }else if (details.city == "1"){
       setCity("Austin");
     }else{
-      setCity("Huston");
+      setCity("Houston");
     }
   }
   const submitHandler = (e: any) => {
