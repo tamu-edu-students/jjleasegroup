@@ -61,7 +61,7 @@ function SignUp() {
   }
 
   const submitForm = () => {
-    if (!email && !errorPwd && !errorPhone && username && password && email && phone && securityAnswer){
+    if (!errorEmail && !errorPwd && !errorPhone && username && password && email && phone && securityAnswer){
         APIService.sign_up({
       customer_username: username,
       customer_password: password,
