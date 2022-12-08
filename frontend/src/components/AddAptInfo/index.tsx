@@ -31,10 +31,12 @@ function AddAptInfo() {
       apt_url: details.url, 
       apt_picture_url: details.picture_url,
     }).then((resp) => {
-      if (resp.code === 200) {
+      console.log(resp)
+      //window.location.reload();
+      if (resp.code == "200") {
         console.log("sucessfully sent apt info!");
         setError("");
-        
+        window.location.reload();
       } else {
         //didnt sent 
         console.log(resp.error_message);
@@ -201,14 +203,14 @@ function AddAptInfo() {
       </div>
       </div>
       
-
       {
-        /*ERROR error !== "" ? (
+        error !== "" ? (
           <div className={styles.error_message}>{error}</div>
         ) : (
           ""
-        )*/
+        )
       }
+
     </div> 
   );
 

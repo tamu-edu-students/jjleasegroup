@@ -62,14 +62,15 @@ function EditAptInfo() {
           free_we:  resp[i].apt_free_we,
           free_internet: resp[i].apt_free_internet,
           url: resp[i].apt_url,
-          picture_url: resp[i].apt_picture_url
+          picture_url: resp[i].apt_picture_url, 
         }])
       }
     });
   }
   const SearchResults = results.map((searchResult,index, array) =>
     {if(index!=0){
-      return <SearchResult {...searchResult}/>
+      //searchResult.index = "index";
+      return <SearchResult {...searchResult} />
     }}
   );
 
