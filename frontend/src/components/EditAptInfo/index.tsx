@@ -91,27 +91,24 @@ function EditAptInfo() {
       setError("");
       setResults(initialResult);
       //loop through all results and generate an array.
-      for (let i = 0; i < resp.length; i++) {
-        console.log("setting apt" + resp[i].apt_name);
-        setResults((results) => [
-          ...results,
-          {
-            id: resp[i].apt_id,
-            name: resp[i].apt_name,
-            city: resp[i].apt_city,
-            street: resp[i].apt_street,
-            zipcode: resp[i].apt_zipcode,
-            price_low: resp[i].apt_price_low,
-            price_high: resp[i].apt_price_high,
-            near_campus: resp[i].apt_near_campus,
-            furnished: resp[i].apt_furnished,
-            free_parking: resp[i].apt_free_parking,
-            free_we: resp[i].apt_free_we,
-            free_internet: resp[i].apt_free_internet,
-            url: resp[i].apt_url,
-            picture_url: resp[i].apt_picture_url,
-          },
-        ]);
+      for(let i = 0; i< resp.length;i++ ){
+        console.log(resp[i]);
+        setResults(results=>[...results, 
+        { id: resp[i].apt_id,
+          name: resp[i].apt_name,
+          city: resp[i].apt_city,
+          street:  resp[i].apt_street,
+          zipcode:  resp[i].apt_zipcode,
+          price_low:  resp[i].apt_price_low,
+          price_high: resp[i].apt_price_high,
+          near_campus:resp[i].apt_tag_near_campus,
+          furnished:  resp[i].apt_tag_furnished,
+          free_parking: resp[i].apt_tag_free_parking,
+          free_we:  resp[i].apt_tag_free_we,
+          free_internet: resp[i].apt_tag_free_internet,
+          url: resp[i].apt_url,
+          picture_url: resp[i].apt_picture_url, 
+        }])
       }
     });
   };
