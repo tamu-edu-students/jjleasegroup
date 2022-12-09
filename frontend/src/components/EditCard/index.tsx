@@ -20,6 +20,7 @@ function EditCard(details : Props) {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const decideCity = () => {
+    console.log(details)
     setTempDetail(details);
     if(details.city == "0"){
       setCity("College Station");
@@ -171,8 +172,7 @@ function EditCard(details : Props) {
                 type="checkbox"
                 id="tags"
                 name="tags"
-                value="near campus"
-                onChange={() => setTempDetail({ ...tempDetail, near_campus: !details.near_campus})}
+                onChange={(e) => setTempDetail({ ...tempDetail, near_campus: e.target.checked})}
                 checked={tempDetail.near_campus}
               />
           </div>
@@ -182,8 +182,7 @@ function EditCard(details : Props) {
                 type="checkbox"
                 id="tags"
                 name="tags"
-                value="furnished"
-                onChange={() => setTempDetail({ ...tempDetail, furnished: !details.furnished})}
+                onChange={(e) => setTempDetail({ ...tempDetail, furnished: e.target.checked})}
                 checked={tempDetail.furnished}
               />
           </div>
@@ -193,8 +192,7 @@ function EditCard(details : Props) {
                 type="checkbox"
                 id="tags"
                 name="tags"
-                value="free_parking"
-                onChange={() => setTempDetail({ ...tempDetail, free_parking: !details.free_parking})}
+                onChange={(e) => setTempDetail({ ...tempDetail, free_parking: e.target.checked})}
                 checked={tempDetail.free_parking}
               />
           </div>
@@ -206,8 +204,7 @@ function EditCard(details : Props) {
                   type="checkbox"
                   id="tags"
                   name="tags"
-                  value="free_we"
-                  onChange={() => setTempDetail({ ...tempDetail, free_we: !details.free_we})}
+                  onChange={(e) => setTempDetail({ ...tempDetail, free_we: e.target.checked})}
                   checked={tempDetail.free_we}
                 />
             </div>
@@ -217,8 +214,7 @@ function EditCard(details : Props) {
                   type="checkbox"
                   id="tags"
                   name="tags"
-                  value="free_internet"
-                  onChange={() => setTempDetail({ ...tempDetail, free_internet: !details.free_internet})}
+                  onChange={(e) => setTempDetail({ ...tempDetail, free_internet: e.target.checked})}
                   checked={tempDetail.free_internet}
                 />
             </div>
