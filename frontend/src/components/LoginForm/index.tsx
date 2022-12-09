@@ -34,6 +34,7 @@ function LoginForm() {
           id: resp.id,
           name: resp.name,
           email: email,
+          isAdmin: isAdmin,
         });
         setError("");
         window.location.href = "/";
@@ -42,13 +43,12 @@ function LoginForm() {
       }
     });
   };
-  const getRoboTest= () =>{
+  const getRoboTest = () => {
     APIService.get_image_robocheck().then((resp) => {
       console.log(resp.image);
       setImageString(resp.image);
     });
-
-  }
+  };
   useEffect(() => {
     getRoboTest();
   }, []);
@@ -58,7 +58,6 @@ function LoginForm() {
         <div className={styles.group_label}>
           <label htmlFor="email">Email: </label>
           <label htmlFor="password">password: </label>
-          
         </div>
 
         <div className={styles.group_input}>
@@ -78,7 +77,6 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-
         </div>
       </div>
       <div className={styles.row}>
@@ -98,15 +96,15 @@ function LoginForm() {
         Login
       </button>
       <div className={styles.roboCheck}>
-          <img src={`data:image/png;base64,${imageString}`}/>
-          <input
-            className={inputClass}
-            type="robocheck"
-            name="robocheck"
-            id="robocheck"
-            onChange={(e) => setRoboCheckAnswer(e.target.value)}
-            value={roboCheckAnswer}
-          />
+        <img src={`data:image/png;base64,${imageString}`} />
+        <input
+          className={inputClass}
+          type="robocheck"
+          name="robocheck"
+          id="robocheck"
+          onChange={(e) => setRoboCheckAnswer(e.target.value)}
+          value={roboCheckAnswer}
+        />
       </div>
       {error && <div className={styles.error_message}>{error}</div>}
     </div>

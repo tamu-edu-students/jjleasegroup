@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^get_back_password', views.get_back_password, name='get_back_password'),
     url(r'^get_question_text', views.get_question_text, name='get_question_text'),
     url(r'^question_consultation$', views.question_consultation_API, name='add_question_consultation'),
+    url(r'^question_consultation/all$', views.question_consultation_API, name='retrieve_question_consultation_all'),
     url(r'^question_consultation/question=([0-9]+)$', views.question_consultation_API,
         name='retrieve_question_consultation_by_question'),
     url(r'^question_consultation/customer=([0-9]+)$', views.question_consultation_API,

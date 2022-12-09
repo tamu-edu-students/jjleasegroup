@@ -4,10 +4,15 @@ const Box = () => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
-        
         <div className={styles.top}>
-            <img src="https://cdn.pixabay.com/photo/2014/07/31/00/30/vw-beetle-405876__340.jpg" alt="" />
-            <span><i className="fas fa-heart"></i><i className="fas fa-exchange-alt"></i></span>
+          <img
+            src="https://cdn.pixabay.com/photo/2014/07/31/00/30/vw-beetle-405876__340.jpg"
+            alt=""
+          />
+          <span>
+            <i className="fas fa-heart"></i>
+            <i className="fas fa-exchange-alt"></i>
+          </span>
         </div>
 
         <div className={styles.bottom}>
@@ -19,11 +24,15 @@ const Box = () => {
           <div className={styles.advants}>
             <div>
               <span>Bedrooms</span>
-              <div><span>3</span></div>
+              <div>
+                <span>3</span>
+              </div>
             </div>
             <div>
               <span>Bathrooms</span>
-              <div><span>2</span></div>
+              <div>
+                <span>2</span>
+              </div>
             </div>
             {/* <div>
               <span>Area</span>
@@ -37,7 +46,6 @@ const Box = () => {
             <span>$410,000</span>
           </div>
         </div>
-
       </div>
     </div>
   );

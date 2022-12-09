@@ -25,7 +25,7 @@ const ProfilePage = (props: Props) => {
         </div>
         <div className={styles["main-right"]}>
           <div className={styles["main-right-title"]}>My Profile</div>
-          <MyProfile  userId={userId}/>
+          <MyProfile userId={userId} />
           {/*<div className={styles["main-right-bottom"]}>*/}
           {/*  <a href={"/SignUp"}>Sign Up</a>*/}
           {/*  <a href={"/ForgetPassword"}>Forget Password</a>*/}

@@ -6,13 +6,10 @@ import styles from "./styles.module.scss";
 import logo from "../../asserts/pictures/logo.svg";
 import { getUser, deleteUser } from "../../utils/cookie";
 import { useEffect } from "react";
+import classNames from "../../utils/classNames";
 
 function NavBar() {
   const userInfo = getUser();
-
-  // useEffect(() => {
-  //   console.log(userInfo);
-  // });
 
   return (
     <Navbar className={styles.nav} expand="lg">
@@ -22,7 +19,11 @@ function NavBar() {
           JJtxhome
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse bsPrefix={"styles"} className={styles.collapse}>
+        {/*<Navbar.Collapse*/}
+        {/*  bsPrefix={"styles"}*/}
+        {/*  className={classNames(styles.collapse, "collapse")}*/}
+        {/*>*/}
+        <Navbar.Collapse>
           <Nav className="justify-content-end">
             <Nav.Link bsPrefix={"styles"} className={styles.item} href="/">
               Home
@@ -59,6 +60,7 @@ function NavBar() {
                 title={userInfo.name}
               >
                 <NavDropdown.Item href="/MyProfile">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/MyMessages">Messages</NavDropdown.Item>
                 <NavDropdown.Item href="/ChangePassword">
                   Change Password
                 </NavDropdown.Item>

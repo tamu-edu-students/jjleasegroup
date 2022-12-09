@@ -24,15 +24,14 @@ function Admin() {
 
         <div className={styles.faqs}>
           <div className={styles["faqs-title"]}>Add New Apartment</div>
-          <AddAptInfo/>
+          <AddAptInfo />
         </div>
         <div className={styles.faqs}>
           <div className={styles["faqs-title"]}>Edit Apartment</div>
-          <EditAptInfo/>
+          <EditAptInfo />
         </div>
       </div>
 
-    
       <Footer />
     </div>
   );
