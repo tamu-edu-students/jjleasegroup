@@ -28,12 +28,13 @@ const Footer = () => {
           <div className={styles["list-content"]}>+1-512-888-4656</div>
         </div>
         <div className={styles.social}>
-          <div className={styles["list-title"]}>WeChat</div>
-          <img
+          <div className={styles["list-title"]}>WeChat ID</div>
+          {/* <img
             src="wechat"
             alt="WeChat_QR_Code"
             className={styles["list-icon"]}
-          />
+          /> */}
+          <div className={styles["list-content"]}>Cocolucky15</div>
         </div>
       </div>
       <div className={styles.divider} />
