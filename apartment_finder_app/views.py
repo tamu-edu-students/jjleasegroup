@@ -14,7 +14,7 @@ from apartment_finder_app.utils.code import check_code
 from apartment_finder_app.utils.forms import LoginForm, ChangePasswordForm, GetPasswordBackForm
 
 from apartment_finder_app.models import QuestionConsultation, Customer, ApartmentInfo
-from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer_full, \
+from apartment_finder_app.serializers import QuestionConsultationSerializer, QuestionConsultationSerializer_update, CustomerSerializer_full, \
     CustomerSerializer_update, CustomerSerializer_pwd
 from apartment_finder_app.serializers import ApartmentInfoSerializer
 
@@ -23,11 +23,25 @@ SALT = "CSCE606"
 
 # Create your views here.
 @csrf_exempt
-def question_consultation_API(request, question_id=0):
+def question_consultation_API(request, id=0):
+    print("request:", request)
     if request.method == 'GET':
-        questions = QuestionConsultation.objects.all()
-        questions_serializer = QuestionConsultationSerializer(questions, many=True)
-        return JsonResponse(questions_serializer.data, safe=False, status=status.HTTP_200_OK)
+        if 'customer' in str(request):
+            print("cus")
+            questions = QuestionConsultation.objects.filter(customer_id=id)
+            questions_serializer = QuestionConsultationSerializer(questions, many=True)
+        elif 'all' in str(request):
+            print("all")
+            questions = QuestionConsultation.objects.all()
+            questions_serializer = QuestionConsultationSerializer(questions, many=True)
+        else:
+            print("que")
+            question = QuestionConsultation.objects.get(question_id=id)
+            questions_serializer = QuestionConsultationSerializer(question)
+        
+        print("ret")
+        return JsonResponse(questions_serializer.data, safe=False)
+
     elif request.method == 'POST':
         question = JSONParser().parse(request)
         # print(question)
@@ -37,10 +51,23 @@ def question_consultation_API(request, question_id=0):
             return JsonResponse({"code": "200"}, safe=False)
         print(questions_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'PUT':
+        print("update")
+        question_info = JSONParser().parse(request)
+        question = QuestionConsultation.objects.get(question_id=question_info['question_id'])
+        questions_serializer = QuestionConsultationSerializer_update(question, data=question_info)
+        if questions_serializer.is_valid():
+            questions_serializer.save()
+            return JsonResponse({"code": "200"}, safe=False)   
+        print(questions_serializer.errors)
+        return JsonResponse({"code": "404", "error:": questions_serializer.error}, safe=False) 
+
+
 
 
 @csrf_exempt
 def customer_API(request, customer_id=0):
+    print(request)
     if request.method == 'POST':
         customer_info = JSONParser().parse(request)
         customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
@@ -54,18 +81,30 @@ def customer_API(request, customer_id=0):
         print(customer_info_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'GET':
-        customer = Customer.objects.get(customer_id=customer_id)
-        customer_info_serializer = CustomerSerializer_update(customer)
-        return JsonResponse(customer_info_serializer.data, safe=False)
+        if 'email' in str(request):
+            print("wer")
+            customer = models.Customer.objects.filter(customer_email=customer_id).first()
+            print(customer_id)
+            if customer:
+                return JsonResponse({"code": "200"}, safe=False)
+            else:
+                return JsonResponse({"code": "404"}, safe=False)
+        else:
+            customer = Customer.objects.get(customer_id=customer_id)
+            customer_info_serializer = CustomerSerializer_update(customer)
+            return JsonResponse(customer_info_serializer.data, safe=False)
     elif request.method == 'PUT':
         customer_info = JSONParser().parse(request)
-        customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
         customer = Customer.objects.get(customer_id=customer_info['customer_id'])
-        customers_serializer = CustomerSerializer_update(customer, data=customer_info)
+        if 'customer_password' in customer_info:
+            customer_info['customer_password'] = make_password(password=customer_info['customer_password'], salt=SALT)
+            customers_serializer = CustomerSerializer_pwd(customer, data=customer_info)
+        else:
+            customers_serializer = CustomerSerializer_update(customer, data=customer_info)
         if customers_serializer.is_valid():
             customers_serializer.save()
             return JsonResponse({"code": "200"}, safe=False)
-        # print(customers_serializer.errors)
+        print(customers_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
     elif request.method == 'DELETE':
         customer = Customer.objects.get(customer_id=customer_id)

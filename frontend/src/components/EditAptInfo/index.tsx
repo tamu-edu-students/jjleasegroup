@@ -5,41 +5,86 @@ import SearchResult from "../SearchResult";
 import classNames from "../../utils/classNames";
 import { type } from "os";
 type Props = {
-  id:string; name:string; city:string; 
-  street:string; zipcode:string; price_low:string; price_high:string;
-  near_campus:boolean; furnished:boolean; free_parking:boolean;
-  free_we:boolean; free_internet:boolean; url:string;picture_url:string;
+  id: string;
+  name: string;
+  city: string;
+  street: string;
+  zipcode: string;
+  price_low: string;
+  price_high: string;
+  near_campus: boolean;
+  furnished: boolean;
+  free_parking: boolean;
+  free_we: boolean;
+  free_internet: boolean;
+  url: string;
+  picture_url: string;
 };
 function EditAptInfo() {
- 
-  const [details, setDetails] = 
-    useState({ id: "", name: "test_name", 
-    city: "0", street: "test_street", zipcode: "test_zip",
-    price_low: "1", price_high: "2", near_campus: false,
-    furnished: false, free_parking: false, free_we: false,
-    free_internet: false, url: "test_url", picture_url: "test_pic_url"});
+  const [details, setDetails] = useState({
+    id: "",
+    name: "test_name",
+    city: "0",
+    street: "test_street",
+    zipcode: "test_zip",
+    price_low: "1",
+    price_high: "2",
+    near_campus: false,
+    furnished: false,
+    free_parking: false,
+    free_we: false,
+    free_internet: false,
+    url: "test_url",
+    picture_url: "test_pic_url",
+  });
   const [searchName, setSearchName] = useState("");
   const [error, setError] = useState("");
   const inputClass = classNames(styles.box, styles.input);
 
-  const [results, setResults] = useState([{ id: "1", name: "test", 
-  city: "0", street: "test street", zipcode: "test_zip",
-  price_low: "test_low", price_high: "test_high", near_campus: false,
-  furnished: false, free_parking: false, free_we: false,
-  free_internet: false, url: "test_url", picture_url: "test_pic_url"},]);
-  
-  const initialResult = [{ id: "0", name: "test", 
-  city: "0", street: "test street", zipcode: "test_zip",
-  price_low: "test_low", price_high: "test_high", near_campus: false,
-  furnished: false, free_parking: false, free_we: false,
-  free_internet: false, url: "test_url", picture_url: "test_pic_url"},]
+  const [results, setResults] = useState([
+    {
+      id: "1",
+      name: "test",
+      city: "0",
+      street: "test street",
+      zipcode: "test_zip",
+      price_low: "test_low",
+      price_high: "test_high",
+      near_campus: false,
+      furnished: false,
+      free_parking: false,
+      free_we: false,
+      free_internet: false,
+      url: "test_url",
+      picture_url: "test_pic_url",
+    },
+  ]);
+
+  const initialResult = [
+    {
+      id: "0",
+      name: "test",
+      city: "0",
+      street: "test street",
+      zipcode: "test_zip",
+      price_low: "test_low",
+      price_high: "test_high",
+      near_campus: false,
+      furnished: false,
+      free_parking: false,
+      free_we: false,
+      free_internet: false,
+      url: "test_url",
+      picture_url: "test_pic_url",
+    },
+  ];
   const aptInfoGetter = (e: any) => {
     e.preventDefault();
     //setResults();
     console.log(results);
-  
+
     APIService.search_apt_info({
-      key_word: searchName, 
+      key_word: searchName,
     }).then((resp) => {
       console.log("sucessfully get apt info!");
       console.log(resp);
@@ -66,35 +111,32 @@ function EditAptInfo() {
         }])
       }
     });
-  }
-  const SearchResults = results.map((searchResult,index, array) =>
-    {if(index!=0){
+  };
+  const SearchResults = results.map((searchResult, index, array) => {
+    if (index != 0) {
       //searchResult.index = "index";
-      return <SearchResult {...searchResult} />
-    }}
-  );
+      return <SearchResult {...searchResult} />;
+    }
+  });
 
-  return(
+  return (
     <div className={styles.search_container}>
       <div className={styles.search_bar}>
         <input
-              className={inputClass}
-              type="search"
-              name="search"
-              id="search"
-              placeholder="Enter Apartment Name Here"
-              onChange={(e) => setSearchName(e.target.value)}
-            />
+          className={inputClass}
+          type="search"
+          name="search"
+          id="search"
+          placeholder="Enter Apartment Name Here"
+          onChange={(e) => setSearchName(e.target.value)}
+        />
         <button className={styles.button_search} onClick={aptInfoGetter}>
           search
         </button>
       </div>
-      <div className={styles.search_result}>
-        {SearchResults}
-      </div>
+      <div className={styles.search_result}>{SearchResults}</div>
     </div>
   );
-
 }
 
 export default EditAptInfo;

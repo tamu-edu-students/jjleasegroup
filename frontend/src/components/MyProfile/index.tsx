@@ -1,5 +1,7 @@
 import APIService from "../../api/APIService";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import classNames from "../../utils/classNames";
+import styles from "../MyProfile/styles.module.scss";
 
 type Props = {
   userId: number;
@@ -7,6 +9,7 @@ type Props = {
 
 function MyProfile(props: Props) {
   const userId = props.userId;
+  // const userId = 2;
   // window.sessionStorage.setItem("customer_id", "17");
 
   const [username, setUsername] = useState("");
@@ -18,6 +21,9 @@ function MyProfile(props: Props) {
   const [securityQuestion, setSecurityQuestion] = useState("0");
   const [securityAnswer, setSecurityAnswer] = useState("");
   const today = new Date().toISOString().slice(0, 10);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [showSubmit, setShowSubmit] = useState(false);
+  const inputClass = classNames(styles.box, styles.input);
 
   const getCustomerInfo = (customer: any) => {
     // TODO: type this
@@ -42,6 +48,15 @@ function MyProfile(props: Props) {
     });
   }, [userId]);
 
+  const edit_profile = () => {
+    setIsDisabled(!isDisabled);
+    setShowSubmit(!showSubmit);
+  };
+
+  const redirect2change_pwd = () => {
+    window.location.href = "/ChangePassword";
+  };
+
   const submitForm = () => {
     APIService.update_account_info(
       // id,
@@ -58,95 +73,113 @@ function MyProfile(props: Props) {
       }
     )
       // .then(resp => console.log(resp))
-      .then((resp) => getCustomerInfo(resp));
+      .then((resp) => {
+        getCustomerInfo(resp);
+        setIsDisabled(!isDisabled);
+        setShowSubmit(!showSubmit);
+      });
   };
   return (
-    <div className="form">
-      <label htmlFor="customer_username">your username</label>
-      <input
-        type="text"
-        id="customer_username"
-        value={username}
-        placeholder="enter your new username"
-        className="form-control"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label htmlFor="your password">your password</label> <br />
-      <button className="btn btn-primary">Change My Password</button>
-      <br />
-      <br />
-      {/*<input type="text" value={password} placeholder="enter your new password"*/}
-      {/*       className="form-control" onChange={(e) => setPassword(e.target.value)}/>*/}
-      <label htmlFor="your email">your email</label>
-      <input
-        type="text"
-        value={email}
-        placeholder="enter your new email"
-        className="form-control"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <label htmlFor="your phone">your phone</label>
-      <input
-        type="text"
-        value={phone}
-        placeholder="enter your new phone"
-        className="form-control"
-        onChange={(e) => setPhone(e.target.value)}
-      />
-      <label htmlFor="your gender">your gender:</label> <br />
-      <select
-        name="customer_gender"
-        id="customer_gender"
-        onChange={(e) => setGender(e.target.value)}
-      >
-        <option value="m">Male</option>
-        <option value="f">Female</option>
-      </select>
-      <br />
-      <br />
-      <label htmlFor="your date of birth">your date of birth:</label> <br />
-      <input
-        type="date"
-        id="customer_date_of_birth"
-        name="customer_date_of_birth"
-        value={dateOfBirth}
-        min="1950-01-01"
-        max={today}
-        onChange={(e) => setDateOfBirth(e.target.value)}
-      />
-      <br />
-      <br />
-      <label htmlFor="your security question">
-        your security question:
-      </label>{" "}
-      <br />
-      <select
-        name="security_question"
-        id="security_question"
-        value={securityQuestion}
-        onChange={(e) => setSecurityQuestion(e.target.value)}
-      >
-        <option value="0">What is your mother's last name?</option>
-        <option value="1">Which city were you born in?</option>
-        <option value="2">What is your favorite movie?</option>
-      </select>
-      <br />
-      <br />
-      <label htmlFor="your security question answer">
-        your security question answer:
-      </label>
-      <input
-        type="text"
-        value={securityAnswer}
-        placeholder="enter your answer"
-        className="form-control"
-        onChange={(e) => setSecurityAnswer(e.target.value)}
-      />
-      <br />
-      <br />
-      <button className="btn btn-primary" onClick={submitForm}>
-        Update My Profile
-      </button>
+    <div className={styles.form}>
+      <div className={styles.container}>
+        <div className={styles.group_label}>
+          <label htmlFor="username">Username: </label>
+          <label htmlFor="password">Password: </label>
+          <label htmlFor="email">Email: </label>
+          <label htmlFor="phone">Phone: </label>
+          <label htmlFor="gender">Gender: </label>
+          <label htmlFor="date_of_birth">Date of Birth: </label>
+          <label htmlFor="securityQuestion">Security Question: </label>
+          <label htmlFor="securityAnswer">Your Answer: </label>
+        </div>
+        <div className={styles.group_input}>
+          <input
+            disabled={isDisabled}
+            type="text"
+            id="username"
+            name={"username"}
+            value={username}
+            placeholder="enter your new username"
+            className={inputClass}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <button className={styles.button} onClick={redirect2change_pwd}>
+            Change My Password
+          </button>
+          <input
+            disabled={true}
+            type="text"
+            value={email}
+            name={"email"}
+            id="email"
+            placeholder="enter your new email"
+            className={inputClass}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            disabled={isDisabled}
+            type="text"
+            value={phone}
+            name="phone"
+            id="phone"
+            placeholder="enter your new phone"
+            className={inputClass}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <select
+            disabled={isDisabled}
+            className={inputClass}
+            name="gender"
+            id="gender"
+            onChange={(e) => setGender(e.target.value)}
+          >
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+          </select>
+          <input
+            disabled={isDisabled}
+            className={inputClass}
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            value={dateOfBirth}
+            min="1950-01-01"
+            max={today}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+          />
+          <select
+            disabled={isDisabled}
+            className={inputClass}
+            name="securityQuestion"
+            id="securityQuestion"
+            value={securityQuestion}
+            onChange={(e) => setSecurityQuestion(e.target.value)}
+          >
+            <option value="0">What is your mother's last name?</option>
+            <option value="1">Which city were you born in?</option>
+            <option value="2">What is your favorite movie?</option>
+          </select>
+          <input
+            disabled={isDisabled}
+            type="text"
+            value={securityAnswer}
+            placeholder="enter your answer"
+            className={inputClass}
+            onChange={(e) => setSecurityAnswer(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {!showSubmit && (
+        <button type="button" className={styles.button} onClick={edit_profile}>
+          Edit My Profile
+        </button>
+      )}
+      {showSubmit && (
+        <button className={styles.button} onClick={submitForm}>
+          Submit
+        </button>
+      )}
     </div>
   );
 }

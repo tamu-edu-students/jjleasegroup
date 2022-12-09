@@ -22,7 +22,10 @@ function ContactForm(props: Props) {
       question_status: "0",
       submission_date_time: new Date().toISOString().slice(0, 19),
       customer_id: userId,
-    }).then((resp) => console.log(resp));
+    }).then((resp) => {
+      console.log(resp);
+      window.location.href = "/MyMessages";
+    });
   };
 
   const inputClass = classNames(styles.box, styles.input);
@@ -92,18 +95,15 @@ function ContactForm(props: Props) {
           Submit
         </button>
 
-
         {/* Scheduling feature embedded */}
       </div>
 
       <div className={styles.container}>
-        <div className={styles.title}>
-            Schdeule Meeting:
+        <div className={styles.title}>Schdeule A Meeting With US:</div>
+        <div className={styles.embed}>
+          <InlineWidget url="https://calendly.com/ky1015/15-mins-meeting" />
         </div>
       </div>
-        <div className={styles.embed}>
-            <InlineWidget url="https://calendly.com/ky1015/15-mins-meeting" />
-        </div>
     </div>
   );
 }
