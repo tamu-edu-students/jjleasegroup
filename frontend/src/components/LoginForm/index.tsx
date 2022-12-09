@@ -37,7 +37,14 @@ function LoginForm() {
           isAdmin: isAdmin,
         });
         setError("");
-        window.location.href = "/";
+        if(isAdmin == true){
+
+          window.location.href = "/Admin";
+        }else{
+
+          window.location.href = "/";
+        }
+        
       } else {
         setError(resp.error_message);
       }
