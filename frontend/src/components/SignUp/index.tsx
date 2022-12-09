@@ -60,34 +60,26 @@ function SignUp() {
   };
 
   const submitForm = () => {
-    if (
-      !email &&
-      !errorPwd &&
-      !errorPhone &&
-      username &&
-      password &&
-      email &&
-      phone &&
-      securityAnswer
-    ) {
-      APIService.sign_up({
-        customer_username: username,
-        customer_password: password,
-        customer_email: email,
-        customer_phone: phone,
-        customer_gender: gender,
-        customer_date_of_birth: date_of_birth,
-        customer_security_question: securityQuestion,
-        customer_security_answer: securityAnswer,
-      }).then((resp) => {
-        if (resp.code == "200") {
-          window.location.href = "/Login";
-        } else {
-          console.log("failed");
-        }
-      });
-    } else {
-      alert("Invalid information entered!");
+    if (!errorEmail && !errorPwd && !errorPhone && username && password && email && phone && securityAnswer){
+        APIService.sign_up({
+      customer_username: username,
+      customer_password: password,
+      customer_email: email,
+      customer_phone: phone,
+      customer_gender: gender,
+      customer_date_of_birth: date_of_birth,
+      customer_security_question: securityQuestion,
+      customer_security_answer: securityAnswer,
+    }).then((resp) => {
+          if (resp.code == "200") {
+            window.location.href = "/Login";
+          } else {
+            console.log("failed");
+          }
+        });
+    }
+    else {
+        alert("Invalid information entered!")
     }
   };
 
