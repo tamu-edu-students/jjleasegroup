@@ -131,6 +131,7 @@ function MyProfile(props: Props) {
             className={inputClass}
             name="gender"
             id="gender"
+            value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
             <option value="m">Male</option>
