@@ -10,6 +10,11 @@ class QuestionConsultationSerializer(serializers.ModelSerializer):
         fields = ('question_id', 'question_purpose', 'apt_area', 'question_text', 'question_status',
                   'submission_date_time', 'customer_id', 'question_reply')
 
+class QuestionConsultationSerializer_update(serializers.ModelSerializer):
+    class Meta:
+        model = QuestionConsultation
+        fields = ('question_id', 'question_reply')
+
 
 class CustomerSerializer_full(serializers.ModelSerializer):
     class Meta:

@@ -4,6 +4,7 @@ export type UserInfo = {
   id: number;
   name: string;
   email: string;
+  isAdmin: boolean;
 };
 
 //保存

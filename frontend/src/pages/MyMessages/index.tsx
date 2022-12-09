@@ -3,36 +3,21 @@ import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
 import background from "../../asserts/pictures/background-square.png";
 import map from "../../asserts/pictures/map.png";
-import MyMessages from "../../components/MyMessages";
+import MessageList from "../../components/MessageList";
 
 type Props = {
   userId: number;
+  isAdmin: boolean;
 };
 
-const MessageList = (props: Props) => {
-  const userId = props.userId;
+const MyMessages = (props: Props) => {
+  const { userId, isAdmin } = props;
   return (
     <div>
       <NavBar />
       <div className={styles.main}>
-        {/*/!*<div className={styles["main-left"]}>*!/*/}
-        {/*/!*  <div className={styles["main-left-background-overlay"]} />*!/*/}
-        {/*/!*  <img*!/*/}
-        {/*/!*    src={background}*!/*/}
-        {/*/!*    alt="background"*!/*/}
-        {/*/!*    className={styles["main-left-background"]}*!/*/}
-        {/*/!*  />*!/*/}
-        {/*/!*</div>*!/*/}
-        {/*<div className={styles["main-right"]}>*/}
-        {/*  <div className={styles["main-right-title"]}>My Profile</div>*/}
-        {/*  <MyMessages  userId={userId}/>*/}
-        {/*  /!*<div className={styles["main-right-bottom"]}>*!/*/}
-        {/*  /!*  <a href={"/SignUp"}>Sign Up</a>*!/*/}
-        {/*  /!*  <a href={"/ForgetPassword"}>Forget Password</a>*!/*/}
-        {/*  /!*</div>*!/*/}
-        {/*</div>*/}
-          <div className={styles["main-right-title"]}>My Messages</div>
-          <MyMessages  userId={userId}/>
+        <div className={styles["main-title"]}>My Messages</div>
+        <MessageList userId={userId} isAdmin={isAdmin} />
       </div>
       <div className={styles.location}>
         <div className={styles["location-text"]}>Where We Are</div>
@@ -43,4 +28,4 @@ const MessageList = (props: Props) => {
   );
 };
 
-export default MessageList;
+export default MyMessages;

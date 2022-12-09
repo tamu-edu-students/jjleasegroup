@@ -14,7 +14,7 @@ from apartment_finder_app.utils.code import check_code
 from apartment_finder_app.utils.forms import LoginForm, ChangePasswordForm, GetPasswordBackForm
 
 from apartment_finder_app.models import QuestionConsultation, Customer, ApartmentInfo
-from apartment_finder_app.serializers import QuestionConsultationSerializer, CustomerSerializer_full, \
+from apartment_finder_app.serializers import QuestionConsultationSerializer, QuestionConsultationSerializer_update, CustomerSerializer_full, \
     CustomerSerializer_update, CustomerSerializer_pwd
 from apartment_finder_app.serializers import ApartmentInfoSerializer
 
@@ -24,16 +24,24 @@ SALT = "CSCE606"
 # Create your views here.
 @csrf_exempt
 def question_consultation_API(request, id=0):
-    print(request)
+    print("request:", request)
     if request.method == 'GET':
         if 'customer' in str(request):
-            print("wer")
+            print("cus")
             questions = QuestionConsultation.objects.filter(customer_id=id)
             questions_serializer = QuestionConsultationSerializer(questions, many=True)
+        elif 'all' in str(request):
+            print("all")
+            questions = QuestionConsultation.objects.all()
+            questions_serializer = QuestionConsultationSerializer(questions, many=True)
         else:
+            print("que")
             question = QuestionConsultation.objects.get(question_id=id)
             questions_serializer = QuestionConsultationSerializer(question)
+        
+        print("ret")
         return JsonResponse(questions_serializer.data, safe=False)
+
     elif request.method == 'POST':
         question = JSONParser().parse(request)
         # print(question)
@@ -43,6 +51,18 @@ def question_consultation_API(request, id=0):
             return JsonResponse({"code": "200"}, safe=False)
         print(questions_serializer.errors)
         return JsonResponse({"code": "404"}, safe=False)
+    elif request.method == 'PUT':
+        print("update")
+        question_info = JSONParser().parse(request)
+        question = QuestionConsultation.objects.get(question_id=question_info['question_id'])
+        questions_serializer = QuestionConsultationSerializer_update(question, data=question_info)
+        if questions_serializer.is_valid():
+            questions_serializer.save()
+            return JsonResponse({"code": "200"}, safe=False)   
+        print(questions_serializer.errors)
+        return JsonResponse({"code": "404", "error:": questions_serializer.error}, safe=False) 
+
+
 
 
 @csrf_exempt

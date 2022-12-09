@@ -4,14 +4,14 @@ type ClassNameType = number | string | number[] | string[] | undefined;
 const classNames = (...classes: ClassNameType[]) => {
   const result: (string | number)[] = [];
   classes.forEach((arg) => {
-    if (typeof arg === 'string' || typeof arg === 'number') {
+    if (typeof arg === "string" || typeof arg === "number") {
       result.push(arg);
     } else if (Array.isArray(arg)) {
       result.push(...arg);
     }
   });
 
-  return result.join(' ');
+  return result.join(" ");
 };
 
 export default classNames;
