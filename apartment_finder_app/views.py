@@ -27,19 +27,14 @@ def question_consultation_API(request, id=0):
     print("request:", request)
     if request.method == 'GET':
         if 'customer' in str(request):
-            print("cus")
             questions = QuestionConsultation.objects.filter(customer_id=id)
             questions_serializer = QuestionConsultationSerializer(questions, many=True)
         elif 'all' in str(request):
-            print("all")
             questions = QuestionConsultation.objects.all()
             questions_serializer = QuestionConsultationSerializer(questions, many=True)
         else:
-            print("que")
             question = QuestionConsultation.objects.get(question_id=id)
             questions_serializer = QuestionConsultationSerializer(question)
-        
-        print("ret")
         return JsonResponse(questions_serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -61,7 +56,6 @@ def question_consultation_API(request, id=0):
             return JsonResponse({"code": "200"}, safe=False)   
         print(questions_serializer.errors)
         return JsonResponse({"code": "404", "error:": questions_serializer.error}, safe=False) 
-
 
 
 
@@ -120,7 +114,8 @@ def customer_login(request):
     form = LoginForm(data=JSONParser().parse(request))
     if form.is_valid():
         user_input_code = form.cleaned_data.pop('verification_code')
-        real_image_code = cache.get('image_code')
+        encrypt_user_input_code = make_password(password=user_input_code.upper(), salt=SALT)
+        real_image_code = models.Verification.objects.filter(code_num='jj').first().code
 
         customer_object = models.Customer.objects.filter(customer_email=form.cleaned_data.get('email')).first()
         if not customer_object:
@@ -129,7 +124,9 @@ def customer_login(request):
         if customer_object.customer_password != input_password:
             return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
 
-        if real_image_code is None or real_image_code.upper() != user_input_code.upper():
+        if real_image_code is None or real_image_code != encrypt_user_input_code:
+            print('user_input_code: ', user_input_code)
+            print('real_image_code', real_image_code)
             form.add_error('verification_code', 'Wrong Verification Code! ')
             return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
 
@@ -146,7 +143,8 @@ def admin_login(request):
     form = LoginForm(data=JSONParser().parse(request))
     if form.is_valid():
         user_input_code = form.cleaned_data.pop('verification_code')
-        real_image_code = cache.get('image_code')
+        encrypt_user_input_code = make_password(password=user_input_code.upper(), salt=SALT)
+        real_image_code = models.Verification.objects.filter(code_num='jj').first().code
         admin_object = models.Admin.objects.filter(admin_email=form.cleaned_data.get('email')).first()
         if not admin_object:
             return JsonResponse({"code": "404", "error_message": "You are not an admin！", "id": ""}, safe=False)
@@ -154,7 +152,7 @@ def admin_login(request):
         if admin_object.admin_password != input_password:
             return JsonResponse({"code": "404", "error_message": "Wrong password！", "id": ""}, safe=False)
 
-        if real_image_code is None or real_image_code.upper() != user_input_code.upper():
+        if real_image_code is None or real_image_code != encrypt_user_input_code:
             form.add_error('verification_code', 'Wrong Verification Code! ')
             return JsonResponse({"code": "404", "error_message": "Wrong Verification Code! "}, safe=False)
 
@@ -166,8 +164,10 @@ def admin_login(request):
 @csrf_exempt
 def image_code(request):
     img, code_string = check_code()
-
-    cache.set("image_code", code_string, 60 * 2)
+    encrypt_code_string = make_password(password=code_string.upper(), salt=SALT)
+    models.Verification.objects.filter(code_num='jj').update(
+        code=encrypt_code_string)
+    # cache.set("image_code", code_string, 60 * 2)
 
     stream = BytesIO()
     img.save(stream, 'png')
@@ -250,19 +250,22 @@ def apt_info_api(request, apt_id=0):
         apartment_info_serializer = ApartmentInfoSerializer(data=apartment_info)
         if apartment_info_serializer.is_valid():
             apartment_info_serializer.save()
-            return JsonResponse({"code": "200"}, safe=False)
-        return JsonResponse({"code": "404"}, safe=False)
+            return JsonResponse({"code": "200", "error_message": ""}, safe=False)
+        wrong_item = list(apartment_info_serializer.errors.keys())[0]
+        return JsonResponse({"code": "404", "error_message": apartment_info_serializer.errors[wrong_item][0]},
+                            safe=False)
     elif request.method == 'PUT':
         apartment_info = JSONParser().parse(request)
         apartment = ApartmentInfo.objects.filter(apt_id=apartment_info['apt_id']).first()
         if apartment is None:
-            return JsonResponse({"code": "404"}, safe=False)
+            return JsonResponse({"code": "404", "error_message": "Apartment not found! "}, safe=False)
         apartment_serializer = ApartmentInfoSerializer(apartment, data=apartment_info)
         if apartment_serializer.is_valid():
             apartment_serializer.save()
-            return JsonResponse({"code": "200"}, safe=False)
-        # print(customers_serializer.errors)
-        return JsonResponse({"code": "404"}, safe=False)
+            return JsonResponse({"code": "200", "error_message": ""}, safe=False)
+        wrong_item = list(apartment_serializer.errors.keys())[0]
+        return JsonResponse({"code": "404", "error_message": apartment_serializer.errors[wrong_item][0]},
+                            safe=False)
     elif request.method == 'DELETE':
         apartment = ApartmentInfo.objects.filter(apt_id=apt_id).first()
         apartment.delete()

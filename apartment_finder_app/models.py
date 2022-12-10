@@ -26,10 +26,10 @@ class Admin(models.Model):
 class QuestionConsultation(models.Model):
     question_id = models.AutoField(primary_key=True)
     question_purpose = models.IntegerField()  # 0 = xxx, 1 = xxx
-    apt_area = models.IntegerField()  # 0 = College Station, 1 = Austin, 2 = Houston
+    apt_area = models.IntegerField()  # 0 = College Station, 1 = Austin, 2 ç= Houston
     question_text = models.TextField()
-    question_reply = models.TextField(default='')
-    question_status = models.IntegerField()  # 1 = answered, 0 = not annswered
+    question_reply = models.TextField(max_length=1000, default='Not replied yet')
+    question_status = models.IntegerField()  # 1 = answered, 0 = not answered
     submission_date_time = models.DateTimeField()
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
 
@@ -51,3 +51,7 @@ class ApartmentInfo(models.Model):
     apt_picture_url = models.URLField(max_length=1024)
 
 
+class Verification(models.Model):
+    id = models.AutoField(primary_key=True)
+    code = models.CharField(max_length=6)
+    code_num = models.CharField(max_length=6)

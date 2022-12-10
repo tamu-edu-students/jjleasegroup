@@ -10,6 +10,7 @@ class QuestionConsultationSerializer(serializers.ModelSerializer):
         fields = ('question_id', 'question_purpose', 'apt_area', 'question_text', 'question_status',
                   'submission_date_time', 'customer_id', 'question_reply')
 
+
 class QuestionConsultationSerializer_update(serializers.ModelSerializer):
     class Meta:
         model = QuestionConsultation
@@ -37,6 +38,13 @@ class CustomerSerializer_pwd(serializers.ModelSerializer):
 
 
 class ApartmentInfoSerializer(serializers.ModelSerializer):
+    def validate_apt_picture_url(self, apt_picture_url):
+        if len(apt_picture_url.split('/')) < 3 or apt_picture_url.split('/')[2] != 'drive.google.com':
+            raise serializers.ValidationError("picture url format not correct! ")
+        if len(apt_picture_url.split('/')) == 7 and apt_picture_url.split('/')[3] == 'file':
+            apt_picture_url = 'https://drive.google.com/uc?export=view&id=' + apt_picture_url.split('/')[5]
+        return apt_picture_url
+
     class Meta:
         model = ApartmentInfo
         fields = ('apt_id', 'apt_name', 'apt_city', 'apt_street', 'apt_zipcode',
