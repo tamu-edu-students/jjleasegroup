@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#^ymbuz_t+fa!#c4y*l_7)u0ebmu)$-b+#i8n1pzo(#s@*)7g+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.68.80', '0.0.0.0', '127.0.0.1','ec2-18-233-157-141.compute-1.amazonaws.com', '107.23.23.155']
+ALLOWED_HOSTS = ['127.0.0.1', "jjgroup-django.herokuapp.com"]
 
 
 
@@ -49,6 +49,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,13 +127,24 @@ WSGI_APPLICATION = 'apartment_finder.wsgi.application'
 # }
 
 # for Liao's local machine
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'apartment_finder',
+#         'USER': 'root',
+#         'PASSWORD': 'ljwk449!',
+#         'HOST': '127.0.0.1',
+#         'PORT': 3306,
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apartment_finder',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'NAME': 'bgrnau2jfcqgvcds',
+        'USER': 'bsdtg3rc290lyuwy',
+        'PASSWORD': 'wfir4819dgiq4at6',
+        'HOST': 'eyvqcfxf5reja3nv.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': 3306,
     }
 }
@@ -186,6 +198,7 @@ SECURE_FRAME_DENY               = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Default primary key field type

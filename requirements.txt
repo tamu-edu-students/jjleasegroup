@@ -12,3 +12,7 @@ PyMySQL==1.0.2
 pytz==2022.6
 sqlparse==0.4.3
 pybase64==1.2.3
+# for heroku django deployment
+gunicorn
+whitenoise
+django_extensions

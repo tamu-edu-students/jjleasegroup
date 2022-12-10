@@ -1,0 +1,1 @@
+web: gunicorn apartment_finder.wsgi --log-file -
