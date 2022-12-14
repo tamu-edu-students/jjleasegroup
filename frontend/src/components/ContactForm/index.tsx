@@ -94,15 +94,6 @@ function ContactForm(props: Props) {
         <button className={styles.button} onClick={submitForm}>
           Submit
         </button>
-
-        {/* Scheduling feature embedded */}
-      </div>
-
-      <div className={styles.container}>
-        <div className={styles.title}>Schdeule A Meeting With US:</div>
-        <div className={styles.embed}>
-          <InlineWidget url="https://calendly.com/ky1015/15-mins-meeting" />
-        </div>
       </div>
     </div>
   );

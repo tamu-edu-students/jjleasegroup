@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "../../utils/classNames";
 import EditCard from "../EditCard";
+
 type Props = {
   id: string;
   name: string;
@@ -19,6 +20,7 @@ type Props = {
   url: string;
   picture_url: string;
 };
+
 function SearchResult(details: Props) {
   const before = details;
   const numbers = [1, 2, 3, 4, 5, 5];
@@ -88,6 +90,7 @@ function SearchResult(details: Props) {
         <div className={styles["card-header"]}>
           <img className={styles["card-image"]} src={tempDetail.picture_url} />
         </div>
+        {/*<div className={styles["card-body"]}>*/}
         <div className={styles.name}>{tempDetail.name}</div>
         <div className={styles.address}>
           <div className={styles.address_component}>{tempDetail.street}</div>
@@ -105,6 +108,7 @@ function SearchResult(details: Props) {
             delete
           </div>
         </div>
+        {/*</div>*/}
       </div>
       {editing ? <EditCard {...tempDetail} /> : listNothing}
     </div>

@@ -21,10 +21,10 @@ type Props = {
 type Message = {
   question_id: number;
   question_text: string;
-  apt_area: string;
-  question_purpose: string;
+  apt_area: number;
+  question_purpose: number;
   customer_id: number;
-  question_status: string;
+  question_status: number;
   question_reply: string;
   submission_date_time: string;
 };
@@ -33,6 +33,10 @@ function Row(props: { row: Message; isAdmin: boolean }) {
   const { row, isAdmin } = props;
   const [open, setOpen] = useState(false);
   const [reply, setReply] = useState("");
+
+  useEffect(() => {
+    console.log("row is admin", isAdmin);
+  }, [isAdmin]);
 
   const pushReply = () => {
     APIService.reply({
@@ -62,9 +66,24 @@ function Row(props: { row: Message; isAdmin: boolean }) {
             " " +
             row.submission_date_time.slice(11, 16)}
         </TableCell>
-        <TableCell align="center">{row.question_purpose}</TableCell>
-        <TableCell align="center">{row.apt_area}</TableCell>
-        <TableCell align="center">{row.question_status}</TableCell>
+
+        <TableCell align="center">
+          {row.question_purpose == 0
+            ? "apartment special offers"
+            : row.question_purpose == 1
+            ? "apartment roommate"
+            : "apartment leasing office"}
+        </TableCell>
+        <TableCell align="center">
+          {row.apt_area == 0
+            ? "College Station"
+            : row.apt_area == 1
+            ? "Austin"
+            : "Houston"}
+        </TableCell>
+        <TableCell align="center">
+          {row.question_status == 0 ? "not yet replied" : "replied"}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -83,7 +102,7 @@ function Row(props: { row: Message; isAdmin: boolean }) {
                 </TableHead>
                 <TableBody>
                   <TableCell align="center">{row.question_text}</TableCell>
-                  {row.question_reply != "" ? (
+                  {row.question_status === 1 ? (
                     <TableCell align="center">{row.question_reply}</TableCell>
                   ) : (
                     isAdmin && (
@@ -113,59 +132,21 @@ function MessageList(props: Props) {
   useEffect(() => {
     if (isAdmin) {
       APIService.get_messages().then((resp) => {
-        set_messages(resp);
+        // set_messages(resp);
+        setMessageList(resp);
       });
     } else {
       APIService.get_messages_by_customer(userId).then((resp) => {
-        set_messages(resp);
+        // set_messages(resp);
+        setMessageList(resp);
       });
     }
   }, [userId]);
 
-  const set_messages = (messages: []) => {
-    messages.map((message) => {
-      var this_apt_area = "";
-      if (message["apt_area"] == 0) {
-        this_apt_area = "College Station";
-      } else if (message["apt_area"] == 1) {
-        this_apt_area = "Austin";
-      } else {
-        this_apt_area = "Houston";
-      }
-
-      var this_question_purpose = "";
-      if (message["question_purpose"] == 0) {
-        this_question_purpose = "apartment special offers";
-      } else if (message["question_purpose"] == 1) {
-        this_question_purpose = "apartment roommate";
-      } else {
-        this_question_purpose = "apartment leasing office";
-      }
-
-      var this_question_status = "";
-      if (message["question_status"] == 0) {
-        this_question_status = "not yet replied";
-      } else {
-        this_question_status = "replied";
-      }
-
-      setMessageList((messageList) => [
-        ...messageList,
-        {
-          question_id: message["question_id"],
-          question_text: message["question_text"],
-          apt_area: this_apt_area,
-          question_purpose: this_question_purpose,
-          customer_id: message["customer_id"],
-          question_status: this_question_status,
-          question_reply: message["question_reply"],
-          submission_date_time: message["submission_date_time"],
-        },
-      ]);
-      console.log("message list:");
-      console.log(messageList);
-    });
-  };
+  useEffect(() => {
+    console.log(messageList);
+    console.log("Message List isAdmin", isAdmin);
+  }, [messageList]);
 
   return (
     <Box sx={{ width: "100%" }}>
