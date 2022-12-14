@@ -58,7 +58,8 @@ const Card_CS = () => {
   }, []);
 
   const renderApt = results.slice(1).map((Apt, index) => (
-    
+    <div className={styles.grid}>
+
     <div className={styles.card}>
     <div className={styles["card-header"]} key={Apt.id}>
       <img className={styles["card-image"]} src={Apt.picture_url} />
@@ -115,7 +116,8 @@ const Card_CS = () => {
         )}
       </div>
     </div>
-  </div>
+    </div>
+    </div>
     
   ));
 
@@ -127,7 +129,7 @@ const Card_CS = () => {
   // });
 
   return(
-    <div className={styles.grid}>{renderApt}</div>
+    <div className={styles.cards}>{renderApt}</div>
   ); 
 };
 

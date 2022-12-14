@@ -59,7 +59,8 @@ function Card_Austin() {
   }, []);
 
   const renderApt = results.slice(1).map((Apt) => (
-    <div className={styles.card}>
+    <div className={styles.grid}>
+       <div className={styles.card}>
       <div className={styles["card-header"]} key={Apt.id}>
         <img className={styles["card-image"]} src={Apt.picture_url} />
       </div>
@@ -116,13 +117,15 @@ function Card_Austin() {
         </div>
       </div>
     </div>
+    </div>
+   
   ));
 
   return (
-    <div className={styles.grid}>
-      {renderApt}
-      {/* {test[1].name} */}
-    </div>
+      <div className={styles.cards}>
+        {renderApt}
+      </div>
+    
   );
 }
 
