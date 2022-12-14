@@ -1,7 +1,6 @@
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import styles from "./styles.module.scss";
-import background from "../../asserts/pictures/background-square.png";
 import map from "../../asserts/pictures/map.png";
 import MessageList from "../../components/MessageList";
 

@@ -1,0 +1,119 @@
+@import '../../style/fonts';
+@import '../../style/colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: fit-content;
+  position: relative;
+
+  &-left {
+    width: 50%;
+    height: max-content;
+    position: relative;
+
+    &-title {
+      position: absolute;
+      left: 10%;
+      top: 25%;
+
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 67px;
+      line-height: 67px;
+      /* or 100% */
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+
+      color: white;
+
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      z-index: 100;
+    }
+
+    &-background {
+      //position: relative;
+      //left: 0;
+      //top: 0;
+      width: 100%;
+      z-index: 0;
+
+      &-overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        background: rgba(34, 93, 153, 0.6);
+        z-index: 50;
+      }
+    }
+  }
+
+  &-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+    align-items: flex-start;
+    padding: 0 5%;
+
+    &-title {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 45px;
+      /* identical to box height */
+
+      color: $branding-blue-medium;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.embed{
+  width:600px;
+  height:600px;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 75px 65px 108px 65px;
+
+  &-text {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 67px;
+    /* identical to box height, or 168% */
+    display: flex;
+    align-items: center;
+
+    color: $branding-blue-medium;
+  }
+
+  &-map {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
