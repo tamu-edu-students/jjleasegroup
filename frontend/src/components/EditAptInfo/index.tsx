@@ -114,7 +114,7 @@ function EditAptInfo() {
   };
   const SearchResults = results.map((searchResult, index, array) => {
     if (index != 0) {
-      //searchResult.index = "index";
+      
       return <SearchResult {...searchResult} />;
     }
   });

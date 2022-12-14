@@ -50,71 +50,85 @@ const Card_CS = () => {
       console.log("sucessfully get apt info!");
     });
   };
+
   useEffect(() => {
+    // console.log('i fire once');
     aptInfoGetter();
+    // console.log(results.length);
   }, []);
 
-  const renderApt = results.slice(1 + results.length / 2).map((Apt) => (
+  const renderApt = results.slice(1).map((Apt, index) => (
+    
     <div className={styles.card}>
-      <div className={styles["card-header"]} key={Apt.id}>
-        <img className={styles["card-image"]} src={Apt.picture_url} />
+    <div className={styles["card-header"]} key={Apt.id}>
+      <img className={styles["card-image"]} src={Apt.picture_url} />
+    </div>
+
+    <div className={styles.name}>{Apt.name}</div>
+
+    <div className={styles.price}>
+      <span>
+        ${Apt.price_low} - {Apt.price_high}
+      </span>
+    </div>
+
+    <div className={styles.address}>
+      {Apt.street}, College Station, Texas, {Apt.zipcode}
+    </div>
+
+    <button className={styles.btn}>Contact Us</button>
+    <button className={styles["btn-outline"]}>
+      <a href={Apt.url}>More Info</a>
+    </button>
+
+    <div className={styles.footer}>
+      <div className={styles.TagGrid}>
+        {Apt.near_campus ? (
+          <div className={styles.tag}>Near Campus</div>
+        ) : (
+          <div></div>
+        )}
+        {Apt.furnished ? (
+          <div className={styles.tag}>Furniture Included</div>
+        ) : (
+          <div></div>
+        )}
       </div>
 
-      <div className={styles.name}>{Apt.name}</div>
-
-      <div className={styles.price}>
-        <span>
-          ${Apt.price_low} - {Apt.price_high}
-        </span>
+      <div className={styles.TagGrid}>
+        {Apt.free_parking ? (
+          <div className={styles.tag}>Free parking</div>
+        ) : (
+          <div></div>
+        )}
+        {Apt.free_we ? (
+          <div className={styles.tag}>Uiltity fee included</div>
+        ) : (
+          <div></div>
+        )}{" "}
       </div>
-
-      <div className={styles.address}>
-        {Apt.street}, College Station, Texas, {Apt.zipcode}
-      </div>
-
-      <button className={styles.btn}>Contact Us</button>
-      <button className={styles["btn-outline"]}>
-        <a href={Apt.url}>More Info</a>
-      </button>
-
-      <div className={styles.footer}>
-        <div className={styles.TagGrid}>
-          {Apt.near_campus ? (
-            <div className={styles.tag}>Near Campus</div>
-          ) : (
-            <div></div>
-          )}
-          {Apt.furnished ? (
-            <div className={styles.tag}>Furniture Included</div>
-          ) : (
-            <div></div>
-          )}
-        </div>
-
-        <div className={styles.TagGrid}>
-          {Apt.free_parking ? (
-            <div className={styles.tag}>Free parking</div>
-          ) : (
-            <div></div>
-          )}
-          {Apt.free_we ? (
-            <div className={styles.tag}>Uiltity fee included</div>
-          ) : (
-            <div></div>
-          )}{" "}
-        </div>
-        <div className={styles.TagGrid}>
-          {Apt.free_internet ? (
-            <div className={styles.tag}>Provide Internet</div>
-          ) : (
-            <div></div>
-          )}
-        </div>
+      <div className={styles.TagGrid}>
+        {Apt.free_internet ? (
+          <div className={styles.tag}>Provide Internet</div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
+  </div>
+    
   ));
 
-  return <div className={styles.grid}>{renderApt}</div>;
+  // const Apts = results.map((searchResult, index, array) => {
+  //   if (index != 0) {
+      
+  //     return <SearchResult {...searchResult} />;
+  //   }
+  // });
+
+  return(
+    <div className={styles.grid}>{renderApt}</div>
+  ); 
 };
 
 export default Card_CS;
