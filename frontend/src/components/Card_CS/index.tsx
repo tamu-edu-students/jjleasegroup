@@ -64,7 +64,7 @@ const Card_CS = () => {
       <img className={styles["card-image"]} src={Apt.picture_url} />
     </div>
 
-    <div className={styles.name}>{Apt.name}{index}</div>
+    <div className={styles.name}>{Apt.name}</div>
 
     <div className={styles.price}>
       <span>

@@ -59,7 +59,7 @@ function Card_Austin() {
     
   }, []);
 
-  const renderApt = results.slice(1 + results.length / 2).map((Apt) => (
+  const renderApt = results.slice(1).map((Apt) => (
     <div className={styles.card}>
       <div className={styles["card-header"]} key={Apt.id}>
         <img className={styles["card-image"]} src={Apt.picture_url} />
