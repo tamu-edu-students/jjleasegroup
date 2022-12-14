@@ -56,6 +56,7 @@ function Card_Austin() {
 
   useEffect(() => {
     aptInfoGetter();
+    
   }, []);
 
   const renderApt = results.slice(1 + results.length / 2).map((Apt) => (
